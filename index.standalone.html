@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sasikumar A | Freelance Technology Consultant & Software Solutions</title>
+  <meta name="description" content="Freelance technology consultant specializing in ERPNext, web development, AI automation, CRM, HRM, and custom software solutions.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            neon: '#39FF14',
+            darkbg: '#050505',
+            darkcard: '#0D0D0D',
+            darkborder: '#1E1E22'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- React 18 & ReactDOM CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Glow & Glassmorphism Utilities -->
+  <style>
+    body {
+      background-color: #050505;
+      color: #f4f4f5;
+    }
+    .neon-glow-text {
+      text-shadow: 0 0 15px rgba(57, 255, 20, 0.6), 0 0 30px rgba(57, 255, 20, 0.3);
+    }
+    .bg-grid-pattern {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    .pulse-neon-dot {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .3; }
+    }
+  </style>
+</head>
+<body class="bg-[#050505] text-white font-sans antialiased selection:bg-[#39FF14] selection:text-black">
+  <div id="root"></div>
+
+  <!-- Standalone Interactive React Application -->
+  <script>
+    const e = React.createElement;
+
+    // Data structures
+    const SERVICES_DATA = [
+      {
+        id: 'erp',
+        title: 'ERP & Business Solutions',
+        description: 'ERP implementation, customization, workflow design, business process automation, reporting, and integrations.',
+        features: ['ERPNext & Frappe Customization', 'Custom Workflow Automation', 'Financial & Accounting Setup', 'Inventory & Supply Chain Modules', 'Third-party API Integrations']
+      },
+      {
+        id: 'web',
+        title: 'Web Development',
+        description: 'Modern, responsive business websites, portfolio websites, landing pages, corporate websites, and custom web applications.',
+        features: ['High-converting Landing Pages', 'Corporate & Enterprise Websites', 'Single Page & Multi-page Apps', 'Performance & SEO Optimization', 'Modern React / TypeScript Architecture']
+      },
+      {
+        id: 'ai',
+        title: 'AI & Automation',
+        description: 'AI-powered applications, workflow automation, intelligent assistants, document processing, and business automation.',
+        features: ['Generative AI & LLM Integrations', 'Autonomous AI Agents & Workflows', 'Intelligent Document Processing (OCR)', 'Automated Data Pipelines', 'Custom AI Interfaces']
+      },
+      {
+        id: 'crm-hrm',
+        title: 'CRM & HRM Solutions',
+        description: 'CRM, HR management, recruitment, employee management, payroll, and customer workflow solutions.',
+        features: ['Lead & Sales Pipeline Automation', 'Employee Lifecycle & Onboarding', 'Payroll & Attendance Management', 'Customer Support Hubs', 'Custom Analytics Dashboards']
+      },
+      {
+        id: 'custom',
+        title: 'Custom Software Development',
+        description: 'Custom software solutions designed around specific business requirements and workflows.',
+        features: ['Tailored Enterprise Backends', 'Microservice & API Architecture', 'Database Design & Optimization', 'Legacy Code Modernization', 'Cloud & On-Prem Deployment']
+      },
+      {
+        id: 'digital',
+        title: 'Digital Business Solutions',
+        description: 'Technology consulting and digital solutions that help businesses improve productivity, efficiency, and customer experience.',
+        features: ['Architecture & Tech Consulting', 'Business Process Audits', 'Digital Transformation Strategy', 'Vendor & Tool Evaluation', 'Post-Launch Scaling & Maintenance']
+      }
+    ];
+
+    const PROJECTS_DATA = [
+      {
+        id: 'proj-01',
+        title: 'Business ERP Platform',
+        category: 'ERP',
+        description: 'Customized ERP solution designed to streamline sales, purchase, inventory, accounting, HR, CRM, and business operations.',
+        longDesc: 'Comprehensive enterprise resource planning platform engineered on top of ERPNext and Frappe Framework for multi-branch business operations.',
+        tech: ['ERPNext', 'Frappe', 'Python', 'MariaDB'],
+        impact: 'Reduced month-end reconciliation time by 65% and unified stock tracking across 4 regional warehouses.'
+      },
+      {
+        id: 'proj-02',
+        title: 'AI Software Development Agent',
+        category: 'AI',
+        description: 'An AI-powered development workflow that converts software ideas into structured development plans and implementation workflows.',
+        longDesc: 'Autonomous agent tool converting high-level business ideas into technical architecture specs, DB schemas, and actionable code execution plans.',
+        tech: ['Python', 'Generative AI', 'Automation'],
+        impact: 'Accelerated technical scoping phase from 2 weeks to under 48 hours.'
+      },
+      {
+        id: 'proj-03',
+        title: 'Corporate Business Website',
+        category: 'Web',
+        description: 'Modern responsive corporate website designed to improve brand presence, lead generation, and customer engagement.',
+        longDesc: 'High-speed B2B corporate portal delivering sub-second page loads, dynamic lead capture, and responsive dark UX.',
+        tech: ['React', 'Tailwind CSS', 'JavaScript'],
+        impact: 'Increased qualified inbound B2B client inquiries by 140% post-launch.'
+      },
+      {
+        id: 'proj-04',
+        title: 'HR & Recruitment Management System',
+        category: 'Automation',
+        description: 'Employee, recruitment, attendance, onboarding, and HR workflow management platform.',
+        longDesc: 'End-to-end HRIS system simplifying recruitment pipelines, automated onboarding, biometric attendance sync, and payroll processing.',
+        tech: ['ERPNext', 'Python', 'JavaScript'],
+        impact: 'Cut HR administrative overhead by 50+ hours monthly for 200+ employees.'
+      },
+      {
+        id: 'proj-05',
+        title: 'Document Processing Automation',
+        category: 'AI',
+        description: 'Automated document extraction and processing workflow that reduces manual data entry and improves operational efficiency.',
+        longDesc: 'Intelligent document extraction pipeline processing invoices, contracts, and receipts into ERP databases with zero manual entry.',
+        tech: ['Python', 'AI', 'PDF Processing'],
+        impact: 'Processed 10,000+ monthly vendor invoices with 98.4% automated extraction accuracy.'
+      },
+      {
+        id: 'proj-06',
+        title: 'Sales & CRM Automation',
+        category: 'CRM',
+        description: 'CRM workflow designed to manage leads, customer interactions, follow-ups, sales pipelines, and business reporting.',
+        longDesc: 'Sales enablement CRM engineered to track deal pipelines, automated lead follow-ups, call logs, and predictive revenue analytics.',
+        tech: ['CRM', 'APIs', 'Automation'],
+        impact: 'Improved lead conversion rate by 28% and shortened average deal cycle by 14 days.'
+      }
+    ];
+
+    const FAQS_DATA = [
+      { q: 'What type of freelance projects do you accept?', a: 'I accept end-to-end projects including ERPNext implementation & customization, custom web applications (React/Python), AI automation integrations, document processing workflows, CRM/HRM systems, and technology consulting.' },
+      { q: 'Can you customize ERPNext for my business?', a: 'Yes, absolutely! I specialize in ERPNext and Frappe framework development. I create custom DocTypes, automate approval workflows, build web portals, and integrate third-party APIs.' },
+      { q: 'Can you build a website from scratch?', a: 'Yes. I build modern, lightning-fast corporate websites, SaaS landing pages, portfolio platforms, and dynamic web applications using React, TypeScript, and Tailwind CSS.' },
+      { q: 'Can you integrate AI into an existing business process?', a: 'Definitely. I can integrate LLM APIs, build autonomous AI agents, automate document extraction from PDFs/images, and construct internal query interfaces over your private business data.' },
+      { q: 'Do you provide maintenance and support?', a: 'Yes, I offer flexible ongoing maintenance plans for server monitoring, bug fixes, feature enhancements, system updates, and technical advisory support.' },
+      { q: 'How do we start a project?', a: 'We start with an initial discovery review to understand your requirements, business goals, and timeline. Once agreed on the technical scope, we proceed into development.' },
+      { q: 'Do you work with international clients?', a: 'Yes. I work with business clients across India, North America, Europe, Middle East, and Asia Pacific via remote collaboration.' }
+    ];
+
+    function StandalonePortfolioApp() {
+      const [mobileMenu, setMobileMenu] = React.useState(false);
+      const [activeCategory, setActiveCategory] = React.useState('All');
+      const [activeModalProject, setActiveModalProject] = React.useState(null);
+      const [openFaq, setOpenFaq] = React.useState(0);
+      const [selectedService, setSelectedService] = React.useState('ERPNext & ERP Solutions');
+      const [formStatus, setFormStatus] = React.useState('');
+
+      React.useEffect(() => {
+        if (window.lucide) {
+          window.lucide.createIcons();
+        }
+      }, [openFaq, activeCategory, activeModalProject, mobileMenu]);
+
+      const handleExploreService = (title) => {
+        setSelectedService(title);
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
+
+      const handleFormSubmit = (event) => {
+        event.preventDefault();
+        setFormStatus('Thank you! Your project inquiry has been received. I will get back to you within 24 hours.');
+        setTimeout(() => setFormStatus(''), 6000);
+      };
+
+      const filteredProjects = activeCategory === 'All'
+        ? PROJECTS_DATA
+        : PROJECTS_DATA.filter(p => p.category === activeCategory);
+
+      return e('div', { className: 'min-h-screen relative bg-[#050505]' }, [
+        
+        // Navigation Bar
+        e('header', { key: 'navbar', className: 'fixed top-0 left-0 right-0 z-50 bg-[#050505]/90 backdrop-blur-md border-b border-white/10 py-4 px-4 sm:px-8 flex items-center justify-between' }, [
+          e('a', { key: 'brand', href: '#home', className: 'flex items-center gap-2 font-mono text-xl font-bold text-white' }, [
+            e('span', { className: 'w-8 h-8 rounded-lg bg-[#0D0D0D] border border-[#39FF14]/40 flex items-center justify-center text-[#39FF14] text-xs font-bold' }, '</>'),
+            'SASI.DEV',
+            e('span', { className: 'w-2 h-2 rounded-full bg-[#39FF14] inline-block pulse-neon-dot' })
+          ]),
+
+          // Desktop Nav Links
+          e('nav', { key: 'navlinks', className: 'hidden md:flex items-center space-x-1 bg-[#0D0D0D] px-4 py-1.5 rounded-full border border-white/10 text-xs font-medium text-gray-300' }, [
+            e('a', { key: 'n1', href: '#home', className: 'px-3 py-1.5 rounded-full hover:text-[#39FF14]' }, 'Home'),
+            e('a', { key: 'n2', href: '#about', className: 'px-3 py-1.5 rounded-full hover:text-[#39FF14]' }, 'About'),
+            e('a', { key: 'n3', href: '#services', className: 'px-3 py-1.5 rounded-full hover:text-[#39FF14]' }, 'Services'),
+            e('a', { key: 'n4', href: '#skills', className: 'px-3 py-1.5 rounded-full hover:text-[#39FF14]' }, 'Skills'),
+            e('a', { key: 'n5', href: '#projects', className: 'px-3 py-1.5 rounded-full hover:text-[#39FF14]' }, 'Projects'),
+            e('a', { key: 'n6', href: '#experience', className: 'px-3 py-1.5 rounded-full hover:text-[#39FF14]' }, 'Experience'),
+            e('a', { key: 'n7', href: '#contact', className: 'px-3 py-1.5 rounded-full hover:text-[#39FF14]' }, 'Contact')
+          ]),
+
+          // Desktop CTA
+          e('a', { key: 'cta', href: '#contact', className: 'hidden md:inline-flex px-5 py-2.5 rounded-full bg-[#39FF14] text-black text-xs font-bold shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:bg-[#45ff24]' }, "Let's Work Together"),
+
+          // Mobile Toggle Button
+          e('button', { key: 'tog', onClick: () => setMobileMenu(!mobileMenu), className: 'md:hidden p-2 rounded-lg bg-[#0D0D0D] border border-white/10 text-white' }, mobileMenu ? '✕' : '☰')
+        ]),
+
+        // Mobile Menu Drawer
+        mobileMenu && e('div', { key: 'mobdrawer', className: 'fixed top-16 left-0 right-0 z-40 bg-[#0D0D0D] border-b border-white/10 p-6 space-y-3 md:hidden text-sm font-medium' }, [
+          e('a', { href: '#home', onClick: () => setMobileMenu(false), className: 'block text-gray-300 hover:text-[#39FF14]' }, 'Home'),
+          e('a', { href: '#about', onClick: () => setMobileMenu(false), className: 'block text-gray-300 hover:text-[#39FF14]' }, 'About'),
+          e('a', { href: '#services', onClick: () => setMobileMenu(false), className: 'block text-gray-300 hover:text-[#39FF14]' }, 'Services'),
+          e('a', { href: '#skills', onClick: () => setMobileMenu(false), className: 'block text-gray-300 hover:text-[#39FF14]' }, 'Skills'),
+          e('a', { href: '#projects', onClick: () => setMobileMenu(false), className: 'block text-gray-300 hover:text-[#39FF14]' }, 'Projects'),
+          e('a', { href: '#experience', onClick: () => setMobileMenu(false), className: 'block text-gray-300 hover:text-[#39FF14]' }, 'Experience'),
+          e('a', { href: '#contact', onClick: () => setMobileMenu(false), className: 'block text-gray-300 hover:text-[#39FF14]' }, 'Contact')
+        ]),
+
+        // HERO SECTION (#home)
+        e('section', { id: 'home', key: 'sec-home', className: 'pt-32 pb-20 px-4 sm:px-8 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center' }, [
+          e('div', { className: 'lg:col-span-7 space-y-6' }, [
+            e('div', { className: 'inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 text-xs font-mono text-[#39FF14]' }, [
+              e('span', { className: 'w-2 h-2 rounded-full bg-[#39FF14] pulse-neon-dot' }),
+              'AVAILABLE FOR FREELANCE PROJECTS'
+            ]),
+            e('h1', { className: 'text-4xl sm:text-6xl font-extrabold text-white leading-tight' }, [
+              'Building ',
+              e('span', { className: 'text-[#39FF14] neon-glow-text underline underline-offset-8 decoration-[#39FF14]/40' }, 'Digital Solutions'),
+              ' That Drive Business Growth.'
+            ]),
+            e('p', { className: 'text-gray-300 text-lg sm:text-xl max-w-2xl leading-relaxed' }, 'I help businesses transform ideas into scalable software, ERP systems, websites, automation solutions, and AI-powered applications.'),
+            e('div', { className: 'flex flex-wrap items-center gap-4 pt-4' }, [
+              e('a', { href: '#contact', className: 'px-8 py-4 rounded-xl bg-[#39FF14] text-black font-bold text-base shadow-[0_0_30px_rgba(57,255,20,0.5)] hover:bg-[#45ff24]' }, 'Start a Project'),
+              e('a', { href: '#projects', className: 'px-8 py-4 rounded-xl bg-[#0D0D0D] border border-white/20 text-white font-semibold hover:border-[#39FF14]/50' }, 'View My Work')
+            ])
+          ]),
+          e('div', { className: 'lg:col-span-5 bg-[#0D0D0D] border border-[#39FF14]/40 rounded-2xl p-6 shadow-[0_0_40px_rgba(57,255,20,0.15)] font-mono text-xs space-y-4' }, [
+            e('div', { className: 'flex items-center justify-between text-[#39FF14] pb-3 border-b border-white/10 font-bold' }, [
+              e('span', null, '⚡ SYSTEM TOPOLOGY'),
+              e('span', null, 'SASIKUMAR A')
+            ]),
+            e('div', { className: 'space-y-3 text-gray-300' }, [
+              e('div', { className: 'p-3 rounded-lg bg-[#050505] border border-white/10' }, '> STACK: ERPNext • Python • AI Agents • React'),
+              e('div', { className: 'p-3 rounded-lg bg-[#050505] border border-white/10' }, '> PRACTICE: 9+ Years Technology Consulting'),
+              e('div', { className: 'p-3 rounded-lg bg-[#050505] border border-white/10' }, '> DELIVERED: 50+ Custom Enterprise Solutions'),
+              e('div', { className: 'p-3 rounded-lg bg-[#050505] border border-white/10 text-[#39FF14]' }, '> STATUS: Open for International Projects')
+            ])
+          ]),
+          // Stats Row
+          e('div', { className: 'lg:col-span-12 pt-10 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6' }, [
+            { num: '9+', label: 'Years Experience' },
+            { num: '50+', label: 'Projects Delivered' },
+            { num: '30+', label: 'Clients / Businesses' },
+            { num: '100%', label: 'Commitment & Quality' }
+          ].map((st, i) => e('div', { key: i, className: 'p-6 rounded-2xl bg-[#0D0D0D] border border-white/10 text-center' }, [
+            e('div', { className: 'text-3xl sm:text-4xl font-extrabold font-mono text-[#39FF14]' }, st.num),
+            e('div', { className: 'text-xs text-gray-400 mt-1 font-medium' }, st.label)
+          ])))
+        ]),
+
+        // ABOUT SECTION (#about)
+        e('section', { id: 'about', key: 'sec-about', className: 'py-24 px-4 sm:px-8 max-w-7xl mx-auto border-t border-white/10' }, [
+          e('div', { className: 'max-w-3xl mb-12 space-y-3' }, [
+            e('div', { className: 'inline-block px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/30 text-xs font-mono text-[#39FF14]' }, 'ABOUT SASIKUMAR A'),
+            e('h2', { className: 'text-3xl sm:text-5xl font-extrabold text-white' }, 'More Than a Developer. A Business-Focused Technology Partner.'),
+            e('p', { className: 'text-gray-300 text-base sm:text-lg pt-2 leading-relaxed' }, 'With 9+ years of experience across business development, software implementation, ERP, CRM, HRM, web development, automation, and AI solutions, I work at the intersection of technology and business.'),
+            e('p', { className: 'text-gray-400 text-base leading-relaxed' }, 'I don\'t just build software. I focus on understanding the business problem, designing the right solution, implementing it efficiently, and ensuring it delivers measurable value.')
+          ]),
+          e('div', { className: 'grid grid-cols-1 lg:grid-cols-12 gap-8 items-start' }, [
+            e('div', { className: 'lg:col-span-7 bg-[#0D0D0D] border border-white/10 rounded-2xl p-8 space-y-6' }, [
+              e('h3', { className: 'text-xl font-bold text-white text-[#39FF14]' }, '⚡ What I Bring To Every Engagement'),
+              e('div', { className: 'grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-300 font-medium' }, [
+                'Business Understanding', 'Technical Solution Design',
+                'ERP Implementation', 'Software Development',
+                'Project Management', 'Client Communication',
+                'Process Automation', 'AI Solutions'
+              ].map((item, idx) => e('div', { key: idx, className: 'p-3 rounded-xl bg-[#050505] border border-white/10 flex items-center gap-2' }, [
+                e('span', { className: 'text-[#39FF14]' }, '✓'),
+                item
+              ])))
+            ]),
+            e('div', { className: 'lg:col-span-5 bg-[#0D0D0D] border border-[#39FF14]/40 rounded-2xl p-8 space-y-4 font-mono text-sm shadow-xl' }, [
+              e('h4', { className: 'text-xl font-bold text-white font-sans border-b border-white/10 pb-4' }, 'Sasikumar A'),
+              e('div', { className: 'space-y-3 text-xs text-gray-300' }, [
+                e('div', null, [e('span', { className: 'text-gray-500 block' }, 'ROLE'), e('span', { className: 'font-semibold text-white' }, 'Freelance Technology Consultant')]),
+                e('div', null, [e('span', { className: 'text-gray-500 block' }, 'LOCATION'), e('span', { className: 'font-semibold text-white' }, 'India (Global Remote)')]),
+                e('div', null, [e('span', { className: 'text-gray-500 block' }, 'EXPERIENCE'), e('span', { className: 'font-semibold text-white' }, '9+ Years Industry Practice')]),
+                e('div', null, [e('span', { className: 'text-gray-500 block' }, 'AVAILABILITY'), e('span', { className: 'font-semibold text-[#39FF14]' }, 'Open for Freelance Projects')])
+              ])
+            ])
+          ])
+        ]),
+
+        // SERVICES SECTION (#services)
+        e('section', { id: 'services', key: 'sec-services', className: 'py-24 px-4 sm:px-8 max-w-7xl mx-auto border-t border-white/10' }, [
+          e('div', { className: 'text-center max-w-3xl mx-auto mb-16 space-y-4' }, [
+            e('div', { className: 'inline-block px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/30 text-xs font-mono text-[#39FF14]' }, 'SERVICES I OFFER'),
+            e('h2', { className: 'text-3xl sm:text-5xl font-extrabold text-white' }, 'Services I Offer'),
+            e('p', { className: 'text-gray-400 text-base sm:text-lg' }, 'High-impact software engineering, ERPNext customization, AI automation, and technology advisory.')
+          ]),
+          e('div', { className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8' }, SERVICES_DATA.map((srv) => e('div', {
+            key: srv.id,
+            className: 'bg-[#0D0D0D] border border-white/10 rounded-2xl p-8 flex flex-col justify-between hover:border-[#39FF14] hover:shadow-[0_0_30px_rgba(57,255,20,0.2)] transition-all'
+          }, [
+            e('div', { className: 'space-y-4' }, [
+              e('div', { className: 'w-12 h-12 rounded-xl bg-[#050505] border border-[#39FF14]/40 flex items-center justify-center text-[#39FF14] font-mono text-lg font-bold' }, '⚡'),
+              e('h3', { className: 'text-xl font-bold text-white' }, srv.title),
+              e('p', { className: 'text-sm text-gray-400 leading-relaxed' }, srv.description),
+              e('div', { className: 'space-y-1.5 pt-2 border-t border-white/5' }, srv.features.map((f, i) => e('div', { key: i, className: 'text-xs text-gray-300 flex items-center gap-2' }, [
+                e('span', { className: 'text-[#39FF14]' }, '•'),
+                f
+              ])))
+            ]),
+            e('button', {
+              onClick: () => handleExploreService(srv.title),
+              className: 'mt-6 pt-4 border-t border-white/10 w-full text-left text-xs font-mono font-semibold text-[#39FF14] hover:underline flex items-center justify-between'
+            }, ['Explore Service', '→'])
+          ])))
+        ]),
+
+        // SKILLS SECTION (#skills)
+        e('section', { id: 'skills', key: 'sec-skills', className: 'py-24 px-4 sm:px-8 max-w-7xl mx-auto border-t border-white/10' }, [
+          e('div', { className: 'max-w-3xl mb-12 space-y-3' }, [
+            e('div', { className: 'inline-block px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/30 text-xs font-mono text-[#39FF14]' }, 'CAPABILITIES MATRIX'),
+            e('h2', { className: 'text-3xl sm:text-5xl font-extrabold text-white' }, 'Technical & Professional Expertise'),
+            e('p', { className: 'text-gray-400 text-base sm:text-lg' }, 'Proven competencies across software development, ERP architecture, artificial intelligence, and consulting.')
+          ]),
+          e('div', { className: 'grid grid-cols-1 md:grid-cols-2 gap-8' }, [
+            {
+              title: 'Software & Development',
+              items: ['Python', 'JavaScript', 'React', 'HTML', 'CSS', 'REST APIs', 'SQL']
+            },
+            {
+              title: 'ERP & Business',
+              items: ['ERPNext', 'Frappe Framework', 'CRM', 'HRM', 'Manufacturing', 'Inventory', 'Accounting', 'Workflow Automation']
+            },
+            {
+              title: 'AI & Automation',
+              items: ['Generative AI', 'AI Agents', 'Process Automation', 'Document Processing', 'AI-assisted Development', 'Data Analysis']
+            },
+            {
+              title: 'Business & Management',
+              items: ['Business Development', 'Project Management', 'Client Management', 'Solution Consulting', 'Requirement Analysis', 'Customer Success']
+            }
+          ].map((cat, idx) => e('div', { key: idx, className: 'bg-[#0D0D0D] border border-white/10 rounded-2xl p-6 space-y-4' }, [
+            e('h3', { className: 'text-lg font-bold text-[#39FF14] font-mono border-b border-white/10 pb-3' }, cat.title),
+            e('div', { className: 'flex flex-wrap gap-2' }, cat.items.map((sk, i) => e('span', { key: i, className: 'px-3 py-1.5 rounded-lg bg-[#050505] border border-white/10 text-xs font-mono text-gray-200' }, sk)))
+          ])))
+        ]),
+
+        // PROJECTS SECTION (#projects)
+        e('section', { id: 'projects', key: 'sec-projects', className: 'py-24 px-4 sm:px-8 max-w-7xl mx-auto border-t border-white/10' }, [
+          e('div', { className: 'max-w-3xl mb-8 space-y-3' }, [
+            e('div', { className: 'inline-block px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/30 text-xs font-mono text-[#39FF14]' }, 'SELECTED PROJECTS'),
+            e('h2', { className: 'text-3xl sm:text-5xl font-extrabold text-white' }, 'Selected Projects'),
+            e('p', { className: 'text-gray-400 text-base sm:text-lg' }, 'Some of the solutions I\'ve worked on or can build for clients.')
+          ]),
+
+          // Category Filter Buttons
+          e('div', { className: 'flex flex-wrap gap-2 mb-10' }, ['All', 'ERP', 'Web', 'AI', 'Automation', 'CRM'].map((cat) => e('button', {
+            key: cat,
+            onClick: () => setActiveCategory(cat),
+            className: `px-4 py-2 rounded-full text-xs font-mono font-semibold transition-all ${
+              activeCategory === cat
+                ? 'bg-[#39FF14] text-black shadow-[0_0_15px_rgba(57,255,20,0.4)]'
+                : 'bg-[#0D0D0D] text-gray-300 border border-white/10 hover:border-[#39FF14]/40'
+            }`
+          }, cat))),
+
+          // Projects Grid
+          e('div', { className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8' }, filteredProjects.map((proj) => e('div', {
+            key: proj.id,
+            className: 'bg-[#0D0D0D] border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-[#39FF14]/60 hover:shadow-[0_0_30px_rgba(57,255,20,0.2)] transition-all'
+          }, [
+            e('div', { className: 'p-6 space-y-4' }, [
+              e('div', { className: 'flex items-center justify-between text-xs font-mono text-[#39FF14]' }, [
+                e('span', { className: 'px-2.5 py-1 rounded bg-[#050505] border border-[#39FF14]/30' }, proj.category),
+                e('span', { className: 'text-gray-500' }, proj.id)
+              ]),
+              e('h3', { className: 'text-xl font-bold text-white' }, proj.title),
+              e('p', { className: 'text-sm text-gray-400 leading-relaxed' }, proj.description),
+              e('div', { className: 'flex flex-wrap gap-1.5 pt-2' }, proj.tech.map((t, idx) => e('span', { key: idx, className: 'px-2 py-1 rounded bg-[#050505] text-[11px] font-mono text-gray-300 border border-white/5' }, t)))
+            ]),
+            e('div', { className: 'p-4 bg-[#08080A] border-t border-white/10 text-xs font-mono font-semibold text-gray-300 hover:text-[#39FF14]' }, [
+              e('button', {
+                onClick: () => setActiveModalProject(proj),
+                className: 'w-full text-left flex items-center justify-between'
+              }, ['View Project Case Study', '→'])
+            ])
+          ])))
+        ]),
+
+        // WORK PROCESS SECTION (#process)
+        e('section', { id: 'process', key: 'sec-process', className: 'py-24 px-4 sm:px-8 max-w-7xl mx-auto border-t border-white/10' }, [
+          e('div', { className: 'max-w-3xl mb-16 space-y-3' }, [
+            e('div', { className: 'inline-block px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/30 text-xs font-mono text-[#39FF14]' }, 'METHODOLOGY'),
+            e('h2', { className: 'text-3xl sm:text-5xl font-extrabold text-white' }, 'How I Work'),
+            e('p', { className: 'text-gray-400 text-base sm:text-lg' }, 'A transparent, 6-phase engineering lifecycle.')
+          ]),
+          e('div', { className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' }, [
+            { step: '01', title: 'Discovery', desc: 'Understand your business, requirements, goals, and challenges.' },
+            { step: '02', title: 'Strategy', desc: 'Define the solution architecture, technology, scope, and roadmap.' },
+            { step: '03', title: 'Development', desc: 'Build the solution using modern and reliable technologies.' },
+            { step: '04', title: 'Testing', desc: 'Validate functionality, performance, usability, and reliability.' },
+            { step: '05', title: 'Deployment', desc: 'Launch the solution and help you get it into production.' },
+            { step: '06', title: 'Support', desc: 'Provide improvements, maintenance, and ongoing support.' }
+          ].map((item) => e('div', { key: item.step, className: 'p-6 rounded-2xl bg-[#0D0D0D] border border-white/10 space-y-3' }, [
+            e('div', { className: 'w-10 h-10 rounded-full bg-[#050505] border border-[#39FF14] text-[#39FF14] font-mono font-bold flex items-center justify-center text-sm' }, item.step),
+            e('h3', { className: 'text-lg font-bold text-white' }, item.title),
+            e('p', { className: 'text-sm text-gray-400 leading-relaxed' }, item.desc)
+          ])))
+        ]),
+
+        // EXPERIENCE SECTION (#experience)
+        e('section', { id: 'experience', key: 'sec-experience', className: 'py-24 px-4 sm:px-8 max-w-7xl mx-auto border-t border-white/10' }, [
+          e('div', { className: 'max-w-3xl mb-12 space-y-3' }, [
+            e('div', { className: 'inline-block px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/30 text-xs font-mono text-[#39FF14]' }, 'BACKGROUND & TRACK RECORD'),
+            e('h2', { className: 'text-3xl sm:text-5xl font-extrabold text-white' }, 'Experience That Combines Technology & Business'),
+            e('p', { className: 'text-gray-400 text-base sm:text-lg' }, 'Over 9+ years combining business understanding with software implementation.')
+          ]),
+          e('div', { className: 'bg-[#0D0D0D] border border-white/10 rounded-2xl p-8 space-y-4' }, [
+            e('div', { className: 'text-xl font-bold text-white' }, 'Freelance Technology Consultant & Solutions Specialist (9+ Years)'),
+            e('p', { className: 'text-sm text-gray-300 leading-relaxed' }, 'Consulted for 30+ SMBs and growing enterprises across India, Middle East, and international markets. Delivered customized ERPNext implementations, custom web applications, AI automation tools, and business process automation.')
+          ])
+        ]),
+
+        // FAQ SECTION (#faq)
+        e('section', { id: 'faq', key: 'sec-faq', className: 'py-24 px-4 sm:px-8 max-w-5xl mx-auto border-t border-white/10' }, [
+          e('div', { className: 'text-center max-w-3xl mx-auto mb-16 space-y-3' }, [
+            e('div', { className: 'inline-block px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/30 text-xs font-mono text-[#39FF14]' }, 'QUESTIONS & ANSWERS'),
+            e('h2', { className: 'text-3xl sm:text-5xl font-extrabold text-white' }, 'Frequently Asked Questions')
+          ]),
+          e('div', { className: 'space-y-4' }, FAQS_DATA.map((faq, idx) => {
+            const isOpen = openFaq === idx;
+            return e('div', {
+              key: idx,
+              className: `rounded-2xl border transition-all overflow-hidden ${isOpen ? 'bg-[#0D0D0D] border-[#39FF14]/60' : 'bg-[#0D0D0D]/60 border-white/10'}`
+            }, [
+              e('button', {
+                onClick: () => setOpenFaq(isOpen ? null : idx),
+                className: 'w-full px-6 py-5 text-left flex items-center justify-between font-bold text-white text-base sm:text-lg'
+              }, [faq.q, isOpen ? '▲' : '▼']),
+              isOpen && e('div', { className: 'px-6 pb-6 text-sm text-gray-300 leading-relaxed border-t border-white/5 pt-3' }, faq.a)
+            ]);
+          }))
+        ]),
+
+        // CONTACT SECTION (#contact)
+        e('section', { id: 'contact', key: 'sec-contact', className: 'py-24 px-4 sm:px-8 max-w-7xl mx-auto border-t border-white/10' }, [
+          e('div', { className: 'max-w-3xl mb-16 space-y-3' }, [
+            e('div', { className: 'inline-block px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/30 text-xs font-mono text-[#39FF14]' }, 'GET IN TOUCH'),
+            e('h2', { className: 'text-3xl sm:text-5xl font-extrabold text-white' }, 'Have a Project in Mind?'),
+            e('p', { className: 'text-gray-300 text-base sm:text-lg' }, 'Tell me what you\'re building, what problem you\'re trying to solve, or what you want to improve. Let\'s discuss how technology can help.')
+          ]),
+
+          formStatus && e('div', { className: 'mb-8 p-4 rounded-xl bg-[#39FF14]/10 border border-[#39FF14] text-[#39FF14] text-sm font-semibold' }, formStatus),
+
+          e('form', { onSubmit: handleFormSubmit, className: 'bg-[#0D0D0D] border border-white/10 rounded-2xl p-8 space-y-6 max-w-3xl shadow-xl' }, [
+            e('div', { className: 'grid grid-cols-1 sm:grid-cols-2 gap-6' }, [
+              e('input', { type: 'text', required: true, placeholder: 'Your Name *', className: 'w-full p-3.5 rounded-xl bg-[#050505] border border-white/10 text-white text-sm focus:border-[#39FF14] outline-none' }),
+              e('input', { type: 'email', required: true, placeholder: 'Email Address *', className: 'w-full p-3.5 rounded-xl bg-[#050505] border border-white/10 text-white text-sm focus:border-[#39FF14] outline-none' })
+            ]),
+            e('div', { className: 'grid grid-cols-1 sm:grid-cols-2 gap-6' }, [
+              e('input', { type: 'tel', placeholder: 'Phone Number', className: 'w-full p-3.5 rounded-xl bg-[#050505] border border-white/10 text-white text-sm focus:border-[#39FF14] outline-none' }),
+              e('input', { type: 'text', placeholder: 'Company Name', className: 'w-full p-3.5 rounded-xl bg-[#050505] border border-white/10 text-white text-sm focus:border-[#39FF14] outline-none' })
+            ]),
+            e('div', { className: 'space-y-2' }, [
+              e('label', { className: 'text-xs font-mono text-gray-300' }, 'PROJECT TYPE'),
+              e('select', {
+                value: selectedService,
+                onChange: (ev) => setSelectedService(ev.target.value),
+                className: 'w-full p-3.5 rounded-xl bg-[#050505] border border-white/10 text-white text-sm focus:border-[#39FF14] outline-none'
+              }, [
+                e('option', { value: 'ERPNext & ERP Solutions' }, 'ERPNext & ERP Solutions'),
+                e('option', { value: 'Web Development' }, 'Web Development & Portals'),
+                e('option', { value: 'AI & Automation' }, 'AI & Autonomous Agents'),
+                e('option', { value: 'CRM & HRM Solutions' }, 'CRM & HRM Systems'),
+                e('option', { value: 'Custom Software Development' }, 'Custom Enterprise Software'),
+                e('option', { value: 'Digital Business Consulting' }, 'Digital Technology Advisory')
+              ])
+            ]),
+            e('textarea', { rows: 4, required: true, placeholder: 'Briefly describe your project or requirements...', className: 'w-full p-3.5 rounded-xl bg-[#050505] border border-white/10 text-white text-sm focus:border-[#39FF14] outline-none resize-none' }),
+            e('button', { type: 'submit', className: 'w-full py-4 rounded-xl bg-[#39FF14] text-black font-bold text-base shadow-[0_0_25px_rgba(57,255,20,0.4)] hover:bg-[#45ff24]' }, 'Send Project Inquiry →')
+          ])
+        ]),
+
+        // PROJECT MODAL DIALOG
+        activeModalProject && e('div', { className: 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md' }, [
+          e('div', { className: 'bg-[#0D0D0D] border border-[#39FF14]/50 rounded-2xl p-8 max-w-2xl w-full space-y-6 shadow-2xl relative' }, [
+            e('div', { className: 'flex justify-between items-center border-b border-white/10 pb-4' }, [
+              e('h3', { className: 'text-2xl font-bold text-white' }, activeModalProject.title),
+              e('button', { onClick: () => setActiveModalProject(null), className: 'text-gray-400 text-xl' }, '✕')
+            ]),
+            e('p', { className: 'text-sm text-gray-300 leading-relaxed' }, activeModalProject.longDesc),
+            e('div', { className: 'p-4 rounded-xl bg-[#050505] border border-white/10 text-xs text-gray-300 space-y-1' }, [
+              e('div', { className: 'text-[#39FF14] font-bold font-mono' }, 'MEASURABLE IMPACT:'),
+              e('p', null, activeModalProject.impact)
+            ]),
+            e('button', {
+              onClick: () => {
+                setActiveModalProject(null);
+                handleExploreService(`Custom Build like ${activeModalProject.title}`);
+              },
+              className: 'w-full py-3 rounded-xl bg-[#39FF14] text-black font-bold text-sm'
+            }, 'Build Similar Solution →')
+          ])
+        ]),
+
+        // FOOTER
+        e('footer', { key: 'footer', className: 'bg-[#050505] border-t border-white/10 py-12 px-4 sm:px-8 text-center text-xs font-mono text-gray-500' }, [
+          '© 2026 Sasikumar A. All rights reserved. • SASI.DEV'
+        ])
+
+      ]);
+    }
+
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+    root.render(e(StandalonePortfolioApp));
+  </script>
+</body>
+</html>
