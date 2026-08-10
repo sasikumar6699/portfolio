@@ -100,7 +100,7 @@ export const HeroCanvas: React.FC = () => {
       }
 
       // Update & Draw nodes
-      nodes.forEach((node, idx) => {
+      nodes.forEach((node) => {
         node.x += node.vx;
         node.y += node.vy;
 
