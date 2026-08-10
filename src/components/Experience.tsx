@@ -1,6 +1,6 @@
 import React from 'react';
 import { EXPERIENCE_TIMELINE } from '../data/portfolioData';
-import { Briefcase, CheckCircle, Award } from 'lucide-react';
+import { CheckCircle, Award } from 'lucide-react';
 
 export const Experience: React.FC = () => {
   return (
