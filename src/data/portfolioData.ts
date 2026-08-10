@@ -103,7 +103,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "digital-business",
-    title: "Digital Business Solutions",
+    title: "Digital",
     description: "Technology consulting and digital solutions that help businesses improve productivity, efficiency, and customer experience.",
     iconName: "TrendingUp",
     features: [
