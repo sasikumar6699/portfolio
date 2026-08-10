@@ -97,7 +97,7 @@ export const Contact: React.FC<ContactProps> = ({ initialService, onSubmitted })
                   <div>
                     <span className="text-xs font-mono text-gray-400 block">EMAIL INQUIRIES</span>
                     <span className="text-base font-bold text-white group-hover:text-[#39FF14] transition-colors">
-                      pavi@gmail.com
+                      {PERSONAL_INFO.email}
                     </span>
                   </div>
                 </a>
