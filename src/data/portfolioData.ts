@@ -1,65 +1,73 @@
 import { Project, Service, SkillCategory, Testimonial, FaqItem, ExperienceItem } from '../types/portfolio';
 
 export const PERSONAL_INFO = {
-  name: "Sasikumar A",
-  title: "Freelance Technology Consultant & Software Solutions Specialist",
-  brandName: "SASI.DEV",
+  name: "Techyora",
+  title: "Freelance Digital Solutions Team | Software, Design, AI & Automation",
+  brandName: "TECHYORA",
   location: "India",
-  experience: "9+ Years",
+  experience: "Experienced Freelance Professionals",
   availability: "Open for Freelance Projects",
-  email: "hello@sasi.dev",
-  tagline: "Building Digital Solutions That Drive Business Growth.",
-  bioHeading: "More Than a Developer. A Business-Focused Technology Partner.",
-  bioText1: "With 9+ years of experience across business development, software implementation, ERP, CRM, HRM, web development, automation, and AI solutions, I work at the intersection of technology and business.",
-  bioText2: "I don't just build software. I focus on understanding the business problem, designing the right solution, implementing it efficiently, and ensuring it delivers measurable value.",
+  email: "techyora@gmail.com",
+  tagline: "We Build. We Design. We Automate. We Deliver.",
+  bioHeading: "One Team. Multiple Skills. Complete Digital Solutions.",
+  bioText1: "Techyora is a freelance collective of developers, designers, technology specialists, data professionals, and content creators helping startups, entrepreneurs, small businesses, growing companies, and organizations turn ideas and business requirements into practical digital solutions.",
+  bioText2: "From custom software and web development to ERP, CRM, AI automation, UI/UX design, graphic design, data entry, data management, and copywriting, we bring diverse skills together to deliver reliable, flexible, and quality-focused freelance solutions.",
   stats: [
-    { label: "Years Experience", value: 9, suffix: "+" },
-    { label: "Projects Delivered", value: 50, suffix: "+" },
-    { label: "Clients / Businesses", value: 30, suffix: "+" },
-    { label: "Commitment & Quality", value: 100, suffix: "%" },
+    { label: "Digital Solutions", value: 9, suffix: "+" },
+    { label: "Service Categories", value: 50, suffix: "+" },
+    { label: "Skills & Expertise", value: 30, suffix: "+" },
+    { label: "Focus on Quality", value: 100, suffix: "%" },
   ],
   socials: {
     linkedin: "https://linkedin.com/in/sasikumar-a",
     github: "https://github.com/sasikumar-a",
-    whatsapp: "https://wa.me/910000000000",
+    whatsapp: "https://wa.me/919524227511",
   },
   whatIBring: [
-    "Business Understanding",
-    "Technical Solution Design",
-    "ERP Implementation",
-    "Software Development",
-    "Project Management",
-    "Client Communication",
-    "Process Automation",
-    "AI Solutions"
+    "Business & Requirement Understanding",
+    "Custom Software & Web Solutions",
+    "ERP & CRM Solutions",
+    "AI & Workflow Automation",
+    "UI/UX & Creative Design",
+    "Accurate Data Management",
+    "Professional Copywriting & Content",
+    "Reliable Project Delivery"
   ]
 };
 
 export const SERVICES: Service[] = [
   {
     id: "erp",
-    title: "ERP & Business Solutions",
-    description: "ERP implementation, customization, workflow design, business process automation, reporting, and integrations.",
+    title: "ERP, CRM & Business Solutions",
+    description: "Flexible ERP and CRM solutions for businesses, including ERP implementation, ERPNext and Frappe customization, workflow automation, business process optimization, reporting, and third-party integrations.",
     iconName: "Database",
     features: [
-      "ERPNext & Frappe Customization",
-      "Custom Workflow Automation",
-      "Financial & Accounting Setup",
-      "Inventory & Supply Chain Modules",
-      "Third-party API & Webhook Integrations"
+      "ERPNext & Frappe Implementation and Customization",
+      "ERP & CRM Workflow Automation",
+      "Accounting & Financial Management Setup",
+      "Inventory, Purchase & Supply Chain Management",
+      "Sales, CRM & Customer Management",
+      "HR, Payroll & Employee Management",
+      "Custom Reports, Dashboards & Business Analytics",
+      "Third-party API, Webhook & System Integrations"
     ]
   },
   {
     id: "web",
-    title: "Web Development",
-    description: "Modern, responsive business websites, portfolio websites, landing pages, corporate websites, and custom web applications.",
+    title: "Web Development & Design",
+    description: "Modern, responsive, fast, and SEO-friendly websites for businesses, startups, professionals, and organizations, including corporate websites, WordPress websites, Magento stores, e-commerce platforms, and custom web applications.",
     iconName: "Globe",
     features: [
-      "High-converting Landing Pages",
-      "Corporate & Enterprise Websites",
-      "Single Page & Multi-page Apps",
-      "Performance & SEO Optimization",
-      "Modern React / TypeScript Architecture"
+      "Business & Corporate Websites",
+      "WordPress Website Development & Customization",
+      "Magento E-commerce Development",
+      "E-commerce Websites & Online Stores",
+      "High-Converting Landing Pages",
+      "Responsive Single & Multi-Page Websites",
+      "Custom Web Applications & Portals",
+      "React, TypeScript & JavaScript Development",
+      "SEO & Website Performance Optimization",
+      "Website Maintenance & Technical Support"
     ]
   },
   {
