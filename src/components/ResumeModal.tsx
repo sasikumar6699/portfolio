@@ -67,7 +67,7 @@ EXPERIENCE HIGHLIGHTS:
             <p className="text-sm font-mono text-[#39FF14]">{PERSONAL_INFO.title}</p>
             <div className="flex flex-wrap gap-4 text-xs font-mono text-gray-400 pt-2">
               <span>📧 {PERSONAL_INFO.email}</span>
-              <span>📍 {PERSONAL_INFO.location}</span>
+              <span>📍 {PERSONAL_INFO.Mobile}</span>
               <span>⏱️ {PERSONAL_INFO.experience} Industry Practice</span>
             </div>
           </div>
