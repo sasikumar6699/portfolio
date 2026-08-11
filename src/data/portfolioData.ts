@@ -19,8 +19,8 @@ export const PERSONAL_INFO = {
     { label: "Focus on Quality", value: 100, suffix: "%" },
   ],
   socials: {
-    linkedin: "https://linkedin.com/in/sasikumar-a",
-    github: "https://github.com/sasikumar-a",
+    linkedin: "https://linkedin.com/in/techyora",
+    github: "https://github.com/techyora",
     whatsapp: "https://wa.me/919524227511",
   },
   whatIBring: [
