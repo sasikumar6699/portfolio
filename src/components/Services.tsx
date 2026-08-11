@@ -32,7 +32,7 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
             <span>EXPERTISE & OFFERS</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Services I Offer
+            Services We Offer
           </h2>
           <p className="text-gray-400 text-base sm:text-lg">
             High-impact software engineering, ERPNext customization, AI automation, and technology advisory tailored to your operational goals.

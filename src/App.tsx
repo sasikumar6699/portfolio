@@ -10,7 +10,7 @@ import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { SkillsPage } from './pages/SkillsPage';
 import { ProjectsPage } from './pages/ProjectsPage';
-import { ExperiencePage } from './pages/ExperiencePage';
+// import { ExperiencePage } from './pages/ExperiencePage';
 import { ContactPage } from './pages/ContactPage';
 
 export function App() {

@@ -64,7 +64,7 @@ export const WhyWorkWithMe: React.FC = () => {
           <div className="max-w-4xl mx-auto space-y-4">
             <span className="text-xs font-mono text-[#39FF14] uppercase tracking-widest block">CLIENT COLLABORATION PHILOSOPHY</span>
             <p className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
-              "Your idea deserves more than a freelancer. It deserves a <span className="text-[#39FF14] underline decoration-[#39FF14]/40">technology partner</span>."
+              "Technology built around your business. <span className=\"text-[#39FF14] underline decoration-[#39FF14]/40\">Solutions built for growth.</span>"
             </p>
           </div>
         </div>

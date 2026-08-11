@@ -45,7 +45,7 @@ export const Footer: React.FC = () => {
               <NavLink to="/services" className="hover:text-[#39FF14] transition-colors">Services</NavLink>
               <NavLink to="/skills" className="hover:text-[#39FF14] transition-colors">Skills</NavLink>
               <NavLink to="/projects" className="hover:text-[#39FF14] transition-colors">Projects</NavLink>
-              <NavLink to="/experience" className="hover:text-[#39FF14] transition-colors">Experience</NavLink>
+              {/* <NavLink to="/experience" className="hover:text-[#39FF14] transition-colors">Experience</NavLink> */}
               <NavLink to="/contact" className="hover:text-[#39FF14] transition-colors">Contact</NavLink>
             </div>
           </div>

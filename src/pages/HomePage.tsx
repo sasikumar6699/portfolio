@@ -6,7 +6,7 @@ import { Skills } from '../components/Skills';
 import { Projects } from '../components/Projects';
 import { WhyWorkWithMe } from '../components/WhyWorkWithMe';
 import { WorkProcess } from '../components/WorkProcess';
-import { Experience } from '../components/Experience';
+// import { Experience } from '../components/Experience';
 import { Testimonials } from '../components/Testimonials';
 import { FAQ } from '../components/FAQ';
 import { Contact } from '../components/Contact';
@@ -34,7 +34,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       <Projects onInquireProject={(projectTitle) => onOpenContact(projectTitle)} />
       <WhyWorkWithMe />
       <WorkProcess />
-      <Experience />
+      {/* <Experience /> */}
       <Testimonials />
       <FAQ />
       <Contact initialService={selectedService} onSubmitted={onFormSubmitted} />

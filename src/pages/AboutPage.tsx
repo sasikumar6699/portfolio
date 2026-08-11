@@ -1,6 +1,6 @@
 import React from 'react';
 import { About } from '../components/About';
-import { Experience } from '../components/Experience';
+// import { Experience } from '../components/Experience';
 import { WhyWorkWithMe } from '../components/WhyWorkWithMe';
 import { CtaBanner } from '../components/CtaBanner';
 
