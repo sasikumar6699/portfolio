@@ -62,7 +62,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume }) => {
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#0D0D0D] text-white border border-white/15 hover:border-[#39FF14]/50 hover:text-[#39FF14] font-semibold text-base transition-all transform hover:-translate-y-1"
               >
                 <Eye className="w-5 h-5" />
-                <span>View Our Work</span>
+                <span>Explore Our Services</span>
               </a>
 
               <button
