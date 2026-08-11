@@ -94,8 +94,8 @@ export const About: React.FC = () => {
                 <div className="flex items-start gap-3 text-gray-300">
                   <MapPin className="w-4 h-4 text-[#39FF14] shrink-0 mt-1" />
                   <div>
-                    <span className="text-xs text-gray-400 block">LOCATION</span>
-                    <span className="font-semibold text-white">{PERSONAL_INFO.location} (Remote & On-site Consulting)</span>
+                    <span className="text-xs text-gray-400 block">Mobile</span>
+                    <span className="font-semibold text-white">{PERSONAL_INFO.Mobile} (Remote & On-site Consulting)</span>
                   </div>
                 </div>
 

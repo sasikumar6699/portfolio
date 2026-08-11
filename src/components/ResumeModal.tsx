@@ -15,7 +15,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose, onCop
     const text = `
 SASIKUMAR A
 ${PERSONAL_INFO.title}
-Email: ${PERSONAL_INFO.email} | Location: ${PERSONAL_INFO.location} | Experience: ${PERSONAL_INFO.experience}
+Email: ${PERSONAL_INFO.email} | Mobile: ${PERSONAL_INFO.Mobile} | Experience: ${PERSONAL_INFO.experience}
 
 SUMMARY:
 ${PERSONAL_INFO.bioText1}
