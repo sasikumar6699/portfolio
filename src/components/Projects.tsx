@@ -88,7 +88,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onInquireProject }) => {
 
                   {/* Bottom Info Bar */}
                   <div className="relative z-10 flex items-center justify-between text-[10px] font-mono text-gray-400">
-                    <span>SASIKUMAR A</span>
+                    <span>TECHYORA</span>
                     <span>FREELANCE PROJECT</span>
                   </div>
                 </div>

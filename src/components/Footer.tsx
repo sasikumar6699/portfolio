@@ -32,7 +32,7 @@ export const Footer: React.FC = () => {
             </p>
 
             <div className="text-xs font-mono text-gray-500 pt-2">
-              SASIKUMAR A • FREELANCE SOFTWARE CONSULTANT
+              TECHYORA • FREELANCE SOFTWARE CONSULTANT TEAM
             </div>
           </div>
 
@@ -91,7 +91,7 @@ export const Footer: React.FC = () => {
         {/* Copyright & Scroll to Top */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-gray-500">
           <div>
-            © 2026 Sasikumar A. All rights reserved.
+            © 2026 Techyora All rights reserved.
           </div>
 
           <button

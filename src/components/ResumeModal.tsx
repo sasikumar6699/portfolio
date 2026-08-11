@@ -13,7 +13,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose, onCop
 
   const handleCopyResume = () => {
     const text = `
-SASIKUMAR A
+TECHYORA
 ${PERSONAL_INFO.title}
 Email: ${PERSONAL_INFO.email} | Mobile: ${PERSONAL_INFO.Mobile} | Experience: ${PERSONAL_INFO.experience}
 

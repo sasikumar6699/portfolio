@@ -26,7 +26,7 @@ export const WhyWorkWithMe: React.FC = () => {
             <span>THE FREELANCE ADVANTAGE</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Why Clients Choose to Work With Me
+            Why Clients Choose to Work With Us
           </h2>
         </div>
 

@@ -111,7 +111,7 @@ export const Contact: React.FC<ContactProps> = ({ initialService, onSubmitted })
                     <span className="text-base font-bold text-white">
                       {PERSONAL_INFO.Mobile}
                     </span>
-                    <span className="text-xs text-gray-400 block mt-0.5">Serving clients worldwide</span>
+                    <span className="text-xs text-gray-400 block mt-0.5">Happy to Connect</span>
                   </div>
                 </div>
 

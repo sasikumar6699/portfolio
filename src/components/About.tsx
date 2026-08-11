@@ -13,7 +13,7 @@ export const About: React.FC = () => {
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/30 text-xs font-mono text-[#39FF14] mb-4">
-            <span>ABOUT SASIKUMAR A</span>
+            <span>ABOUT TECHYORA </span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
             {PERSONAL_INFO.bioHeading}
