@@ -12,7 +12,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onInquireProject }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
 
-  const categories = ['All', 'ERP', 'Web', 'AI', 'Automation', 'CRM'];
+  const categories = ['All', 'ERP', 'Web', 'AI', 'Automation', 'Data', 'Design'];
 
   const filteredProjects = selectedCategory === 'All'
     ? PROJECTS
