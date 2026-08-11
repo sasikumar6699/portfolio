@@ -60,15 +60,20 @@ export const WhyWorkWithMe: React.FC = () => {
         </div>
 
         {/* Strong Banner Statement */}
-        <div className="p-8 sm:p-12 rounded-2xl bg-gradient-to-r from-[#0D0D0D] via-[#121212] to-[#0D0D0D] border border-[#39FF14]/40 text-center relative shadow-[0_0_40px_rgba(57,255,20,0.15)]">
-          <div className="max-w-4xl mx-auto space-y-4">
-            <span className="text-xs font-mono text-[#39FF14] uppercase tracking-widest block">CLIENT COLLABORATION PHILOSOPHY</span>
-            <p className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
-              "Technology built around your business. <span className=\"text-[#39FF14] underline decoration-[#39FF14]/40\">Solutions built for growth.</span>"
-            </p>
-          </div>
-        </div>
+      <div className="p-8 sm:p-12 rounded-2xl bg-gradient-to-r from-[#0D0D0D] via-[#121212] to-[#0D0D0D] border border-[#39FF14]/40 text-center relative shadow-[0_0_40px_rgba(57,255,20,0.15)]">
+      <div className="max-w-4xl mx-auto space-y-4">
+      <span className="text-xs font-mono text-[#39FF14] uppercase tracking-widest block">
+      CLIENT COLLABORATION PHILOSOPHY
+      </span>
 
+      <p className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
+      "Technology built around your business.{" "}
+      <span className="text-[#39FF14] underline decoration-[#39FF14]/40">
+        Solutions built for growth.
+      </span>"
+    </p>
+  </div>
+</div>
       </div>
     </section>
   );
