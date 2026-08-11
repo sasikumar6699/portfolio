@@ -46,7 +46,7 @@ EXPERIENCE HIGHLIGHTS:
         <div className="px-6 py-4 bg-[#050505] border-b border-white/10 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
             <span className="px-3 py-1 rounded-full bg-[#39FF14]/10 border border-[#39FF14]/30 text-xs font-mono text-[#39FF14]">
-              OFFICIAL CV SUMMARY
+              PORTFOLIO SUMMARY
             </span>
             <span className="text-xs font-mono text-gray-400">PDF PREVIEW</span>
           </div>
@@ -97,6 +97,14 @@ EXPERIENCE HIGHLIGHTS:
                 <span>React, TypeScript, Tailwind CSS, Node.js, Python FastAPI</span>
               </div>
               <div className="p-3 rounded-xl bg-[#050505] border border-white/10 space-y-1">
+                <span className="font-bold text-white block">Graphic Design & Branding</span>
+                <span>Logo Design, Brand Identity, Visiting Cards, Posters, Brochures, Labels, Invitations</span>
+              </div>
+              <div className="p-3 rounded-xl bg-[#050505] border border-white/10 space-y-1">
+                <span className="font-bold text-white block">Data Entry & Copywriting</span>
+                <span>Excel, Google Sheets, Data Entry, Data Cleaning, SEO Copywriting, Website Content</span>
+              </div>
+              <div className="p-3 rounded-xl bg-[#050505] border border-white/10 space-y-1">
                 <span className="font-bold text-white block">AI & Automation</span>
                 <span>Autonomous Agents, Document OCR Extraction, LLM Prompt Engineering</span>
               </div>
@@ -115,11 +123,11 @@ EXPERIENCE HIGHLIGHTS:
             <div className="space-y-2 text-xs text-gray-300">
               <div className="flex items-start gap-2">
                 <CheckCircle className="w-4 h-4 text-[#39FF14] shrink-0 mt-0.5" />
-                <span>Successfully delivered 50+ enterprise and custom software projects over 9+ years.</span>
+                <span>Successfully delivered 30+ enterprise and custom projects.</span>
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle className="w-4 h-4 text-[#39FF14] shrink-0 mt-0.5" />
-                <span>Advised 30+ client businesses on digital transformation, ERP automation, and workflow efficiency.</span>
+                <span>Advised client businesses on digital transformation, ERP automation, and workflow efficiency.</span>
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle className="w-4 h-4 text-[#39FF14] shrink-0 mt-0.5" />
@@ -154,7 +162,7 @@ EXPERIENCE HIGHLIGHTS:
               className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-[#39FF14] text-black text-xs font-bold shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:bg-[#45ff24]"
             >
               <Download className="w-4 h-4" />
-              <span>Download Resume</span>
+              <span>Download Our Portfolio</span>
             </button>
           </div>
         </div>

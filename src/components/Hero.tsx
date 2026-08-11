@@ -53,7 +53,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume }) => {
                 onClick={onOpenContact}
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#39FF14] text-black font-bold text-base hover:bg-[#45ff24] shadow-[0_0_30px_rgba(57,255,20,0.5)] hover:shadow-[0_0_45px_rgba(57,255,20,0.8)] transition-all transform hover:-translate-y-1 active:translate-y-0"
               >
-                <span>Start a Project</span>
+                <span>Start Your Project</span>
                 <ArrowRight className="w-5 h-5" />
               </button>
 
@@ -62,7 +62,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume }) => {
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#0D0D0D] text-white border border-white/15 hover:border-[#39FF14]/50 hover:text-[#39FF14] font-semibold text-base transition-all transform hover:-translate-y-1"
               >
                 <Eye className="w-5 h-5" />
-                <span>View My Work</span>
+                <span>View Our Work</span>
               </a>
 
               <button
@@ -70,7 +70,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume }) => {
                 className="inline-flex items-center justify-center gap-2 py-3 px-4 text-sm font-mono text-gray-400 hover:text-[#39FF14] transition-colors group underline underline-offset-4 decoration-gray-600 hover:decoration-[#39FF14]"
               >
                 <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform text-[#39FF14]" />
-                <span>Download Resume</span>
+                <span>Download Our Portfolio</span>
               </button>
             </div>
 

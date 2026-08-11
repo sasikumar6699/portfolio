@@ -431,7 +431,7 @@ export const FAQS: FaqItem[] = [
     answer: "Yes, We offer flexible ongoing maintenance plans for server monitoring, bug fixes, feature enhancements, system updates, and dedicated technical advisory support."
   },
   {
-    question: "How do we start a project?",
+    question: "How do we start Your project?",
     answer: "We start with an initial discovery call or inquiry review to understand your requirements, business goals, and timeline. Once agreed on the technical scope and proposal, we proceed immediately into planning and execution."
   },
   
