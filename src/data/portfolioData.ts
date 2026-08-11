@@ -4,7 +4,7 @@ export const PERSONAL_INFO = {
   name: "Techyora",
   title: "Freelance Digital Solutions Team | Software, Design, AI & Automation",
   brandName: "TECHYORA",
-  location: "India",
+  Mobile: "9524 22 75 11",
   experience: "Experienced Freelance Professionals",
   availability: "Open for Freelance Projects",
   email: "techyora@gmail.com",
@@ -79,18 +79,18 @@ export const SERVICES: Service[] = [
     ]
   },
   {
-    id: "crm-hrm",
-    title: "CRM & HRM Solutions",
-    description: "CRM, HR management, recruitment, employee management, payroll, and customer workflow solutions.",
-    iconName: "Users",
-    features: [
-     "CRM Lead & Sales Pipeline Automation",
-     "Employee Onboarding & HR Management Systems",
-     "Payroll, Attendance & Employee Management",
-     "Customer Support & Ticketing Solutions",
-     "Custom Business Dashboards & BI Analytics",
-     "Business Workflow & Process Automation"
-    ]
+  id: "data-entry",
+  title: "Data Entry & Data Management",
+  description: "Accurate data entry and management services for businesses, including Excel, Google Sheets, data processing, document conversion, data cleaning, and database management.",
+  iconName: "Database",
+  features: [
+    "Accurate Excel & Google Sheets Data Entry",
+    "PDF, Image & Document Data Conversion",
+    "Data Cleaning, Formatting & Validation",
+    "Database Data Entry & Record Management",
+    "Product & Business Data Processing Services",
+    "Data Quality Checking & Organization"
+  ]
   },
   {
     id: "custom-software",
@@ -110,7 +110,7 @@ export const SERVICES: Service[] = [
     id: "digital-business",
     title: "Graphic Design & Branding",
     description: "Creative graphic design and branding services including logos, visiting cards, labels, posters, brochures, invitations, and marketing materials.",
-    iconName: "Palette",
+    iconName: "PenTool",
     features: [
        "Professional Logo Design & Branding",
        "Creative Visiting Card Design Services",
@@ -170,15 +170,15 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
   ]
   },
   {
-    title: "Business & Management",
-    skills: [
-      { name: "Business Development", tag: "Growth & Opportunity Alignment" },
-      { name: "Project Management", tag: "Agile Execution & Delivery" },
-      { name: "Client Relationship Management", tag: "Stakeholder Trust" },
-      { name: "Solution Consulting", tag: "Tech Architecture & Selection" },
-      { name: "Requirement Analysis", tag: "Specification & Scoping" },
-      { name: "Customer Success", tag: "Adoption & Post-Launch Growth" }
-    ]
+  title: "Data Entry & Copywriting",
+  skills: [
+    { name: "Data Entry", tag: "Accurate & Efficient Data Processing" },
+    { name: "Excel & Google Sheets", tag: "Spreadsheet Data Management" },
+    { name: "Data Cleaning & Validation", tag: "Formatting & Quality Assurance" },
+    { name: "PDF & Document Conversion", tag: "Digital Data Processing" },
+    { name: "SEO Copywriting", tag: "Search-Optimized Business Content" },
+    { name: "Website & Marketing Content", tag: "Professional Web & Promotional Copy" }
+  ] 
   }
 ];
 
@@ -264,7 +264,7 @@ export const PROJECTS: Project[] = [
   {
     id: "proj-05",
     title: "Document Processing Automation",
-    category: "AI",
+    category: "Automation",
     description: "Automated document extraction and processing workflow that reduces manual data entry and improves operational efficiency.",
     longDescription: "An AI-powered Intelligent Document Processing pipeline built to process structured and un-structured invoices, purchase orders, contracts, and receipts into verified database records with zero manual typing.",
     technologies: ["Python", "Computer Vision OCR", "AI Parsing", "PDF Processing", "REST API"],
@@ -389,7 +389,7 @@ export const TESTIMONIALS: Testimonial[] = [
     author: "Business Owner",
     role: "ERP & Business Solutions",
     companyType: "Manufacturing & Distribution",
-    isSample: true
+    isSample: false
   },
   {
     id: "test-2",

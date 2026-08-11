@@ -15,7 +15,7 @@ export const WorkProcess: React.FC = () => {
             <span>METHODOLOGY</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            How I Work
+            How We Work
           </h2>
           <p className="text-gray-400 text-base sm:text-lg mt-3">
             A transparent, 6-phase engineering lifecycle that guarantees predictable milestones, high technical standards, and zero surprises.

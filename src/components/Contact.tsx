@@ -107,9 +107,9 @@ export const Contact: React.FC<ContactProps> = ({ initialService, onSubmitted })
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-xs font-mono text-gray-400 block">LOCATION</span>
+                    <span className="text-xs font-mono text-gray-400 block">MOBILE</span>
                     <span className="text-base font-bold text-white">
-                      {PERSONAL_INFO.location}
+                      {PERSONAL_INFO.Mobile}
                     </span>
                     <span className="text-xs text-gray-400 block mt-0.5">Serving clients worldwide</span>
                   </div>
