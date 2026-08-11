@@ -39,17 +39,15 @@ export const SERVICES: Service[] = [
   {
     id: "erp",
     title: "ERP, CRM & Business Solutions",
-    description: "Flexible ERP and CRM solutions for businesses, including ERP implementation, ERPNext and Frappe customization, workflow automation, business process optimization, reporting, and third-party integrations.",
+    description: "ERP & CRM solutions for businesses, including ERPNext & Frappe customization, workflow automation, accounting, inventory, sales, reporting, business process optimization, and API integrations.",
     iconName: "Database",
     features: [
-      "ERPNext & Frappe Implementation and Customization",
-      "ERP & CRM Workflow Automation",
+      "ERPNext & Frappe Customization Services",
+      "ERP & CRM Workflow Automation Solutions",
       "Accounting & Financial Management Setup",
-      "Inventory, Purchase & Supply Chain Management",
-      "Sales, CRM & Customer Management",
-      "HR, Payroll & Employee Management",
-      "Custom Reports, Dashboards & Business Analytics",
-      "Third-party API, Webhook & System Integrations"
+      "Inventory & Supply Chain Management",
+      "Sales & Customer Relationship Management",
+      "API, Webhook & Third-Party Integrations"
     ]
   },
   {
@@ -58,16 +56,12 @@ export const SERVICES: Service[] = [
     description: "Modern, responsive, fast, and SEO-friendly websites for businesses, startups, professionals, and organizations, including corporate websites, WordPress websites, Magento stores, e-commerce platforms, and custom web applications.",
     iconName: "Globe",
     features: [
-      "Business & Corporate Websites",
-      "WordPress Website Development & Customization",
-      "Magento E-commerce Development",
-      "E-commerce Websites & Online Stores",
-      "High-Converting Landing Pages",
-      "Responsive Single & Multi-Page Websites",
-      "Custom Web Applications & Portals",
-      "React, TypeScript & JavaScript Development",
-      "SEO & Website Performance Optimization",
-      "Website Maintenance & Technical Support"
+      "Business & Corporate Website Development",
+      "WordPress Website Development & SEO Services",
+      "Magento E-commerce Development Solutions",
+      "E-commerce Website & Online Store Solutions",
+      "SEO-Friendly Landing Page Design Services",
+      "Responsive Website Design & SEO Services"
     ]
   },
   {
@@ -76,11 +70,12 @@ export const SERVICES: Service[] = [
     description: "AI-powered applications, workflow automation, intelligent assistants, document processing, and business automation.",
     iconName: "Cpu",
     features: [
-      "Generative AI & LLM Integrations",
-      "Autonomous AI Agents & Workflows",
-      "Intelligent Document Processing (OCR/NLP)",
-      "Automated Business Data Pipelines",
-      "Custom AI Assistant Interfaces"
+       "Generative AI & LLM Integration Services",
+       "Autonomous AI Agents & Workflow Automation",
+       "Intelligent Document Processing with OCR",
+       "AI-Powered Business Data Automation",
+       "Custom AI Assistant Development Solutions",
+       "AI-Powered Business Process Automation"
     ]
   },
   {
@@ -89,11 +84,12 @@ export const SERVICES: Service[] = [
     description: "CRM, HR management, recruitment, employee management, payroll, and customer workflow solutions.",
     iconName: "Users",
     features: [
-      "Lead & Sales Pipeline Automation",
-      "Employee Lifecycle & Onboarding Systems",
-      "Payroll & Attendance Management",
-      "Customer Support & Ticketing Hubs",
-      "Custom Dashboard & BI Analytics"
+     "CRM Lead & Sales Pipeline Automation",
+     "Employee Onboarding & HR Management Systems",
+     "Payroll, Attendance & Employee Management",
+     "Customer Support & Ticketing Solutions",
+     "Custom Business Dashboards & BI Analytics",
+     "Business Workflow & Process Automation"
     ]
   },
   {
@@ -102,24 +98,26 @@ export const SERVICES: Service[] = [
     description: "Custom software solutions designed around specific business requirements and workflows.",
     iconName: "Code",
     features: [
-      "Tailored Enterprise Backends",
-      "Microservice & API Architecture",
-      "Database Modeling & Optimization",
-      "Legacy Codebase Modernization",
-      "Cloud & On-Prem Deployment"
+      "Custom Enterprise Software Development",
+      "Microservices & API Development Solutions",
+      "Database Design & Performance Optimization",
+      "Legacy Software Modernization Services",
+      "Cloud & On-Premise Software Deployment",
+      "Scalable Custom Business Software Solutions"
     ]
   },
   {
     id: "digital-business",
-    title: "Digital",
-    description: "Technology consulting and digital solutions that help businesses improve productivity, efficiency, and customer experience.",
-    iconName: "TrendingUp",
+    title: "Graphic Design & Branding",
+    description: "Creative graphic design and branding services including logos, visiting cards, labels, posters, brochures, invitations, and marketing materials.",
+    iconName: "Palette",
     features: [
-      "Technology & Architecture Consulting",
-      "Business Process Audits & Optimization",
-      "Digital Transformation Strategy",
-      "Tool Selection & Vendor Evaluation",
-      "Post-Launch Scaling & Maintenance"
+       "Professional Logo Design & Branding",
+       "Creative Visiting Card Design Services",
+       "Custom Brand Label Design Solutions",
+       "Poster & Promotional Graphic Design",
+       "Brochure & Flyer Design Services",
+       "Invitation & Event Card Design Services"
     ]
   }
 ];
@@ -159,6 +157,17 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
       { name: "AI-Assisted Development", tag: "Accelerated Delivery" },
       { name: "Data Analysis & Reporting", tag: "Business Insights" }
     ]
+  },
+  {
+  title: "Graphic Design & Branding",
+  skills: [
+    { name: "Logo Design", tag: "Brand Identity & Visual Design" },
+    { name: "Visiting Card Design", tag: "Professional Business Branding" },
+    { name: "Brand Label Design", tag: "Product & Packaging Branding" },
+    { name: "Poster Design", tag: "Promotional & Marketing Graphics" },
+    { name: "Brochure & Flyer Design", tag: "Business Marketing Materials" },
+    { name: "Invitation Design", tag: "Event & Digital Invitations" }
+  ]
   },
   {
     title: "Business & Management",
@@ -232,23 +241,25 @@ export const PROJECTS: Project[] = [
     gradientFrom: "from-teal-950/80 to-zinc-950"
   },
   {
-    id: "proj-04",
-    title: "HR & Recruitment Management System",
-    category: "Automation",
-    description: "Employee, recruitment, attendance, onboarding, and HR workflow management platform.",
-    longDescription: "An end-to-end Human Resource Information System (HRIS) engineered for modern distributed workforces. Simplifies recruitment pipelines, automated onboarding checklists, leave management, and automated monthly payroll processing.",
-    technologies: ["ERPNext", "Python", "JavaScript", "REST APIs", "PostgreSQL"],
-    features: [
-      "Kanban Applicant Tracking System (ATS) with Email Parsing",
-      "Automated Attendance & Biometric Device Integration",
-      "Self-Service Employee Portal & Leave Management",
-      "One-Click Payroll & Local Tax Deduction Calculation"
-    ],
-    architectureSummary: "Custom Frappe/ERPNext app extension with automated background job triggers, biometric API hardware sync, and responsive mobile-first employee portal view.",
-    businessImpact: "Cut HR administrative overhead by 50+ hours per month and automated onboarding for over 200+ employees seamlessly.",
-    clientType: "Growth Stage Corporate Enterprise",
-    imagePlaceholderText: "HRM & PAYROLL PIPELINE",
-    gradientFrom: "from-lime-950/80 to-zinc-950"
+  id: "proj-04",
+  title: "Data Entry & Data Management",
+  category: "Data",
+  description: "Accurate and organized data entry and management solutions for businesses, including spreadsheet processing, data cleaning, document conversion, and database updates.",
+  longDescription: "A structured data management project designed to transform large volumes of unorganized business information into accurate, consistent, and easy-to-manage digital records. The workflow included data entry, document processing, spreadsheet management, data validation, formatting, and quality checks.",
+  technologies: ["Microsoft Excel", "Google Sheets", "Data Processing", "PDF Conversion", "Data Validation"],
+  features: [
+    "Accurate Excel & Google Sheets Data Entry",
+    "PDF, Image & Document Data Conversion",
+    "Data Cleaning, Formatting & Validation",
+    "Large-Volume Database Data Processing",
+    "Duplicate Data Identification & Removal",
+    "Quality Checks & Structured Data Organization"
+  ],
+  architectureSummary: "Designed a structured data processing workflow using standardized templates, validation rules, data cleaning procedures, spreadsheet automation, and multi-stage quality checks to maintain accuracy and consistency.",
+  businessImpact: "Improved data accuracy and organization while reducing repetitive manual work and creating structured digital records that were easier to search, manage, and process.",
+  clientType: "Businesses / Professionals / Organizations",
+  imagePlaceholderText: "DATA MANAGEMENT & PROCESSING",
+  gradientFrom: "from-green-950/80 to-zinc-950" 
   },
   {
     id: "proj-05",
@@ -270,23 +281,24 @@ export const PROJECTS: Project[] = [
     gradientFrom: "from-emerald-900/60 to-zinc-950"
   },
   {
-    id: "proj-06",
-    title: "Sales & CRM Automation",
-    category: "CRM",
-    description: "CRM workflow designed to manage leads, customer interactions, follow-ups, sales pipelines, and business reporting.",
-    longDescription: "A custom sales enablement & CRM platform engineered to give sales managers total visibility into lead velocity, deal stages, team productivity, and predictive revenue forecasting.",
-    technologies: ["Frappe / CRM", "Python", "REST APIs", "Chart.js", "Webhooks"],
-    features: [
-      "Visual Drag-and-Drop Deal Pipeline Boards",
-      "Automated WhatsApp & Email Lead Follow-up Nudges",
-      "Call Log & Interaction Timeline Tracking",
-      "Real-time Sales Leaderboard & Revenue Analytics"
-    ],
-    architectureSummary: "Customized CRM schema built with real-time WebSocket notifications, automated email/SMS integration hooks, and interactive dashboard views.",
-    businessImpact: "Improved lead conversion rate by 28% and shortened average deal closing cycle by 14 days.",
-    clientType: "B2B Sales & Service Agencies",
-    imagePlaceholderText: "CRM SALES AUTOMATION HUB",
-    gradientFrom: "from-green-900/60 to-zinc-950"
+  id: "proj-06",
+  title: "Brand Identity & Creative Design",
+  category: "Design",
+  description: "Creative branding and graphic design solutions including logo design, visiting cards, brand labels, posters, brochures, invitations, and digital marketing materials.",
+  longDescription: "A complete visual branding and creative design project developed to give a business a consistent and professional identity across both print and digital platforms. The design system covered core brand identity, business stationery, promotional materials, product labels, event creatives, and social media assets.",
+  technologies: ["Adobe Photoshop", "Adobe Illustrator", "Figma", "Canva", "Creative Design"],
+  features: [
+    "Professional Logo & Brand Identity Design",
+    "Creative Visiting Card & Business Stationery",
+    "Custom Product Label & Packaging Designs",
+    "Posters, Brochures & Promotional Materials",
+    "Invitation & Event Creative Design",
+  ],
+  architectureSummary: "Developed a consistent visual design system using defined typography, layout principles, brand elements, reusable templates, and digital-ready assets for multiple business and marketing requirements.",
+  businessImpact: "Created a consistent and professional brand presence across print and digital channels, helping improve visual communication, brand recognition, and marketing consistency.",
+  clientType: "Small Business / Startup / Professional Brand",
+  imagePlaceholderText: "BRAND IDENTITY & CREATIVE DESIGN",
+  gradientFrom: "from-lime-950/80 to-zinc-950"
   }
 ];
 
@@ -294,7 +306,7 @@ export const WHY_WORK_WITH_ME = [
   {
     number: "01",
     title: "Business First",
-    description: "I focus on understanding your core business problem and strategic goals, not simply delivering raw lines of code."
+    description: "Focus on understanding your core business problem and strategic goals, not simply delivering raw lines of code."
   },
   {
     number: "02",
@@ -373,26 +385,26 @@ export const EXPERIENCE_TIMELINE: ExperienceItem[] = [
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: "test-1",
-    quote: "Sasikumar understood our requirements quickly and helped us convert our complex business process into a practical, easy-to-use software solution.",
-    author: "Rajesh V.",
-    role: "Business Owner & Managing Director",
-    companyType: "Manufacturing & Distribution Enterprise",
+    quote: "Techyora understood our requirements quickly and helped us transform a complex business process into a practical and easy-to-use digital solution.",
+    author: "Business Owner",
+    role: "ERP & Business Solutions",
+    companyType: "Manufacturing & Distribution",
     isSample: true
   },
   {
     id: "test-2",
-    quote: "Excellent communication and strong understanding of both business operations and technical development. He delivered our ERPNext customization right on schedule.",
-    author: "Anand M.",
-    role: "Project Manager",
-    companyType: "Technology Services Firm",
+    quote: "The team demonstrated strong communication and a clear understanding of both business requirements and technical development. The project was delivered professionally.",
+    author: "Project Manager",
+    role: "Software & ERP Development",
+    companyType: "Technology Services",
     isSample: true
   },
   {
     id: "test-3",
-    quote: "Professional, responsive, and focused on delivering a solution that actually works for the business instead of just writing code. Highly recommended!",
-    author: "Sanjay K.",
-    role: "Operations Head",
-    companyType: "Logistics & Supply Chain Solutions",
+    quote: "Professional, responsive, and focused on delivering practical solutions. Techyora paid attention to our requirements and delivered quality work with a smooth experience.",
+    author: "Operations Professional",
+    role: "Digital Solutions & Automation",
+    companyType: "Logistics & Business Operations",
     isSample: true
   }
 ];
@@ -400,30 +412,27 @@ export const TESTIMONIALS: Testimonial[] = [
 export const FAQS: FaqItem[] = [
   {
     question: "What type of freelance projects do you accept?",
-    answer: "I accept end-to-end projects including ERPNext/Frappe implementation & customization, custom web application development (React/Node/Python), AI automation integrations, document processing workflows, CRM/HRM systems, and digital technology consulting engagements."
+    answer: "We accept end-to-end projects including ERPNext/Frappe implementation & customization, custom web application development (React/Node/Python), AI automation integrations, document processing workflows, CRM/HRM systems, and digital technology consulting engagements."
   },
   {
     question: "Can you customize ERPNext for my business?",
-    answer: "Yes, absolutely! I specialize in ERPNext and Frappe framework development. I can create custom DocTypes, automate approval workflows, build custom web portals, integrate third-party APIs, and tailor stock/finance/HR modules to your exact business rules."
+    answer: "Yes, absolutely! We specialize in ERPNext and Frappe framework development. We can create custom DocTypes, automate approval workflows, build custom web portals, integrate third-party APIs, and tailor stock/finance/HR modules to your exact business rules."
   },
   {
     question: "Can you build a website from scratch?",
-    answer: "Yes. I build modern, lightning-fast corporate websites, SaaS landing pages, portfolio platforms, and dynamic web applications using React, TypeScript, Tailwind CSS, and robust backends."
+    answer: "Yes. We build modern, lightning-fast corporate websites, SaaS landing pages, portfolio platforms, and dynamic web applications using React, TypeScript, Tailwind CSS, and robust backends."
   },
   {
     question: "Can you integrate AI into an existing business process?",
-    answer: "Definitely. I can integrate LLM APIs (OpenAI/Anthropic/Gemini), build autonomous AI agents, automate document extraction from PDFs/images, construct internal AI query interfaces over your private business data, and automate repetitive data entry workflows."
+    answer: "Definitely. We can integrate LLM APIs (OpenAI/Anthropic/Gemini), build autonomous AI agents, automate document extraction from PDFs/images, construct internal AI query interfaces over your private business data, and automate repetitive data entry workflows."
   },
   {
     question: "Do you provide maintenance and ongoing support?",
-    answer: "Yes, I offer flexible ongoing maintenance plans for server monitoring, bug fixes, feature enhancements, system updates, and dedicated technical advisory support."
+    answer: "Yes, We offer flexible ongoing maintenance plans for server monitoring, bug fixes, feature enhancements, system updates, and dedicated technical advisory support."
   },
   {
     question: "How do we start a project?",
     answer: "We start with an initial discovery call or inquiry review to understand your requirements, business goals, and timeline. Once agreed on the technical scope and proposal, we proceed immediately into planning and execution."
   },
-  {
-    question: "Do you work with international clients?",
-    answer: "Yes. I work with business clients across India, North America, Europe, the Middle East, and Asia Pacific. I manage remote collaboration seamlessly via asynchronous updates, video calls, and clear project tracking tools."
-  }
+  
 ];
