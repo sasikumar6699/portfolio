@@ -13,7 +13,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenContact }) => {
     <div className="pt-24">
       <About />
       <WhyWorkWithMe />
-      <Experience />
+      {/* <Experience /> */}
       <CtaBanner onOpenContact={onOpenContact} />
     </div>
   );

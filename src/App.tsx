@@ -71,7 +71,7 @@ export function App() {
           />
           <Route
             path="/experience"
-            element={<ExperiencePage onOpenContact={() => handleOpenContact()} />}
+            // element={<ExperiencePage onOpenContact={() => handleOpenContact()} />}
           />
           <Route
             path="/contact"
