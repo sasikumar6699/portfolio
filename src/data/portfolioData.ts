@@ -7,7 +7,7 @@ export const PERSONAL_INFO = {
   Mobile: "9524 22 75 11",
   experience: "Experienced Freelance Professionals",
   availability: "Open for Freelance Projects",
-  email: "techyora@gmail.com",
+  email: "connect.techyora@gmail.com",
   tagline: "We Build. We Design. We Automate. We Deliver.",
   bioHeading: "One Team. Multiple Skills. Complete Digital Solutions.",
   bioText1: "Techyora is a freelance collective of developers, designers, technology specialists, data professionals, and content creators helping startups, entrepreneurs, small businesses, growing companies, and organizations turn ideas and business requirements into practical digital solutions.",
