@@ -4,7 +4,7 @@ export const PERSONAL_INFO = {
   name: "Techyora",
   title: "Freelance Digital Solutions Team | Software, Design, AI & Automation",
   brandName: "TECHYORA",
-  Mobile: "9524 22 75 11",
+  Mobile: "+91 9524227511, +91 7845328409",
   experience: "Experienced Freelance Professionals",
   availability: "Open for Freelance Projects",
   email: "connect.techyora@gmail.com",
