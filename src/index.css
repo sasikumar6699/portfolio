@@ -84,3 +84,21 @@
 .pulse-neon-dot {
   animation: neonPulse 2s infinite ease-in-out;
 }
+
+/* SVG Laser Pipeline Data Flow */
+@keyframes laserFlow {
+  from {
+    stroke-dashoffset: 38;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-flow {
+  animation: laserFlow 1.8s linear infinite;
+}
+
+.animate-flow-fast {
+  animation: laserFlow 1s linear infinite;
+}

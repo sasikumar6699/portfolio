@@ -4,7 +4,7 @@ import { PERSONAL_INFO } from '../data/portfolioData';
 import { HeroCanvas } from './HeroCanvas';
 
 interface HeroProps {
-  onOpenContact: () => void;
+  onOpenContact: (serviceTitle?: string) => void;
   onOpenResume: () => void;
 }
 
@@ -22,7 +22,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
           {/* Left Column Content */}
-          <div className="lg:col-span-7 space-y-8">
+          <div className="lg:col-span-6 space-y-8">
             
             {/* Small Availability Badge */}
             <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 shadow-[0_0_15px_rgba(57,255,20,0.15)] text-xs sm:text-sm font-mono text-[#39FF14]">
@@ -50,7 +50,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume }) => {
             {/* CTA Buttons & Resume Link */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
               <button
-                onClick={onOpenContact}
+                onClick={() => onOpenContact()}
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#39FF14] text-black font-bold text-base hover:bg-[#45ff24] shadow-[0_0_30px_rgba(57,255,20,0.5)] hover:shadow-[0_0_45px_rgba(57,255,20,0.8)] transition-all transform hover:-translate-y-1 active:translate-y-0"
               >
                 <span>Start Your Project</span>
@@ -83,8 +83,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume }) => {
           </div>
 
           {/* Right Column Visual */}
-          <div className="lg:col-span-5 w-full">
-            <HeroCanvas />
+          <div className="lg:col-span-6 w-full">
+            <HeroCanvas onSelectService={onOpenContact} />
           </div>
 
         </div>

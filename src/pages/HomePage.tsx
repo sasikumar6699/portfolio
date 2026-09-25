@@ -27,7 +27,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 }) => {
   return (
     <div>
-      <Hero onOpenContact={() => onOpenContact()} onOpenResume={onOpenResume} />
+      <Hero onOpenContact={(serviceTitle) => onOpenContact(serviceTitle)} onOpenResume={onOpenResume} />
       <About />
       <Services onSelectService={(serviceTitle) => onOpenContact(serviceTitle)} />
       <Skills />
