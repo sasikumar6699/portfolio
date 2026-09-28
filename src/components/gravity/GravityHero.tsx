@@ -179,10 +179,11 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
   }, [triggerGravitizeAt]);
 
 
-  // Main Continuous Automatic Rotation & Global Convergence Animation Loop
+  // Main Continuous Automatic Rotation & Global Convergence Animation Loop (Viewport Paused)
   useEffect(() => {
-    let animId: number;
+    let animId: number = 0;
     let lastTime = performance.now();
+    let isHeroInView = true;
 
     const clusterOffsets = [
       { ox: -25, oy: -18 },
@@ -192,6 +193,11 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
     ];
 
     const frame = (now: number) => {
+      if (!isHeroInView) {
+        animId = 0;
+        return;
+      }
+
       const dt = Math.min(0.033, (now - lastTime) / 1000);
       lastTime = now;
 
@@ -271,8 +277,28 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
       animId = requestAnimationFrame(frame);
     };
 
+    // Pause physics calculations completely when hero section is not visible
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isHeroInView = entry.isIntersecting;
+        if (isHeroInView && !animId) {
+          lastTime = performance.now();
+          animId = requestAnimationFrame(frame);
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
+
     animId = requestAnimationFrame(frame);
-    return () => cancelAnimationFrame(animId);
+
+    return () => {
+      if (animId) cancelAnimationFrame(animId);
+      observer.disconnect();
+    };
   }, [CX, CY]);
 
   const orbitRadii = isMobile ? [65, 110, 155, 200] : [105, 165, 225, 285];
@@ -501,7 +527,7 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
         <svg
           ref={svgRef}
           viewBox="0 0 1920 1080"
-          className="absolute inset-0 w-full h-full block pointer-events-none overflow-visible z-0"
+          className="absolute inset-0 w-full h-full block pointer-events-none overflow-visible z-0 will-change-transform transform-gpu"
           preserveAspectRatio="xMidYMid slice"
         >
           {renderSvgContent()}
@@ -622,7 +648,7 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
                 <svg
                   ref={svgRef}
                   viewBox="0 0 520 520"
-                  className="w-full max-w-[340px] sm:max-w-[420px] aspect-square mx-auto block overflow-visible z-10 select-none cursor-pointer"
+                  className="w-full max-w-[340px] sm:max-w-[420px] aspect-square mx-auto block overflow-visible z-10 select-none cursor-pointer will-change-transform transform-gpu"
                   preserveAspectRatio="xMidYMid meet"
                 >
                   {renderSvgContent()}

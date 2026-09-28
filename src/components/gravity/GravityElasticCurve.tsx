@@ -4,23 +4,37 @@ export const GravityElasticCurve: React.FC = () => {
   const curveRef = useRef<HTMLDivElement>(null);
   const [controlY, setControlY] = useState(0);
   const isBouncingRef = useRef(false);
+  const inViewRef = useRef(false);
 
   useEffect(() => {
+    // Use IntersectionObserver to avoid forced layout reflows during scroll
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inViewRef.current = entry.isIntersecting;
+      },
+      { threshold: 0.1 }
+    );
+
+    if (curveRef.current) {
+      observer.observe(curveRef.current);
+    }
+
     let prevY = window.scrollY;
+    let ticking = false;
 
     const onScroll = () => {
-      if (!curveRef.current) return;
-      const rect = curveRef.current.getBoundingClientRect();
-      const currentY = window.scrollY;
-      const scrollSpeed = currentY - prevY;
-      prevY = currentY;
+      if (!inViewRef.current || ticking) return;
 
-      // When the curve is within viewport window
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        if (!isBouncingRef.current) {
+      ticking = true;
+      requestAnimationFrame(() => {
+        const currentY = window.scrollY;
+        const scrollSpeed = currentY - prevY;
+        prevY = currentY;
+        ticking = false;
+
+        if (!isBouncingRef.current && Math.abs(scrollSpeed) > 10) {
           isBouncingRef.current = true;
-          // Trigger spring bounce
-          const impulse = Math.max(-60, Math.min(60, scrollSpeed * 1.5));
+          const impulse = Math.max(-50, Math.min(50, scrollSpeed * 1.2));
           let val = impulse;
           let vel = 0;
           const k = 0.08;
@@ -33,7 +47,7 @@ export const GravityElasticCurve: React.FC = () => {
 
             setControlY(Math.round(val));
 
-            if (Math.abs(val) > 0.5 || Math.abs(vel) > 0.5) {
+            if (Math.abs(val) > 0.8 || Math.abs(vel) > 0.8) {
               requestAnimationFrame(bounce);
             } else {
               setControlY(0);
@@ -42,17 +56,21 @@ export const GravityElasticCurve: React.FC = () => {
           };
           requestAnimationFrame(bounce);
         }
-      }
+      });
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (
     <div
       ref={curveRef}
-      className="relative z-20 w-full h-16 sm:h-24 -mt-1 -mb-1 overflow-hidden pointer-events-none select-none"
+      className="relative z-20 w-full h-16 sm:h-24 -mt-1 -mb-1 overflow-hidden pointer-events-none select-none transform-gpu will-change-transform"
       aria-hidden="true"
     >
       <svg
@@ -62,7 +80,7 @@ export const GravityElasticCurve: React.FC = () => {
       >
         <defs>
           <filter id="curveNeonGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feGaussianBlur stdDeviation="3" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
@@ -77,7 +95,6 @@ export const GravityElasticCurve: React.FC = () => {
           stroke="#39FF14"
           strokeWidth="1.5"
           filter="url(#curveNeonGlow)"
-          className="transition-all duration-75"
         />
 
         {/* Center Photon Node */}
