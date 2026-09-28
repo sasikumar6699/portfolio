@@ -12,6 +12,8 @@ import { SkillsPage } from './pages/SkillsPage';
 import { ProjectsPage } from './pages/ProjectsPage';
 // import { ExperiencePage } from './pages/ExperiencePage';
 import { ContactPage } from './pages/ContactPage';
+import { GravityCursor } from './components/gravity/GravityCursor';
+import { SmoothScroll } from './components/gravity/SmoothScroll';
 
 export function App() {
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
@@ -35,12 +37,16 @@ export function App() {
   };
 
   return (
-    <div className="bg-[#050505] text-white min-h-screen font-sans selection:bg-[#39FF14] selection:text-black flex flex-col justify-between">
-      {/* Sticky Navbar */}
-      <Navbar onOpenContact={() => handleOpenContact()} />
+    <SmoothScroll>
+      <div className="bg-[#050505] text-white min-h-screen font-sans selection:bg-[#39FF14] selection:text-black flex flex-col justify-between">
+        {/* Custom Magnetic Gravity Cursor */}
+        <GravityCursor />
 
-      {/* Main Content Views with React Router */}
-      <main className="flex-grow">
+        {/* Sticky Navbar */}
+        <Navbar onOpenContact={() => handleOpenContact()} />
+
+        {/* Main Content Views with React Router */}
+        <main className="flex-grow">
         <Routes>
           <Route
             path="/"
@@ -48,7 +54,6 @@ export function App() {
               <HomePage
                 onOpenContact={handleOpenContact}
                 onOpenResume={() => setResumeModalOpen(true)}
-                selectedService={selectedService}
                 onFormSubmitted={handleFormSubmitted}
               />
             }
@@ -103,6 +108,7 @@ export function App() {
         />
       )}
     </div>
+    </SmoothScroll>
   );
 }
 

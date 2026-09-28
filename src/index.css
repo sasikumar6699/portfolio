@@ -102,3 +102,192 @@
 .animate-flow-fast {
   animation: laserFlow 1s linear infinite;
 }
+
+/* =========================================================================
+   GRAVITY DESIGN FORMATIONS & 3D ANIMATION ENGINE
+   ========================================================================= */
+
+/* 3D Perspective & Orbit Stage */
+.perspective-1400 {
+  perspective: 1400px;
+  -webkit-perspective: 1400px;
+  perspective-origin: 50% 50%;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+/* Concentric Orbit Track Spin */
+@keyframes orbitTrackSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes orbitTrackSpinReverse {
+  from { transform: rotate(360deg); }
+  to   { transform: rotate(0deg); }
+}
+
+.animate-orbit-spin {
+  animation: orbitTrackSpin var(--orbit-dur, 30s) linear infinite;
+}
+
+.animate-orbit-counter {
+  animation: orbitTrackSpinReverse var(--orbit-dur, 30s) linear infinite;
+}
+
+/* Gyroscopic 3D Gimbal Rings */
+@keyframes gyroReif1 {
+  0%   { transform: rotateZ(0deg) rotateX(0deg); }
+  100% { transform: rotateZ(360deg) rotateX(720deg); }
+}
+
+@keyframes gyroReif2 {
+  0%   { transform: rotateZ(-25deg) rotateY(0deg); }
+  100% { transform: rotateZ(-385deg) rotateY(-720deg); }
+}
+
+.animate-gyro-ring-1 {
+  animation: gyroReif1 6s linear infinite;
+}
+
+.animate-gyro-ring-2 {
+  animation: gyroReif2 8s linear infinite;
+}
+
+/* Gravity Ticker Photon Pulse */
+@keyframes gravityTickerPulse {
+  0%   { transform: translateY(0); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateY(80px); opacity: 0; }
+}
+
+.animate-gravity-ticker {
+  animation: gravityTickerPulse 2.4s cubic-bezier(0.55, 0.06, 0.45, 0.94) infinite;
+}
+
+/* Magnetic Bead Orbit Rotation */
+@keyframes magneticRingBead {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.animate-bead-track {
+  animation: magneticRingBead 22s linear infinite;
+}
+
+/* Masked Word Slide Up */
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding: 0.15em 0;
+  margin: -0.15em 0;
+}
+
+.word-reveal {
+  display: inline-block;
+  transform: translateY(115%);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.word-mask.is-active .word-reveal {
+  transform: translateY(0%);
+}
+
+/* Animated Strike-through */
+.strike-through-path {
+  position: relative;
+  display: inline-block;
+}
+
+.strike-through-path::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: #39FF14;
+  box-shadow: 0 0 10px rgba(57, 255, 20, 0.8);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.strike-through-path.is-struck::after {
+  transform: scaleX(1);
+}
+
+/* Underline Draw */
+.neon-draw-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.neon-draw-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background: #39FF14;
+  box-shadow: 0 0 12px rgba(57, 255, 20, 0.7);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.neon-draw-underline.is-drawn::after {
+  transform: scaleX(1);
+}
+
+/* Horizontal Filmstrip Hide Scrollbars */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Auto Progress Keyframes */
+@keyframes autoProgress3s {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+@keyframes autoProgress2s {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* Anime Mecha Neural Audio Waveform Equalizer */
+@keyframes neuralEqualizer {
+  0%, 100% { height: 4px; }
+  50% { height: 16px; }
+}
+
+.animate-equalizer-1 { animation: neuralEqualizer 0.8s ease-in-out infinite; }
+.animate-equalizer-2 { animation: neuralEqualizer 0.6s ease-in-out 0.2s infinite; }
+.animate-equalizer-3 { animation: neuralEqualizer 0.9s ease-in-out 0.4s infinite; }
+.animate-equalizer-4 { animation: neuralEqualizer 0.7s ease-in-out 0.15s infinite; }
+.animate-equalizer-5 { animation: neuralEqualizer 0.85s ease-in-out 0.3s infinite; }
+
+/* Anime Circuit Packet Runner */
+@keyframes circuitPacketMove {
+  0%   { top: 0%; opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.animate-circuit-packet {
+  animation: circuitPacketMove 1.8s ease-in-out infinite;
+}
+
