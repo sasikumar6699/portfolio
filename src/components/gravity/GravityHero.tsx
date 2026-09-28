@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { ArrowRight, Eye, Download, Database, Globe, Cpu, PenTool } from 'lucide-react';
+import { ArrowRight, Eye, Download, Database, Globe, Cpu, Code } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 
 interface GravityHeroProps {
@@ -22,58 +22,82 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
   const heroRef = useRef<HTMLElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const [activeSatId, setActiveSatId] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // SVG Stage Dimensions (1920 x 1080 ViewBox)
-  // Central Mass is anchored in the right column space (CX = 1350, CY = 540)
-  const CX = 1350;
-  const CY = 540;
-  const MASS_R = 48;
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-  // 4 Named Satellites revolving automatically around the right-side mass in compact orbits
+  // SVG Stage Dimensions
+  // Desktop: Anchored on right column (CX = 1350, CY = 540 in 1920x1080)
+  // Mobile: Centered in dedicated stage (CX = 260, CY = 260 in 520x520)
+  const CX = isMobile ? 260 : 1350;
+  const CY = isMobile ? 260 : 540;
+  const MASS_R = isMobile ? 36 : 48;
+
+  // 4 Named Satellites revolving automatically around mass
   const initialSatellites: Satellite[] = [
     {
       id: 'erp',
-      name: 'ERP, CRM & Business Solutions',
+      name: 'ERP, CRM & HCM Solutions',
       icon: Database,
-      radius: 105,
+      radius: isMobile ? 65 : 105,
       omega: 0.85, // automatic continuous rotation
       theta: 0.4,
       color: '#39FF14',
-      size: 16
+      size: isMobile ? 12 : 16
     },
     {
-      id: 'web',
-      name: 'Web Development & Design',
-      icon: Globe,
-      radius: 165,
+      id: 'custom-sw',
+      name: 'Custom Software (Fleet / Logistics)',
+      icon: Code,
+      radius: isMobile ? 110 : 165,
       omega: -0.65,
       theta: 1.9,
       color: '#39FF14',
-      size: 18
+      size: isMobile ? 13 : 18
     },
     {
-      id: 'ai',
-      name: 'AI & Automation',
-      icon: Cpu,
-      radius: 225,
+      id: 'web',
+      name: 'Web Development & 3D Websites',
+      icon: Globe,
+      radius: isMobile ? 155 : 225,
       omega: 0.52,
       theta: 3.5,
       color: '#39FF14',
-      size: 17
+      size: isMobile ? 12 : 17
     },
     {
-      id: 'design',
-      name: 'Graphic Design & Branding',
-      icon: PenTool,
-      radius: 285,
+      id: 'ai',
+      name: 'AI, Automation & AMC Support',
+      icon: Cpu,
+      radius: isMobile ? 200 : 285,
       omega: -0.42,
       theta: 4.9,
       color: '#39FF14',
-      size: 16
+      size: isMobile ? 11 : 16
     }
   ];
 
   const satellitesRef = useRef(initialSatellites);
+
+  // Keep satellite radii synchronized with mobile/desktop resize
+  useEffect(() => {
+    satellitesRef.current = satellitesRef.current.map((s) => {
+      let r = 105;
+      let sz = 16;
+      if (s.id === 'erp') { r = isMobile ? 65 : 105; sz = isMobile ? 12 : 16; }
+      else if (s.id === 'custom-sw') { r = isMobile ? 110 : 165; sz = isMobile ? 13 : 18; }
+      else if (s.id === 'web') { r = isMobile ? 155 : 225; sz = isMobile ? 12 : 17; }
+      else if (s.id === 'ai') { r = isMobile ? 200 : 285; sz = isMobile ? 11 : 16; }
+      return { ...s, radius: r, size: sz };
+    });
+  }, [isMobile]);
 
   // Render positions
   const [satPositions, setSatPositions] = useState(
@@ -119,15 +143,17 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
     // Fallback if CTM not ready
     if (heroRef.current) {
       const rect = heroRef.current.getBoundingClientRect();
+      const baseW = isMobile ? 520 : 1920;
+      const baseH = isMobile ? 520 : 1080;
       return {
-        x: ((clientX - rect.left) / rect.width) * 1920,
-        y: ((clientY - rect.top) / rect.height) * 1080
+        x: ((clientX - rect.left) / rect.width) * baseW,
+        y: ((clientY - rect.top) / rect.height) * baseH
       };
     }
     return { x: CX, y: CY };
-  }, [CX, CY]);
+  }, [CX, CY, isMobile]);
 
-  // Handle click anywhere across the entire hero section (even on the left side or outside the box)
+  // Handle click anywhere across the entire hero section
   const triggerGravitizeAt = useCallback((clientX: number, clientY: number) => {
     const { x: clickedX, y: clickedY } = getSvgCoordinates(clientX, clientY);
 
@@ -249,307 +275,333 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
     return () => cancelAnimationFrame(animId);
   }, [CX, CY]);
 
+  const orbitRadii = isMobile ? [65, 110, 155, 200] : [105, 165, 225, 285];
+
+  const renderSvgContent = () => (
+    <>
+      <defs>
+        <filter id="heroNeonGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="8" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        <radialGradient id="heroSunGrad" cx="35%" cy="35%" r="65%">
+          <stop offset="0%" stopColor="#9eff7a" />
+          <stop offset="65%" stopColor="#39FF14" />
+          <stop offset="100%" stopColor="#146a09" />
+        </radialGradient>
+      </defs>
+
+      {/* Orbit Trajectory Ellipses */}
+      {orbitRadii.map((r, i) => (
+        <ellipse
+          key={i}
+          cx={CX}
+          cy={CY}
+          rx={r}
+          ry={r}
+          fill="none"
+          stroke="#39FF14"
+          strokeWidth="1"
+          strokeDasharray={i % 2 === 0 ? "4 8" : "none"}
+          opacity={i % 2 === 0 ? "0.25" : "0.12"}
+        />
+      ))}
+
+      {/* Gravitational Tether Laser Rays when converging anywhere across the screen */}
+      {convergeRef.current.weight > 0.05 && (
+        <g opacity={convergeRef.current.weight * 0.85}>
+          {satPositions.map((sat) => (
+            <line
+              key={`tether-${sat.id}`}
+              x1={sat.x}
+              y1={sat.y}
+              x2={convergeRef.current.targetX}
+              y2={convergeRef.current.targetY}
+              stroke="#39FF14"
+              strokeWidth="1.5"
+              strokeDasharray="6 4"
+              filter="url(#heroNeonGlow)"
+            />
+          ))}
+        </g>
+      )}
+
+      {/* Gravitational Click Wave Marker anywhere on screen */}
+      {clickWave && (
+        <g>
+          <circle
+            cx={clickWave.x}
+            cy={clickWave.y}
+            r={clickWave.radius}
+            fill="none"
+            stroke="#39FF14"
+            strokeWidth="2.5"
+            opacity={clickWave.opacity}
+            filter="url(#heroNeonGlow)"
+          />
+          <circle
+            cx={clickWave.x}
+            cy={clickWave.y}
+            r={clickWave.radius * 0.5}
+            fill="none"
+            stroke="#39FF14"
+            strokeWidth="1.2"
+            opacity={clickWave.opacity * 0.8}
+          />
+          <circle
+            cx={clickWave.x}
+            cy={clickWave.y}
+            r="6"
+            fill="#39FF14"
+            opacity={clickWave.opacity}
+            filter="url(#heroNeonGlow)"
+          />
+        </g>
+      )}
+
+      {/* Central Mass (Anchored with Recoil) */}
+      <g transform={`translate(${massRecoil.x}, ${massRecoil.y})`}>
+        <circle
+          cx={CX}
+          cy={CY}
+          r={MASS_R + (isMobile ? 10 : 14)}
+          fill="#39FF14"
+          opacity="0.12"
+          filter="url(#heroNeonGlow)"
+        />
+        <circle
+          cx={CX}
+          cy={CY}
+          r={MASS_R}
+          fill="url(#heroSunGrad)"
+          filter="url(#heroNeonGlow)"
+        />
+        <circle
+          cx={CX}
+          cy={CY}
+          r={MASS_R - (isMobile ? 14 : 20)}
+          fill="none"
+          stroke="#050505"
+          strokeWidth={isMobile ? "2" : "3"}
+          opacity="0.75"
+        />
+        <text
+          x={CX}
+          y={CY + (isMobile ? 3.5 : 4)}
+          textAnchor="middle"
+          fill="#050505"
+          fontFamily="monospace"
+          fontWeight="bold"
+          fontSize={isMobile ? "8.5" : "11"}
+          letterSpacing="0.12em"
+        >
+          TECHYORA
+        </text>
+      </g>
+
+      {/* 4 NAMED SATELLITES */}
+      {satPositions.map((sat) => {
+        const isHovered = activeSatId === sat.id;
+        const displayName = isMobile
+          ? (sat.id === 'erp' ? 'ERP & HCM' : sat.id === 'custom-sw' ? 'Custom Software' : sat.id === 'web' ? 'Web & 3D' : 'AI & AMC')
+          : sat.name;
+        const badgeW = isMobile ? 74 : 158;
+        const badgeH = isMobile ? 18 : 22;
+        const badgeY = isMobile ? -9 : -11;
+        const badgeX = sat.x > CX ? (isMobile ? 10 : 14) : -(badgeW + (isMobile ? 10 : 14));
+        const textX = sat.x > CX ? (isMobile ? 15 : 22) : -(badgeW + (isMobile ? 5 : 6));
+
+        return (
+          <g key={sat.id}>
+            {/* Satellite Node Disc */}
+            <circle
+              cx={sat.x}
+              cy={sat.y}
+              r={sat.size + (isMobile ? 3.5 : 5)}
+              fill="#39FF14"
+              opacity={isHovered ? "0.5" : "0.2"}
+              filter="url(#heroNeonGlow)"
+            />
+            <circle
+              cx={sat.x}
+              cy={sat.y}
+              r={sat.size}
+              fill="#0D0D0D"
+              stroke="#39FF14"
+              strokeWidth="2"
+              filter="url(#heroNeonGlow)"
+            />
+            <circle
+              cx={sat.x}
+              cy={sat.y}
+              r={isMobile ? "2.5" : "3.5"}
+              fill="#39FF14"
+            />
+
+            {/* Satellite Name Badge Label */}
+            <g
+              transform={`translate(${sat.x}, ${sat.y})`}
+              className="cursor-pointer pointer-events-auto"
+              onMouseEnter={() => setActiveSatId(sat.id)}
+              onMouseLeave={() => setActiveSatId(null)}
+              onClick={(e) => {
+                e.stopPropagation();
+                triggerGravitizeAt(
+                  heroRef.current ? heroRef.current.getBoundingClientRect().left + (sat.x / (isMobile ? 520 : 1920)) * heroRef.current.clientWidth : 0,
+                  heroRef.current ? heroRef.current.getBoundingClientRect().top + (sat.y / (isMobile ? 520 : 1080)) * heroRef.current.clientHeight : 0
+                );
+              }}
+            >
+              <rect
+                x={badgeX}
+                y={badgeY}
+                width={badgeW}
+                height={badgeH}
+                rx={isMobile ? "4" : "5"}
+                fill="#070709"
+                stroke={isHovered ? "#39FF14" : "rgba(57, 255, 20, 0.55)"}
+                strokeWidth="1"
+                opacity="0.95"
+              />
+              <text
+                x={textX}
+                y={isMobile ? "2.5" : "3.5"}
+                fill="#FFFFFF"
+                fontSize={isMobile ? "7.5" : "9.2"}
+                fontFamily="sans-serif"
+                fontWeight="bold"
+                letterSpacing="0.02em"
+              >
+                {displayName}
+              </text>
+            </g>
+          </g>
+        );
+      })}
+    </>
+  );
+
   return (
     <section
       id="home"
       ref={heroRef}
       onClick={handleHeroClick}
-      className="relative w-full min-h-[92vh] lg:min-h-screen bg-[#050505] overflow-hidden flex items-center pt-28 pb-16 select-none cursor-crosshair"
+      className="relative w-full min-h-0 bg-[#050505] overflow-hidden flex items-center pt-12 sm:pt-16 pb-4 sm:pb-6 select-none cursor-crosshair"
     >
       {/* Background Precision Grid & Ambient Void Glows */}
       <div className="absolute inset-0 bg-grid-pattern opacity-25 pointer-events-none" />
-      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 w-[600px] h-[600px] bg-[#39FF14]/5 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute top-1/2 right-10 w-[700px] h-[700px] bg-[#39FF14]/5 rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] bg-[#39FF14]/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 right-10 w-[350px] sm:w-[700px] h-[350px] sm:h-[700px] bg-[#39FF14]/5 rounded-full blur-[160px] pointer-events-none" />
 
-      {/* =========================================================================
-          FULL-SCREEN KEPLERIAN SVG ENGINE (CANVAS COVERS ENTIRE HERO WITH OVERFLOW-VISIBLE)
-          SATELLITES CAN FLY ANYWHERE ON SCREEN EVEN OUT OF THE BOX WHEN CLICKED!
-          ========================================================================= */}
-      <svg
-        ref={svgRef}
-        viewBox="0 0 1920 1080"
-        className="absolute inset-0 w-full h-full block pointer-events-none overflow-visible z-0"
-        preserveAspectRatio="xMidYMid slice"
-      >
-        <defs>
-          <filter id="heroNeonGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="8" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          <radialGradient id="heroSunGrad" cx="35%" cy="35%" r="65%">
-            <stop offset="0%" stopColor="#9eff7a" />
-            <stop offset="65%" stopColor="#39FF14" />
-            <stop offset="100%" stopColor="#146a09" />
-          </radialGradient>
-        </defs>
-
-        {/* Orbit Trajectory Ellipses around right-side core (Compact & Screen-Fit) */}
-        {[105, 165, 225, 285].map((r, i) => (
-          <ellipse
-            key={i}
-            cx={CX}
-            cy={CY}
-            rx={r}
-            ry={r}
-            fill="none"
-            stroke="#39FF14"
-            strokeWidth="1"
-            strokeDasharray={i % 2 === 0 ? "4 8" : "none"}
-            opacity={i % 2 === 0 ? "0.2" : "0.1"}
-          />
-        ))}
-
-        {/* Gravitational Tether Laser Rays when converging anywhere across the screen */}
-        {convergeRef.current.weight > 0.05 && (
-          <g opacity={convergeRef.current.weight * 0.85}>
-            {satPositions.map((sat) => (
-              <line
-                key={`tether-${sat.id}`}
-                x1={sat.x}
-                y1={sat.y}
-                x2={convergeRef.current.targetX}
-                y2={convergeRef.current.targetY}
-                stroke="#39FF14"
-                strokeWidth="1.5"
-                strokeDasharray="6 4"
-                filter="url(#heroNeonGlow)"
-              />
-            ))}
-          </g>
-        )}
-
-        {/* Gravitational Click Wave Marker anywhere on screen */}
-        {clickWave && (
-          <g>
-            <circle
-              cx={clickWave.x}
-              cy={clickWave.y}
-              r={clickWave.radius}
-              fill="none"
-              stroke="#39FF14"
-              strokeWidth="2.5"
-              opacity={clickWave.opacity}
-              filter="url(#heroNeonGlow)"
-            />
-            <circle
-              cx={clickWave.x}
-              cy={clickWave.y}
-              r={clickWave.radius * 0.5}
-              fill="none"
-              stroke="#39FF14"
-              strokeWidth="1.2"
-              opacity={clickWave.opacity * 0.8}
-            />
-            <circle
-              cx={clickWave.x}
-              cy={clickWave.y}
-              r="6"
-              fill="#39FF14"
-              opacity={clickWave.opacity}
-              filter="url(#heroNeonGlow)"
-            />
-          </g>
-        )}
-
-        {/* Central Mass (Anchored on Right Side with Recoil) */}
-        <g transform={`translate(${massRecoil.x}, ${massRecoil.y})`}>
-          <circle
-            cx={CX}
-            cy={CY}
-            r={MASS_R + 14}
-            fill="#39FF14"
-            opacity="0.12"
-            filter="url(#heroNeonGlow)"
-          />
-          <circle
-            cx={CX}
-            cy={CY}
-            r={MASS_R}
-            fill="url(#heroSunGrad)"
-            filter="url(#heroNeonGlow)"
-          />
-          <circle
-            cx={CX}
-            cy={CY}
-            r={MASS_R - 20}
-            fill="none"
-            stroke="#050505"
-            strokeWidth="3"
-            opacity="0.75"
-          />
-          <text
-            x={CX}
-            y={CY + 4}
-            textAnchor="middle"
-            fill="#050505"
-            fontFamily="monospace"
-            fontWeight="bold"
-            fontSize="11"
-            letterSpacing="0.12em"
-          >
-            TECHYORA
-          </text>
-        </g>
-
-        {/* 4 NAMED SATELLITES (COMPACT & SCREEN-CONTAINED) */}
-        {satPositions.map((sat) => {
-          const isHovered = activeSatId === sat.id;
-
-          return (
-            <g key={sat.id}>
-              {/* Satellite Node Disc */}
-              <circle
-                cx={sat.x}
-                cy={sat.y}
-                r={sat.size + 5}
-                fill="#39FF14"
-                opacity={isHovered ? "0.45" : "0.18"}
-                filter="url(#heroNeonGlow)"
-              />
-              <circle
-                cx={sat.x}
-                cy={sat.y}
-                r={sat.size}
-                fill="#0D0D0D"
-                stroke="#39FF14"
-                strokeWidth="2"
-                filter="url(#heroNeonGlow)"
-              />
-              <circle
-                cx={sat.x}
-                cy={sat.y}
-                r="3.5"
-                fill="#39FF14"
-              />
-
-              {/* Satellite Name Badge Label */}
-              <g
-                transform={`translate(${sat.x}, ${sat.y})`}
-                className="cursor-pointer pointer-events-auto"
-                onMouseEnter={() => setActiveSatId(sat.id)}
-                onMouseLeave={() => setActiveSatId(null)}
-              >
-                <rect
-                  x={sat.x > CX ? 14 : -172}
-                  y="-11"
-                  width="158"
-                  height="22"
-                  rx="5"
-                  fill="#070709"
-                  stroke={isHovered ? "#39FF14" : "rgba(57, 255, 20, 0.55)"}
-                  strokeWidth="1"
-                  opacity="0.95"
-                />
-                <text
-                  x={sat.x > CX ? 22 : -164}
-                  y="3.5"
-                  fill="#FFFFFF"
-                  fontSize="9.2"
-                  fontFamily="sans-serif"
-                  fontWeight="bold"
-                  letterSpacing="0.02em"
-                >
-                  {sat.name}
-                </text>
-              </g>
-            </g>
-          );
-        })}
-      </svg>
+      {/* DESKTOP FULL-SCREEN KEPLERIAN SVG ENGINE */}
+      {!isMobile && (
+        <svg
+          ref={svgRef}
+          viewBox="0 0 1920 1080"
+          className="absolute inset-0 w-full h-full block pointer-events-none overflow-visible z-0"
+          preserveAspectRatio="xMidYMid slice"
+        >
+          {renderSvgContent()}
+        </svg>
+      )}
 
       {/* FOREGROUND CONTENT LAYER */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pointer-events-none">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           
-          {/* =========================================================================
-              LEFT COLUMN: CLEAN TYPOGRAPHY & CTAs (NON-OVERLAPPING)
-              ========================================================================= */}
-          <div className="lg:col-span-6 space-y-6 pointer-events-auto">
+          {/* LEFT COLUMN: CLEAN TYPOGRAPHY & CTAs */}
+          <div className="lg:col-span-6 space-y-5 sm:space-y-6 pointer-events-auto">
             
             {/* Live Status Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 shadow-[0_0_15px_rgba(57,255,20,0.15)] text-xs font-mono text-[#39FF14]">
-              <span className="relative flex h-2.5 w-2.5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 shadow-[0_0_15px_rgba(57,255,20,0.15)] text-[10px] sm:text-xs font-mono text-[#39FF14]">
+              <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#39FF14] opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#39FF14]" />
+                <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-[#39FF14]" />
               </span>
               <span className="tracking-wide uppercase font-semibold">
-                AVAILABLE FOR FREELANCE & ENTERPRISE PROJECTS
+                TECHYORA ENGINEERING TEAM // ENTERPRISE & GLOBAL CLIENTS
               </span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
-              Building{' '}
-              <span className="text-[#39FF14] inline-block neon-glow-text underline decoration-[#39FF14]/40 underline-offset-8">
-                Digital Solutions
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12]">
+              Engineering{' '}
+              <span className="text-[#39FF14] inline-block neon-glow-text underline decoration-[#39FF14]/40 underline-offset-4 sm:underline-offset-8">
+                Digital Systems
               </span>{' '}
-              That Drive Business Growth.
+              That Drive Enterprise Growth.
             </h1>
 
             {/* Descriptive Copy */}
-            <p className="text-base sm:text-lg text-gray-300 font-light leading-relaxed max-w-xl">
-              We help startups, small businesses, and growing companies transform operational challenges into scalable ERPNext systems, modern web portals, autonomous AI workflows, and bespoke branding.
+            <p className="text-sm sm:text-base lg:text-lg text-gray-300 font-light leading-relaxed max-w-xl">
+              We are Techyora — an enterprise technology company delivering custom ERPNext, CRM & HCM implementations, specialized custom software (billing, fleet, logistics), 3D interactive web portals, agentic AI automation, branding, and 24/7 AMC support.
             </p>
 
             {/* Service Pillars */}
-            <div className="flex flex-wrap gap-2 pt-1 text-xs font-mono text-gray-400">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-1 text-[11px] sm:text-xs font-mono text-gray-400">
               <span className="px-2.5 py-1 rounded bg-[#0D0D0D] border border-white/10 text-[#39FF14]">
-                • ERPNext & Frappe
+                • ERP, CRM & HCM (ERPNext)
               </span>
               <span className="px-2.5 py-1 rounded bg-[#0D0D0D] border border-white/10 text-gray-300">
-                • React / Next.js
+                • Custom Software (Billing, Fleet, Logistics)
               </span>
               <span className="px-2.5 py-1 rounded bg-[#0D0D0D] border border-white/10 text-[#39FF14]">
-                • AI Automation
+                • 3D Web & E-Commerce
               </span>
               <span className="px-2.5 py-1 rounded bg-[#0D0D0D] border border-white/10 text-gray-300">
-                • Data & Branding
+                • Agentic AI & Chatbots
+              </span>
+              <span className="px-2.5 py-1 rounded bg-[#0D0D0D] border border-white/10 text-[#39FF14]">
+                • Branding & Flex Design
+              </span>
+              <span className="px-2.5 py-1 rounded bg-[#0D0D0D] border border-white/10 text-gray-300">
+                • 24/7 AMC & Cloud Support
               </span>
             </div>
 
             {/* Action CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-3 sm:pt-4">
               <button
                 onClick={() => onOpenContact()}
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-[#39FF14] text-black font-bold text-sm tracking-wider uppercase hover:bg-[#45ff24] shadow-[0_0_25px_rgba(57,255,20,0.5)] hover:shadow-[0_0_40px_rgba(57,255,20,0.8)] transition-all transform hover:-translate-y-1 active:translate-y-0"
+                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-[#39FF14] text-black font-bold text-xs sm:text-sm tracking-wider uppercase hover:bg-[#45ff24] shadow-[0_0_25px_rgba(57,255,20,0.5)] hover:shadow-[0_0_40px_rgba(57,255,20,0.8)] transition-all transform hover:-translate-y-1 active:translate-y-0 cursor-pointer"
               >
-                <span>Start Your Project</span>
+                <span>Consult Our Team</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
               <a
-                href="#orbit-showcase"
-                className="inline-flex items-center gap-2.5 px-6 py-4 rounded-xl bg-[#0D0D0D] text-white border border-white/20 hover:border-[#39FF14]/60 hover:text-[#39FF14] font-semibold text-sm tracking-wider uppercase transition-all transform hover:-translate-y-1"
+                href="#services"
+                className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 sm:py-4 rounded-xl bg-[#0D0D0D] text-white border border-white/20 hover:border-[#39FF14]/60 hover:text-[#39FF14] font-semibold text-xs sm:text-sm tracking-wider uppercase transition-all transform hover:-translate-y-1 text-center"
               >
                 <Eye className="w-4 h-4" />
-                <span>Explore 3D Services</span>
+                <span>Explore Services</span>
               </a>
 
               <button
                 onClick={onOpenResume}
-                className="inline-flex items-center gap-2 py-3 px-3 text-xs font-mono text-gray-400 hover:text-[#39FF14] transition-colors underline underline-offset-4 decoration-gray-600 hover:decoration-[#39FF14]"
+                className="inline-flex items-center justify-center gap-1.5 py-2 sm:py-3 px-2 sm:px-3 text-[11px] sm:text-xs font-mono text-gray-400 hover:text-[#39FF14] transition-colors underline underline-offset-4 decoration-gray-600 hover:decoration-[#39FF14] cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5 text-[#39FF14]" />
-                <span>Download Portfolio Spec</span>
+                <span>Download Company Profile</span>
               </button>
             </div>
 
             {/* Quick Metrics Statistics */}
-            <div className="pt-6 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="pt-4 sm:pt-6 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
               {PERSONAL_INFO.stats.map((stat, idx) => (
                 <div
                   key={idx}
-                  className="p-3.5 rounded-xl bg-[#0D0D0D]/90 border border-white/10 hover:border-[#39FF14]/40 transition-colors"
+                  className="p-2.5 sm:p-3.5 rounded-xl bg-[#0D0D0D]/90 border border-white/10 hover:border-[#39FF14]/40 transition-colors"
                 >
-                  <div className="text-2xl font-bold font-mono text-white flex items-center">
+                  <div className="text-xl sm:text-2xl font-bold font-mono text-white flex items-center">
                     <span>{stat.value}</span>
                     <span className="text-[#39FF14] ml-0.5">{stat.suffix}</span>
                   </div>
-                  <div className="text-[11px] text-gray-400 font-medium mt-0.5 leading-tight">
+                  <div className="text-[10px] sm:text-[11px] text-gray-400 font-medium mt-0.5 leading-tight">
                     {stat.label}
                   </div>
                 </div>
@@ -558,10 +610,26 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
 
           </div>
 
-          {/* =========================================================================
-              RIGHT COLUMN: DEDICATED TO FULL ACTIVE ORBITS & SATELLITES
-              ========================================================================= */}
-          <div className="lg:col-span-6 pointer-events-none" />
+          {/* RIGHT COLUMN: DEDICATED ORBIT STAGE (CENTERED ON MOBILE, SPACIOUS ON DESKTOP) */}
+          <div className="lg:col-span-6 w-full flex flex-col items-center justify-center relative">
+            {isMobile && (
+              <div className="w-full flex flex-col items-center justify-center pt-2 sm:pt-4 pointer-events-auto">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/30 text-[10px] font-mono text-[#39FF14] mb-3 shadow-[0_0_12px_rgba(57,255,20,0.15)]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#39FF14] animate-ping" />
+                  <span>ORBITAL PHYSICS // TAP ANYWHERE TO ATTRACT</span>
+                </div>
+                
+                <svg
+                  ref={svgRef}
+                  viewBox="0 0 520 520"
+                  className="w-full max-w-[340px] sm:max-w-[420px] aspect-square mx-auto block overflow-visible z-10 select-none cursor-pointer"
+                  preserveAspectRatio="xMidYMid meet"
+                >
+                  {renderSvgContent()}
+                </svg>
+              </div>
+            )}
+          </div>
 
         </div>
 
@@ -569,3 +637,4 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
     </section>
   );
 };
+

@@ -30,7 +30,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume }) => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#39FF14] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#39FF14]"></span>
               </span>
-              <span className="tracking-wide uppercase font-semibold">AVAILABLE FOR FREELANCE PROJECTS</span>
+              <span className="tracking-wide uppercase font-semibold">ENTERPRISE SOFTWARE & SOLUTIONS COMPANY</span>
             </div>
 
             {/* Main Heading */}

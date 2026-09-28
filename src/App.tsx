@@ -14,6 +14,7 @@ import { ProjectsPage } from './pages/ProjectsPage';
 import { ContactPage } from './pages/ContactPage';
 import { GravityCursor } from './components/gravity/GravityCursor';
 import { SmoothScroll } from './components/gravity/SmoothScroll';
+import { CyberDoorTransition } from './components/gravity/CyberDoorTransition';
 
 export function App() {
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
@@ -47,48 +48,52 @@ export function App() {
 
         {/* Main Content Views with React Router */}
         <main className="flex-grow">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <HomePage
-                onOpenContact={handleOpenContact}
-                onOpenResume={() => setResumeModalOpen(true)}
-                onFormSubmitted={handleFormSubmitted}
-              />
-            }
-          />
-          <Route
-            path="/about"
-            element={<AboutPage onOpenContact={() => handleOpenContact()} />}
-          />
-          <Route
-            path="/services"
-            element={<ServicesPage onOpenContact={handleOpenContact} />}
-          />
-          <Route
-            path="/skills"
-            element={<SkillsPage onOpenContact={() => handleOpenContact()} />}
-          />
-          <Route
-            path="/projects"
-            element={<ProjectsPage onOpenContact={handleOpenContact} />}
-          />
-          <Route
-            path="/experience"
-            // element={<ExperiencePage onOpenContact={() => handleOpenContact()} />}
-          />
-          <Route
-            path="/contact"
-            element={
-              <ContactPage
-                selectedService={selectedService}
-                onSubmitted={handleFormSubmitted}
-              />
-            }
-          />
-        </Routes>
-      </main>
+          <CyberDoorTransition>
+            {(displayLocation) => (
+              <Routes location={displayLocation}>
+                <Route
+                  path="/"
+                  element={
+                    <HomePage
+                      onOpenContact={handleOpenContact}
+                      onOpenResume={() => setResumeModalOpen(true)}
+                      onFormSubmitted={handleFormSubmitted}
+                    />
+                  }
+                />
+                <Route
+                  path="/about"
+                  element={<AboutPage onOpenContact={() => handleOpenContact()} />}
+                />
+                <Route
+                  path="/services"
+                  element={<ServicesPage onOpenContact={handleOpenContact} />}
+                />
+                <Route
+                  path="/skills"
+                  element={<SkillsPage onOpenContact={() => handleOpenContact()} />}
+                />
+                <Route
+                  path="/projects"
+                  element={<ProjectsPage onOpenContact={handleOpenContact} />}
+                />
+                <Route
+                  path="/experience"
+                  // element={<ExperiencePage onOpenContact={() => handleOpenContact()} />}
+                />
+                <Route
+                  path="/contact"
+                  element={
+                    <ContactPage
+                      selectedService={selectedService}
+                      onSubmitted={handleFormSubmitted}
+                    />
+                  }
+                />
+              </Routes>
+            )}
+          </CyberDoorTransition>
+        </main>
 
       {/* Footer */}
       <Footer />

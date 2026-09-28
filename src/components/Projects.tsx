@@ -12,7 +12,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onInquireProject }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
 
-  const categories = ['All', 'ERP', 'Web', 'AI', 'Automation', 'Data', 'Design'];
+  const categories = ['All', 'ERP', 'Custom Software', 'Web', 'AI', 'Design'];
 
   const filteredProjects = selectedCategory === 'All'
     ? PROJECTS
@@ -31,10 +31,10 @@ export const Projects: React.FC<ProjectsProps> = ({ onInquireProject }) => {
             <span>PORTFOLIO & CASE STUDIES</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Selected Projects
+            Selected Projects & Solutions
           </h2>
           <p className="text-gray-400 text-base sm:text-lg mt-3">
-            Some of the solutions I've worked on or can build for clients. Engineered for scalability, reliability, and business impact.
+            Enterprise digital systems engineered and deployed by our team. Built for scalability, high security, and measurable business growth.
           </p>
         </div>
 
@@ -89,7 +89,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onInquireProject }) => {
                   {/* Bottom Info Bar */}
                   <div className="relative z-10 flex items-center justify-between text-[10px] font-mono text-gray-400">
                     <span>TECHYORA</span>
-                    <span>FREELANCE PROJECT</span>
+                    <span>ENTERPRISE CASE STUDY</span>
                   </div>
                 </div>
 

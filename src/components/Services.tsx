@@ -1,5 +1,5 @@
 import React from 'react';
-import { Database, Globe, Cpu, Users, Code, TrendingUp, ArrowRight, Check } from 'lucide-react';
+import { Database, Globe, Cpu, Users, Code, TrendingUp, ArrowRight, Check, PenTool, ShieldCheck } from 'lucide-react';
 import { SERVICES } from '../data/portfolioData';
 
 interface ServicesProps {
@@ -15,6 +15,8 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
       case 'Users': return <Users className="w-7 h-7 text-[#39FF14]" />;
       case 'Code': return <Code className="w-7 h-7 text-[#39FF14]" />;
       case 'TrendingUp': return <TrendingUp className="w-7 h-7 text-[#39FF14]" />;
+      case 'PenTool': return <PenTool className="w-7 h-7 text-[#39FF14]" />;
+      case 'ShieldCheck': return <ShieldCheck className="w-7 h-7 text-[#39FF14]" />;
       default: return <Code className="w-7 h-7 text-[#39FF14]" />;
     }
   };

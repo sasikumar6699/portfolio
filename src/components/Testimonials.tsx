@@ -1,40 +1,54 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { TESTIMONIALS } from '../data/portfolioData';
 import { Quote, Star, AlertCircle, ShieldCheck, Activity } from 'lucide-react';
 
 export const Testimonials: React.FC = () => {
   return (
-    <section className="py-24 sm:py-32 bg-[#050505] relative overflow-hidden border-t border-white/5 select-none">
+    <section className="py-6 sm:py-10 bg-[#050505] relative overflow-hidden border-t border-white/5 select-none">
       {/* Background Ambience */}
       <div className="absolute top-1/2 right-10 w-96 h-96 bg-[#39FF14]/5 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 text-xs font-mono text-[#39FF14] mb-4 shadow-[0_0_15px_rgba(57,255,20,0.15)]">
+        {/* Section Header with Motion Entrance */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mb-4 sm:mb-6"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 text-xs font-mono text-[#39FF14] mb-2 sm:mb-3 shadow-[0_0_15px_rgba(57,255,20,0.15)]">
             <Activity className="w-3.5 h-3.5 animate-pulse" />
             <span>NEURAL REVIEWS // MECHA HUD TARGETING ARCHIVE</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             What Clients{' '}
             <span className="text-[#39FF14] inline-block neon-glow-text">
               Say
             </span>
           </h2>
-          <p className="text-gray-400 text-sm sm:text-base mt-2 font-light max-w-2xl">
+          <p className="text-gray-400 text-xs sm:text-base mt-1.5 font-light max-w-2xl">
             Verified transmissions and project outcomes from founders, enterprise directors, and operations managers worldwide.
           </p>
-        </div>
+        </motion.div>
 
         {/* Testimonials Grid with Anime Mecha HUD Reticles & Neural Audio Equalizer */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
           {TESTIMONIALS.map((item, idx) => (
-            <div
+            <motion.div
               key={item.id}
-              className="relative bg-[#0D0D0D] rounded-2xl border border-white/10 p-6 sm:p-8 flex flex-col justify-between hover:border-[#39FF14] hover:shadow-[0_0_35px_rgba(57,255,20,0.22)] transition-all duration-300 group overflow-hidden"
+              initial={{ opacity: 0, y: 35 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.6, delay: idx * 0.18, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -8, transition: { duration: 0.25 } }}
+              className="relative bg-[#0D0D0D] rounded-2xl border border-white/10 p-4 sm:p-8 flex flex-col justify-between hover:border-[#39FF14] hover:shadow-[0_0_40px_rgba(57,255,20,0.25)] transition-all duration-300 group overflow-hidden cursor-default"
             >
+              {/* Laser Cyber Scan Sweep Line */}
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#39FF14]/10 to-transparent -translate-y-full group-hover:translate-y-full transition-transform duration-1000 ease-in-out pointer-events-none" />
               {/* =========================================================================
                   ANIME EFFECT 1: MECHA HUD TARGET LOCK RETICLE CORNERS (┌ ┐ └ ┘)
                   ========================================================================= */}
@@ -113,7 +127,7 @@ export const Testimonials: React.FC = () => {
                 </div>
               </div>
 
-            </div>
+            </motion.div>
           ))}
         </div>
 

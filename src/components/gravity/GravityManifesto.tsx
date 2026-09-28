@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Database, Globe, Cpu, BarChart3, PenTool, CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Database, Globe, Cpu, Code, PenTool, CheckCircle2, ShieldCheck } from 'lucide-react';
 
 export const GravityManifesto: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -55,16 +56,17 @@ export const GravityManifesto: React.FC = () => {
     setBeadOffset({ x: 0, y: 0 });
   };
 
-  // Dynamic circular clip radius calculation (smooth circular iris like before)
+  // Dynamic circular clip radius calculation (smooth circular iris that expands smoothly from center)
   const maxRadius = typeof window !== 'undefined' ? Math.hypot(window.innerWidth, window.innerHeight) : 1800;
-  const clipRadius = Math.max(90, maxRadius * Math.min(1, scrollProgress * 1.5 + 0.1));
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+  const clipRadius = Math.max(isMobile ? 120 : 180, maxRadius * Math.min(1, Math.pow(scrollProgress * 2.5, 1.4)));
 
   return (
     <div
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full h-[210vh] bg-[#050505] select-none"
+      className="relative w-full h-[108vh] sm:h-[114vh] bg-[#050505] select-none"
     >
       {/* Viewport Sticky Stage with Circular Expanding Iris */}
       <div
@@ -91,38 +93,44 @@ export const GravityManifesto: React.FC = () => {
               style={{
                 transform: `translate3d(${beadOffset.x}px, ${beadOffset.y}px, 0)`
               }}
-              className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-[#39FF14] shadow-[0_0_25px_#39FF14] flex items-center justify-center transition-transform duration-100 ease-out"
+              className="absolute -top-3 left-1/2 -translate-x-1/2 w-5 sm:w-6 h-5 sm:h-6 rounded-full bg-[#39FF14] shadow-[0_0_25px_#39FF14] flex items-center justify-center transition-transform duration-100 ease-out"
             >
               <div className="w-2 h-2 rounded-full bg-black" />
             </div>
           </div>
         </div>
 
-        {/* Manifesto Foreground Content (Proportioned to fit laptop screens without cutoff) */}
-        <div className="relative z-10 max-w-5xl mx-auto w-full text-left my-auto space-y-5 sm:space-y-6">
+        {/* Manifesto Foreground Content (Animated Smooth Entrance) */}
+        <motion.div
+          initial={{ opacity: 0, y: 50, scale: 0.96 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10 max-w-5xl mx-auto w-full text-left my-auto space-y-3 sm:space-y-5"
+        >
           
           {/* Eyebrow Label */}
-          <div className="flex items-center gap-3">
-            <span className="w-8 h-[2px] bg-[#39FF14]" />
-            <span className="text-xs sm:text-sm font-mono font-bold tracking-[0.25em] text-[#39FF14] uppercase">
-              STUDIO MANIFESTO // STRATEGY · EXECUTION · ARCHITECTURE
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span className="w-5 sm:w-8 h-[2px] bg-[#39FF14]" />
+            <span className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.2em] sm:tracking-[0.25em] text-[#39FF14] uppercase">
+              TECHYORA MANIFESTO // STRATEGY · EXECUTION
             </span>
           </div>
 
           {/* Massive Typographical Statements */}
-          <div className="space-y-2 sm:space-y-3 font-extrabold uppercase text-white tracking-tight leading-[0.98] text-3xl sm:text-5xl lg:text-6xl">
+          <div className="space-y-1 sm:space-y-2 font-extrabold uppercase text-white tracking-tight leading-[1.05] sm:leading-[0.98] text-2xl sm:text-4xl lg:text-6xl">
             <div>
-              ONE TEAM. MULTIPLE SKILLS.
+              ONE COMPANY. ONE DEDICATED TEAM.
             </div>
 
-            <div className="flex flex-wrap items-center gap-x-3 text-[#39FF14] neon-glow-text">
-              COMPLETE DIGITAL SOLUTIONS.
+            <div className="flex flex-wrap items-center gap-x-2 sm:gap-x-3 text-[#39FF14] neon-glow-text">
+              COMPLETE ENTERPRISE DIGITAL SOLUTIONS.
             </div>
 
-            <div className="flex flex-wrap items-center gap-x-3 text-2xl sm:text-4xl lg:text-5xl">
+            <div className="flex flex-wrap items-center gap-x-2 sm:gap-x-3 text-xl sm:text-3xl lg:text-5xl">
               <span className="text-gray-400">NO</span>
               <span className={`strike-through-path text-gray-500 ${isStruck ? 'is-struck' : ''}`}>
-                OVERHEAD.
+                MIDDLEMEN.
               </span>
               <span className="text-white">JUST BOLD</span>
               <span className={`neon-draw-underline text-[#39FF14] ${isDrawn ? 'is-drawn' : ''}`}>
@@ -132,38 +140,39 @@ export const GravityManifesto: React.FC = () => {
           </div>
 
           {/* SEO & Service Narrative */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 pt-2 text-xs sm:text-sm text-gray-300 font-light leading-relaxed border-t border-white/10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-5 pt-2 text-[11px] sm:text-xs lg:text-sm text-gray-300 font-light leading-relaxed border-t border-white/10">
             <p>
-              We engineer enterprise-grade <strong>ERPNext & Frappe business solutions</strong>, high-performance <strong>React & Next.js websites</strong>, and <strong>autonomous AI workflow automation</strong> that eliminate manual bottlenecks and accelerate commercial scale.
+              We engineer enterprise-grade <strong>ERPNext, CRM & HCM solutions</strong>, tailor-made <strong>custom software (billing, inventory, fleet management, and logistics software)</strong>, and high-performance <strong>3D interactive websites & e-commerce portals</strong>.
             </p>
-            <p>
-              From accurate <strong>data management & spreadsheet ETL processing</strong> to cohesive <strong>brand identity and graphic design</strong>, we bridge end-to-end technology with commercial execution without middleman overhead.
+            <p className="hidden sm:block">
+              From autonomous <strong>agentic AI workflows & chatbots</strong> to cohesive <strong>graphic branding & flex printing</strong>, our dedicated team backs your entire digital infrastructure with <strong>24/7 AMC and cloud support services</strong>.
             </p>
           </div>
 
-          {/* 5 Core Pillars */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 pt-1">
+          {/* 6 Core Pillars */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 pt-0.5">
             {[
-              { label: 'ERP & CRM', sub: 'ERPNext / Frappe', icon: Database },
-              { label: 'Web Apps', sub: 'React / Next.js', icon: Globe },
-              { label: 'AI & Agents', sub: 'Workflows & OCR', icon: Cpu },
-              { label: 'Data ETL', sub: 'Cleaning & Records', icon: BarChart3 },
-              { label: 'Branding', sub: 'Visual Identity', icon: PenTool },
+              { label: 'ERP & HCM', sub: 'ERPNext / Frappe', icon: Database },
+              { label: 'Custom Software', sub: 'Fleet / Logistics / POS', icon: Code },
+              { label: '3D Web & E-Com', sub: 'React / Next.js', icon: Globe },
+              { label: 'AI & Agents', sub: 'Agentic / Chatbots', icon: Cpu },
+              { label: 'Brand & Flex', sub: 'Logos / Marketing', icon: PenTool },
+              { label: '24/7 AMC Support', sub: 'Cloud & Bug Fixes', icon: ShieldCheck },
             ].map((p, idx) => {
               const IconComp = p.icon;
               return (
                 <div
                   key={idx}
-                  className="p-2.5 rounded-xl bg-[#070709] border border-white/10 hover:border-[#39FF14]/50 transition-colors flex items-center gap-2 group"
+                  className="p-2 sm:p-2.5 rounded-xl bg-[#070709] border border-white/10 hover:border-[#39FF14]/50 transition-colors flex items-center gap-2 group"
                 >
-                  <div className="p-1.5 rounded-lg bg-white/5 border border-white/10 text-[#39FF14] group-hover:bg-[#39FF14] group-hover:text-black transition-colors shrink-0">
-                    <IconComp className="w-3.5 h-3.5" />
+                  <div className="p-1 sm:p-1.5 rounded-lg bg-white/5 border border-white/10 text-[#39FF14] group-hover:bg-[#39FF14] group-hover:text-black transition-colors shrink-0">
+                    <IconComp className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                   </div>
                   <div className="min-w-0">
-                    <span className="text-[11px] font-bold text-white block leading-tight truncate">
+                    <span className="text-[10px] sm:text-[11px] font-bold text-white block leading-tight truncate">
                       {p.label}
                     </span>
-                    <span className="text-[9px] font-mono text-gray-400 block truncate">
+                    <span className="text-[8.5px] sm:text-[9px] font-mono text-gray-400 block truncate">
                       {p.sub}
                     </span>
                   </div>
@@ -173,17 +182,16 @@ export const GravityManifesto: React.FC = () => {
           </div>
 
           {/* Quality Badges */}
-          <div className="pt-2 flex flex-wrap items-center gap-4 text-[11px] font-mono text-gray-400">
+          <div className="pt-1.5 sm:pt-2 flex flex-wrap items-center gap-2.5 sm:gap-4 text-[10px] sm:text-[11px] font-mono text-gray-400">
             <span className="flex items-center gap-1.5 text-[#39FF14]">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>100% Quality Guaranteed</span>
+              <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+              <span>100% Quality & SLA Guaranteed</span>
             </span>
-            <span>• Sub-Second Page Speeds</span>
-            <span>• Secure Local/Cloud Deployments</span>
-            <span>• Direct Team Collaboration</span>
+            <span className="hidden xs:inline">• Sub-Second Performance</span>
+            <span>• Dedicated In-House Engineering Team</span>
           </div>
 
-        </div>
+        </motion.div>
 
       </div>
     </div>

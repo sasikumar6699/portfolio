@@ -4,7 +4,6 @@ import {
   Mail, 
   Phone, 
   Linkedin, 
-  Github, 
   Send, 
   Sparkles, 
   X, 
@@ -26,7 +25,7 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    service: 'ERP, CRM & Business Solutions',
+    service: 'ERP, CRM, HCM & Business Solutions',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -49,7 +48,7 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
       setTimeout(() => {
         setSubmitSuccess(false);
         setModalOpen(false);
-        setFormData({ name: '', email: '', service: 'ERP, CRM & Business Solutions', message: '' });
+        setFormData({ name: '', email: '', service: 'ERP, CRM, HCM & Business Solutions', message: '' });
       }, 2500);
     }, 1200);
   };
@@ -65,7 +64,7 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
   return (
     <section 
       id="contact-portal" 
-      className="relative w-full pt-32 pb-24 bg-[#050505] overflow-hidden select-none border-t border-white/10"
+      className="relative w-full pt-8 sm:pt-12 pb-8 sm:pb-12 bg-[#050505] overflow-hidden select-none border-t border-white/10"
     >
       {/* Background Precision Wave Contours & Active Gravitational Well */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
@@ -78,74 +77,74 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center z-10">
         
         {/* Animated Gravity Ticker Pulse Line */}
-        <div className="w-[1px] h-24 bg-gradient-to-b from-transparent via-[#39FF14] to-[#39FF14] mb-8 relative">
+        <div className="w-[1px] h-8 sm:h-10 bg-gradient-to-b from-transparent via-[#39FF14] to-[#39FF14] mb-3 relative">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#39FF14] shadow-[0_0_12px_#39FF14] animate-gravity-ticker" />
         </div>
 
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 text-xs font-mono text-[#39FF14] mb-5 shadow-[0_0_15px_rgba(57,255,20,0.15)]">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 text-xs font-mono text-[#39FF14] mb-3 sm:mb-4 shadow-[0_0_15px_rgba(57,255,20,0.15)]">
           <Sparkles className="w-3.5 h-3.5" />
           <span>INNOVATIVE 3D GYROSCOPIC GRAVITY PORTAL</span>
         </div>
 
-        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4">
+        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-2 sm:mb-3">
           Initiate Your{' '}
           <span className="text-[#39FF14] inline-block neon-glow-text">
             Digital Transformation
           </span>
         </h2>
 
-        <p className="text-gray-400 text-sm sm:text-base max-w-xl font-light mb-16">
-          Collaborate directly with our technical collective on custom ERPNext, autonomous AI, web architecture, and branding.
+        <p className="text-gray-400 text-xs sm:text-sm max-w-xl font-light mb-4 sm:mb-6">
+          Collaborate directly with our engineering team on custom ERPNext, CRM & HCM, custom software (fleet, logistics, billing), 3D web, agentic AI, branding, and 24/7 AMC support.
         </p>
 
         {/* =========================================================================
             INNOVATIVE GYROSCOPIC 3D SPHERICAL PORTAL WITH CONTINUOUS ACTIVE ORBITS
             ========================================================================= */}
-        <div className="relative my-8 flex items-center justify-center">
+        <div className="relative my-3 sm:my-5 flex items-center justify-center">
           
           {/* Active 3D Gyroscopic Gimbal Ring 1 */}
           <div 
-            className="absolute w-[320px] h-[320px] sm:w-[380px] sm:h-[380px] rounded-full border-2 border-[#39FF14]/60 pointer-events-none shadow-[0_0_30px_rgba(57,255,20,0.25)] animate-gyro-ring-1" 
+            className="absolute w-[240px] h-[240px] sm:w-[380px] sm:h-[380px] rounded-full border-2 border-[#39FF14]/60 pointer-events-none shadow-[0_0_30px_rgba(57,255,20,0.25)] animate-gyro-ring-1" 
           />
 
           {/* Active 3D Gyroscopic Gimbal Ring 2 */}
           <div 
-            className="absolute w-[360px] h-[360px] sm:w-[420px] sm:h-[420px] rounded-full border border-white/50 pointer-events-none animate-gyro-ring-2" 
+            className="absolute w-[275px] h-[275px] sm:w-[420px] sm:h-[420px] rounded-full border border-white/50 pointer-events-none animate-gyro-ring-2" 
           />
 
           {/* Active 3D Gyroscopic Gimbal Ring 3 */}
           <div 
-            className="absolute w-[400px] h-[400px] sm:w-[470px] sm:h-[470px] rounded-full border border-[#39FF14]/30 pointer-events-none animate-orbit-spin"
+            className="absolute w-[310px] h-[310px] sm:w-[470px] sm:h-[470px] rounded-full border border-[#39FF14]/30 pointer-events-none animate-orbit-spin"
             style={{ '--orbit-dur': '20s' } as React.CSSProperties}
           >
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#39FF14] shadow-[0_0_15px_#39FF14]" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#39FF14] shadow-[0_0_15px_#39FF14]" />
           </div>
 
           {/* Orbiting Satellite Nodes */}
           <div 
-            className="absolute w-[300px] h-[300px] sm:w-[340px] sm:h-[340px] rounded-full pointer-events-none animate-orbit-counter"
+            className="absolute w-[240px] h-[240px] sm:w-[340px] sm:h-[340px] rounded-full pointer-events-none animate-orbit-counter"
             style={{ '--orbit-dur': '16s' } as React.CSSProperties}
           >
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 p-2 rounded-full bg-[#0D0D0D] border border-[#39FF14] shadow-[0_0_15px_rgba(57,255,20,0.5)]">
-              <Mail className="w-3.5 h-3.5 text-[#39FF14]" />
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 p-1.5 sm:p-2 rounded-full bg-[#0D0D0D] border border-[#39FF14] shadow-[0_0_15px_rgba(57,255,20,0.5)]">
+              <Mail className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#39FF14]" />
             </div>
-            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 p-2 rounded-full bg-[#0D0D0D] border border-[#39FF14] shadow-[0_0_15px_rgba(57,255,20,0.5)]">
-              <Phone className="w-3.5 h-3.5 text-[#39FF14]" />
+            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 p-1.5 sm:p-2 rounded-full bg-[#0D0D0D] border border-[#39FF14] shadow-[0_0_15px_rgba(57,255,20,0.5)]">
+              <Phone className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#39FF14]" />
             </div>
           </div>
 
           {/* Core Interactive Gravitational Sphere */}
           <button
             onClick={handleLaunchInquiry}
-            className="relative z-10 w-52 h-52 sm:w-60 sm:h-60 rounded-full bg-[#39FF14] text-black font-extrabold flex flex-col items-center justify-center p-6 text-center shadow-[0_0_70px_rgba(57,255,20,0.7)] hover:shadow-[0_0_110px_rgba(57,255,20,1)] transform hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group"
+            className="relative z-10 w-44 h-44 sm:w-60 sm:h-60 rounded-full bg-[#39FF14] text-black font-extrabold flex flex-col items-center justify-center p-4 sm:p-6 text-center shadow-[0_0_50px_rgba(57,255,20,0.6)] sm:shadow-[0_0_70px_rgba(57,255,20,0.7)] hover:shadow-[0_0_110px_rgba(57,255,20,1)] transform hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group"
           >
-            <span className="text-[11px] font-mono tracking-widest uppercase opacity-85 mb-1 group-hover:tracking-[0.2em] transition-all">
+            <span className="text-[9.5px] sm:text-[11px] font-mono tracking-widest uppercase opacity-85 mb-0.5 sm:mb-1 group-hover:tracking-[0.2em] transition-all">
               CLICK TO LAUNCH
             </span>
-            <span className="text-3xl sm:text-4xl font-black tracking-tight leading-none">
+            <span className="text-2xl sm:text-4xl font-black tracking-tight leading-none">
               LET’S MEET<br />UP!
             </span>
-            <span className="text-xs font-mono tracking-wider mt-2.5 font-bold underline underline-offset-4 flex items-center gap-1">
+            <span className="text-[11px] sm:text-xs font-mono tracking-wider mt-2 sm:mt-2.5 font-bold underline underline-offset-4 flex items-center gap-1">
               <span>START INQUIRY</span>
               <span>→</span>
             </span>
@@ -155,28 +154,28 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
         {/* =========================================================================
             ANIME CYBER ENERGY LINKS (LIVE HYPERLINKS WITH 100% COMPLETE VISIBLE CONTENT)
             ========================================================================= */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 w-full max-w-5xl pt-14 text-xs font-mono">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-5 w-full max-w-5xl pt-6 sm:pt-8 text-xs font-mono">
           
           {/* 1. EMAIL - ANIME ENERGY HYPERLINK */}
           <a
             href={`mailto:${PERSONAL_INFO.email}`}
-            className="relative overflow-hidden group p-5 sm:p-6 rounded-2xl bg-[#0D0D0D] border border-[#39FF14]/30 hover:border-[#39FF14] transition-all duration-300 hover:shadow-[0_0_35px_rgba(57,255,20,0.5)] transform hover:-translate-y-1 text-left flex flex-col justify-between min-h-[145px] cursor-pointer"
+            className="relative overflow-hidden group p-4 sm:p-6 rounded-2xl bg-[#0D0D0D] border border-[#39FF14]/30 hover:border-[#39FF14] transition-all duration-300 hover:shadow-[0_0_35px_rgba(57,255,20,0.5)] transform hover:-translate-y-1 text-left flex flex-col justify-between min-h-[135px] sm:min-h-[145px] cursor-pointer"
           >
             {/* Anime Diagonal Laser Sweep Glow Effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#39FF14]/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
             
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-10 h-10 rounded-xl bg-[#050505] border border-[#39FF14]/40 flex items-center justify-center text-[#39FF14] group-hover:scale-110 group-hover:shadow-[0_0_20px_#39FF14] transition-all shrink-0">
-                <Mail className="w-5 h-5" />
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#050505] border border-[#39FF14]/40 flex items-center justify-center text-[#39FF14] group-hover:scale-110 group-hover:shadow-[0_0_20px_#39FF14] transition-all shrink-0">
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-[#39FF14] transition-colors" />
+              <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-500 group-hover:text-[#39FF14] transition-colors" />
             </div>
 
             <div>
-              <span className="text-[10px] text-gray-400 block uppercase tracking-wider font-semibold mb-1">
+              <span className="text-[9.5px] sm:text-[10px] text-gray-400 block uppercase tracking-wider font-semibold mb-1">
                 PRIMARY EMAIL
               </span>
-              <span className="text-xs sm:text-[13px] font-bold text-white group-hover:text-[#39FF14] transition-colors break-words block leading-relaxed">
+              <span className="text-xs sm:text-[13px] font-bold text-white group-hover:text-[#39FF14] transition-colors break-all block leading-relaxed">
                 {PERSONAL_INFO.email}
               </span>
             </div>
@@ -187,22 +186,22 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
             href={PERSONAL_INFO.socials.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative overflow-hidden group p-5 sm:p-6 rounded-2xl bg-[#0D0D0D] border border-[#39FF14]/30 hover:border-[#39FF14] transition-all duration-300 hover:shadow-[0_0_35px_rgba(57,255,20,0.5)] transform hover:-translate-y-1 text-left flex flex-col justify-between min-h-[145px] cursor-pointer"
+            className="relative overflow-hidden group p-4 sm:p-6 rounded-2xl bg-[#0D0D0D] border border-[#39FF14]/30 hover:border-[#39FF14] transition-all duration-300 hover:shadow-[0_0_35px_rgba(57,255,20,0.5)] transform hover:-translate-y-1 text-left flex flex-col justify-between min-h-[135px] sm:min-h-[145px] cursor-pointer"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#39FF14]/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
             
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-10 h-10 rounded-xl bg-[#050505] border border-[#39FF14]/40 flex items-center justify-center text-[#39FF14] group-hover:scale-110 group-hover:shadow-[0_0_20px_#39FF14] transition-all shrink-0">
-                <Phone className="w-5 h-5" />
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#050505] border border-[#39FF14]/40 flex items-center justify-center text-[#39FF14] group-hover:scale-110 group-hover:shadow-[0_0_20px_#39FF14] transition-all shrink-0">
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-[#39FF14] transition-colors" />
+              <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-500 group-hover:text-[#39FF14] transition-colors" />
             </div>
 
             <div>
-              <span className="text-[10px] text-gray-400 block uppercase tracking-wider font-semibold mb-1">
+              <span className="text-[9.5px] sm:text-[10px] text-gray-400 block uppercase tracking-wider font-semibold mb-1">
                 WHATSAPP / PHONE
               </span>
-              <span className="text-xs sm:text-[13px] font-bold text-white group-hover:text-[#39FF14] transition-colors break-words block leading-relaxed">
+              <span className="text-xs sm:text-[13px] font-bold text-white group-hover:text-[#39FF14] transition-colors break-all block leading-relaxed">
                 {PERSONAL_INFO.Mobile.split(',')[0]}
               </span>
             </div>
@@ -213,57 +212,30 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
             href={PERSONAL_INFO.socials.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative overflow-hidden group p-5 sm:p-6 rounded-2xl bg-[#0D0D0D] border border-[#39FF14]/30 hover:border-[#39FF14] transition-all duration-300 hover:shadow-[0_0_35px_rgba(57,255,20,0.5)] transform hover:-translate-y-1 text-left flex flex-col justify-between min-h-[145px] cursor-pointer"
+            className="relative overflow-hidden group p-4 sm:p-6 rounded-2xl bg-[#0D0D0D] border border-[#39FF14]/30 hover:border-[#39FF14] transition-all duration-300 hover:shadow-[0_0_35px_rgba(57,255,20,0.5)] transform hover:-translate-y-1 text-left flex flex-col justify-between min-h-[135px] sm:min-h-[145px] cursor-pointer"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#39FF14]/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
             
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-10 h-10 rounded-xl bg-[#050505] border border-[#39FF14]/40 flex items-center justify-center text-[#39FF14] group-hover:scale-110 group-hover:shadow-[0_0_20px_#39FF14] transition-all shrink-0">
-                <Linkedin className="w-5 h-5" />
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#050505] border border-[#39FF14]/40 flex items-center justify-center text-[#39FF14] group-hover:scale-110 group-hover:shadow-[0_0_20px_#39FF14] transition-all shrink-0">
+                <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-[#39FF14] transition-colors" />
+              <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-500 group-hover:text-[#39FF14] transition-colors" />
             </div>
 
             <div>
-              <span className="text-[10px] text-gray-400 block uppercase tracking-wider font-semibold mb-1">
+              <span className="text-[9.5px] sm:text-[10px] text-gray-400 block uppercase tracking-wider font-semibold mb-1">
                 LINKEDIN PROFILE
               </span>
-              <span className="text-xs sm:text-[13px] font-bold text-white group-hover:text-[#39FF14] transition-colors break-words block leading-relaxed">
+              <span className="text-xs sm:text-[13px] font-bold text-white group-hover:text-[#39FF14] transition-colors break-all block leading-relaxed">
                 {PERSONAL_INFO.socials.linkedin.replace(/^https?:\/\//, '')}
               </span>
             </div>
           </a>
-
-          {/* 4. GITHUB - ANIME ENERGY HYPERLINK */}
-          <a
-            href={PERSONAL_INFO.socials.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative overflow-hidden group p-5 sm:p-6 rounded-2xl bg-[#0D0D0D] border border-[#39FF14]/30 hover:border-[#39FF14] transition-all duration-300 hover:shadow-[0_0_35px_rgba(57,255,20,0.5)] transform hover:-translate-y-1 text-left flex flex-col justify-between min-h-[145px] cursor-pointer"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#39FF14]/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
-            
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-10 h-10 rounded-xl bg-[#050505] border border-[#39FF14]/40 flex items-center justify-center text-[#39FF14] group-hover:scale-110 group-hover:shadow-[0_0_20px_#39FF14] transition-all shrink-0">
-                <Github className="w-5 h-5" />
-              </div>
-              <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-[#39FF14] transition-colors" />
-            </div>
-
-            <div>
-              <span className="text-[10px] text-gray-400 block uppercase tracking-wider font-semibold mb-1">
-                GITHUB REPOSITORY
-              </span>
-              <span className="text-xs sm:text-[13px] font-bold text-white group-hover:text-[#39FF14] transition-colors break-words block leading-relaxed">
-                {PERSONAL_INFO.socials.github.replace(/^https?:\/\//, '')}
-              </span>
-            </div>
-          </a>
-
         </div>
 
         {/* Back To Top Action */}
-        <div className="pt-16">
+        <div className="pt-6 sm:pt-8">
           <button
             onClick={scrollToTop}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 hover:border-[#39FF14] text-xs font-mono text-gray-400 hover:text-[#39FF14] transition-all bg-[#0D0D0D]/80 hover:shadow-[0_0_20px_rgba(57,255,20,0.3)]"
@@ -339,12 +311,12 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
                     onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                     className="w-full px-4 py-2.5 rounded-xl bg-[#050505] border border-white/15 focus:border-[#39FF14] text-white text-sm focus:outline-none"
                   >
-                    <option value="ERP, CRM & Business Solutions">ERP, CRM & Business Solutions (ERPNext)</option>
-                    <option value="Web Development & Design">Web Development & Design</option>
-                    <option value="AI & Automation">AI & Autonomous Automation</option>
-                    <option value="Data Entry & Data Management">Data Entry & Management</option>
-                    <option value="Custom Software Development">Custom Software Development</option>
-                    <option value="Graphic Design & Branding">Graphic Design & Branding</option>
+                    <option value="ERP, CRM, HCM & Business Solutions">ERP, CRM, HCM & Business Solutions (ERPNext, Custom CRM, HCM)</option>
+                    <option value="Custom Software Solutions">Custom Software Solutions (Billing, Inventory, Fleet & Logistics Software)</option>
+                    <option value="Web Development & Design">Web Development & Design (3D Websites, E-Commerce, Landing Pages)</option>
+                    <option value="AI & Automation">AI & Automation (Agentic AI, Workflow Integrations, Chatbots)</option>
+                    <option value="Graphic Design & Branding">Graphic Design & Branding (Logo, Pamphlet, Flex Design, Digital Marketing)</option>
+                    <option value="AMC & Support Services">AMC & Support Services (ERP Support, Software, Cloud Support, Bug Fixing)</option>
                   </select>
                 </div>
 

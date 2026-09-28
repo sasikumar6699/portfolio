@@ -1,7 +1,7 @@
 export interface Project {
   id: string;
   title: string;
-  category: 'ERP' | 'Web' | 'AI' | 'Automation' | 'Data' | 'Design';
+  category: 'ERP' | 'Custom Software' | 'Web' | 'AI' | 'Automation' | 'Design' | 'AMC' | string;
   description: string;
   longDescription: string;
   technologies: string[];

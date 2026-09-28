@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Code2, Linkedin, Github, MessageSquare, ArrowUp } from 'lucide-react';
+import { Code2, Linkedin, MessageSquare, ArrowUp } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
 export const Footer: React.FC = () => {
@@ -9,10 +9,10 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#050505] border-t border-white/10 pt-16 pb-12 relative">
+    <footer className="bg-[#050505] border-t border-white/10 pt-8 sm:pt-10 pb-8 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-6 sm:pb-8 border-b border-white/10">
           
           {/* Brand Info */}
           <div className="md:col-span-5 space-y-4">
@@ -28,11 +28,11 @@ export const Footer: React.FC = () => {
             </NavLink>
 
             <p className="text-sm text-gray-400 max-w-sm leading-relaxed">
-              Building useful technology. Solving real business problems.
+              Engineering scalable software, ERPNext systems, 3D web, agentic AI & 24/7 AMC support.
             </p>
 
             <div className="text-xs font-mono text-gray-500 pt-2">
-              TECHYORA • FREELANCE SOFTWARE CONSULTANT TEAM
+              TECHYORA • ENTERPRISE SOFTWARE & SOLUTIONS COMPANY
             </div>
           </div>
 
@@ -64,15 +64,6 @@ export const Footer: React.FC = () => {
                 <span>LinkedIn</span>
               </a>
 
-              <a
-                href={PERSONAL_INFO.socials.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gray-400 hover:text-[#39FF14] transition-colors"
-              >
-                <Github className="w-4 h-4 text-[#39FF14]" />
-                <span>GitHub</span>
-              </a>
 
               <a
                 href={PERSONAL_INFO.socials.whatsapp}
@@ -89,7 +80,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Copyright & Scroll to Top */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-gray-500">
+        <div className="pt-4 sm:pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-gray-500">
           <div>
             © 2026 Techyora All rights reserved.
           </div>

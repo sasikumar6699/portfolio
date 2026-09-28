@@ -3,10 +3,12 @@ import Lenis from 'lenis';
 
 export const SmoothScroll: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   useEffect(() => {
-    // Check reduced motion or coarse pointer
+    // Check reduced motion
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return;
     }
+
+    const isTouch = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
 
     const lenis = new Lenis({
       duration: 1.1,
@@ -15,7 +17,8 @@ export const SmoothScroll: React.FC<{ children: React.ReactNode }> = ({ children
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
+      touchMultiplier: isTouch ? 1.0 : 1.2,
+      syncTouch: true,
       infinite: false
     });
 
@@ -35,3 +38,4 @@ export const SmoothScroll: React.FC<{ children: React.ReactNode }> = ({ children
 
   return <>{children}</>;
 };
+

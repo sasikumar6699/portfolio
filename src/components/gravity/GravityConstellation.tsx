@@ -4,12 +4,12 @@ import {
   Database, 
   Globe, 
   Cpu, 
-  BarChart3, 
   Code, 
   PenTool, 
   ArrowRight, 
-  CheckCircle2,
-  Layers
+  CheckCircle2, 
+  Layers, 
+  ShieldCheck 
 } from 'lucide-react';
 import { SERVICES } from '../../data/portfolioData';
 
@@ -23,61 +23,61 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
   // 6 Planetary nodes directly tied to the service cards and their core deliverables
   const serviceNodes = [
     {
-      title: "ERP, CRM & Business Solutions",
-      shortTitle: "ERP & CRM",
+      title: "ERP, CRM, HCM & Business Solutions",
+      shortTitle: "ERP & HCM",
       discipline: "ERPNext & Frappe",
-      badge: "Frappe / Workflow",
+      badge: "ERPNext / Custom HCM",
       icon: Database,
       radius: 80,
       dur: '20s',
       twinkleDelay: '0s'
     },
     {
-      title: "Web Development & Design",
-      shortTitle: "Web & Design",
-      discipline: "React & Next.js",
-      badge: "E-Commerce / SEO",
-      icon: Globe,
+      title: "Custom Software Solutions",
+      shortTitle: "Custom Software",
+      discipline: "Fleet, Logistics & Billing",
+      badge: "Billing / Fleet / Logistics",
+      icon: Code,
       radius: 122,
       dur: '26s',
       twinkleDelay: '0.4s'
     },
     {
-      title: "AI & Automation",
-      shortTitle: "AI Automation",
-      discipline: "Autonomous Agents",
-      badge: "LLM / Agents",
-      icon: Cpu,
+      title: "Web Development & Design",
+      shortTitle: "Web & 3D",
+      discipline: "3D Web & E-Commerce",
+      badge: "3D WebGL / Next.js",
+      icon: Globe,
       radius: 164,
       dur: '32s',
       twinkleDelay: '0.8s'
     },
     {
-      title: "Data Entry & Data Management",
-      shortTitle: "Data Systems",
-      discipline: "ETL & Record Systems",
-      badge: "Excel / SQL ETL",
-      icon: BarChart3,
+      title: "AI & Automation",
+      shortTitle: "AI & Bots",
+      discipline: "Agentic AI & Chatbots",
+      badge: "Agentic AI / Workflows",
+      icon: Cpu,
       radius: 206,
       dur: '38s',
       twinkleDelay: '1.2s'
     },
     {
-      title: "Custom Software Development",
-      shortTitle: "Custom Software",
-      discipline: "Scalable Microservices",
-      badge: "APIs / Cloud",
-      icon: Code,
+      title: "Graphic Design & Branding",
+      shortTitle: "Brand & Flex",
+      discipline: "Logo, Flex & Marketing",
+      badge: "Logo / Flex / Print",
+      icon: PenTool,
       radius: 248,
       dur: '46s',
       twinkleDelay: '1.6s'
     },
     {
-      title: "Graphic Design & Branding",
-      shortTitle: "Brand & Design",
-      discipline: "Brand Identity & Visuals",
-      badge: "Logos / Identity",
-      icon: PenTool,
+      title: "AMC & Support Services",
+      shortTitle: "24/7 AMC",
+      discipline: "ERP, Cloud & Bug Fixes",
+      badge: "Cloud / 24/7 Support",
+      icon: ShieldCheck,
       radius: 290,
       dur: '54s',
       twinkleDelay: '2.0s'
@@ -101,7 +101,7 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
   return (
     <section
       id="services-constellation"
-      className="relative w-full py-24 sm:py-32 bg-[#050505] overflow-hidden select-none"
+      className="relative w-full py-6 sm:py-10 bg-[#050505] overflow-hidden select-none border-t border-white/5"
     >
       {/* Background Ambience */}
       <div className="absolute inset-0 bg-grid-pattern opacity-15 pointer-events-none" />
@@ -132,8 +132,8 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 text-xs font-mono text-[#39FF14] mb-3">
+        <div className="mb-4 sm:mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 text-xs font-mono text-[#39FF14] mb-2 sm:mb-3">
             <Layers className="w-3.5 h-3.5" />
             <span>GRAVITATIONAL CONSTELLATION · 3S AUTO-CYCLE</span>
           </div>
@@ -155,7 +155,7 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
           <div className="lg:col-span-7 relative w-full aspect-square max-w-[620px] mx-auto flex items-center justify-center">
             
             <svg
-              viewBox="-350 -350 700 700"
+              viewBox="-410 -410 820 820"
               className="w-full h-full block overflow-visible select-none"
             >
               <defs>
@@ -346,16 +346,33 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
             {/* Central Interactive Magnetic Capsule Button */}
             <button
               onClick={() => onSelectService(activeService.title)}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1.5 rounded-full bg-[#39FF14] text-black font-mono font-bold text-[10px] tracking-wider uppercase shadow-[0_0_20px_rgba(57,255,20,0.6)] hover:scale-110 transition-transform flex items-center gap-1.5 z-20 pointer-events-auto"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1.5 rounded-full bg-[#39FF14] text-black font-mono font-bold text-[10px] tracking-wider uppercase shadow-[0_0_20px_rgba(57,255,20,0.6)] hover:scale-110 transition-transform flex items-center gap-1.5 z-20 pointer-events-auto cursor-pointer"
             >
               <span>EXPLORE</span>
               <ArrowRight className="w-3 h-3" />
             </button>
           </div>
 
+          {/* Quick Touch Selector Chips for Mobile */}
+          <div className="lg:hidden flex flex-wrap justify-center gap-1.5 px-2 -mt-4 mb-2">
+            {serviceNodes.map((node, i) => (
+              <button
+                key={i}
+                onClick={() => setSelectedServiceIndex(i)}
+                className={`px-2.5 py-1 rounded-full text-[10px] font-mono transition-all cursor-pointer ${
+                  selectedServiceIndex === i
+                    ? 'bg-[#39FF14] text-black font-bold shadow-[0_0_10px_#39FF14]'
+                    : 'bg-[#0D0D0D] border border-white/10 text-gray-300 hover:text-white'
+                }`}
+              >
+                {node.shortTitle}
+              </button>
+            ))}
+          </div>
+
           {/* RIGHT: Auto-Cycling Service Card (3-Second Smooth Left-Entrance & Fade Transition) */}
           <div className="lg:col-span-5">
-            <div className="rounded-2xl bg-[#0D0D0D]/95 border border-[#39FF14]/40 p-6 sm:p-8 backdrop-blur-xl shadow-[0_0_40px_rgba(57,255,20,0.15)] relative overflow-hidden min-h-[460px] flex flex-col justify-between">
+            <div className="rounded-2xl bg-[#0D0D0D]/95 border border-[#39FF14]/40 p-5 sm:p-8 backdrop-blur-xl shadow-[0_0_40px_rgba(57,255,20,0.15)] relative overflow-hidden min-h-[400px] sm:min-h-[460px] flex flex-col justify-between">
               
               {/* 3-Second Progress Countdown Bar */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-white/10 overflow-hidden">

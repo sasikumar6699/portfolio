@@ -10,14 +10,14 @@ import {
   Database, 
   Cpu, 
   Globe, 
-  BarChart3, 
   Code, 
   PenTool, 
   ArrowRight, 
   ChevronLeft, 
   ChevronRight, 
   Sparkles,
-  MousePointer
+  MousePointer,
+  ShieldCheck
 } from 'lucide-react';
 
 interface GravityOrbitCarouselProps {
@@ -37,58 +37,58 @@ interface OrbitCardData {
 
 const CAROUSEL_CARDS: OrbitCardData[] = [
   {
-    id: 'erp-platform',
-    title: 'Business ERP & CRM Platform',
-    category: 'ERPNext & Frappe Solutions',
-    description: 'Customized ERPNext deployment unifying multi-branch sales, inventory, accounting, and supply chain into one single source of truth.',
-    impact: '65% faster financial reconciliation',
-    tech: ['ERPNext', 'Frappe', 'Python', 'MariaDB'],
+    id: 'erp-solutions',
+    title: 'ERP, CRM, HCM & Business Solutions',
+    category: 'ERPNext, Custom CRM & HCM',
+    description: 'Enterprise ERPNext deployments, custom CRM pipelines, and HCM/HRMS payroll suites unifying multi-branch business operations.',
+    impact: '65% faster month-end close & automated payroll',
+    tech: ['ERPNext', 'Frappe', 'Custom CRM', 'HCM / Payroll'],
     icon: Database
   },
   {
-    id: 'ai-agent',
-    title: 'Autonomous AI Development Agent',
-    category: 'AI & Workflow Automation',
-    description: 'Autonomous LLM agent system converting high-level business specs into architecture schemas, API endpoints, and executable code plans.',
-    impact: 'Accelerated technical scoping by 80%',
-    tech: ['Python', 'FastAPI', 'LangChain', 'OpenAI'],
-    icon: Cpu
-  },
-  {
-    id: 'web-portal',
-    title: 'High-Performance Corporate SaaS',
-    category: 'Web Development & Design',
-    description: 'Sub-second speed Jamstack corporate web portal with dynamic lead calculators, SEO-optimized markup, and interactive visual storytelling.',
-    impact: '140% surge in qualified inbound B2B inquiries',
-    tech: ['React', 'TypeScript', 'Tailwind', 'Vite'],
-    icon: Globe
-  },
-  {
-    id: 'data-mgmt',
-    title: 'Data Management & Record Systems',
-    category: 'Data Entry & Analytics',
-    description: 'Structured enterprise data cleaning, automated Excel/Sheets ETL pipelines, OCR document conversion, and database record management.',
-    impact: 'Over 100,000+ data rows validated at 99.8%',
-    tech: ['Excel ETL', 'Sheets API', 'Python', 'SQL'],
-    icon: BarChart3
-  },
-  {
     id: 'custom-software',
-    title: 'Scalable Microservices Software',
-    category: 'Custom Software Architecture',
-    description: 'Event-driven backend services, distributed APIs, and cloud-native databases engineered specifically for reliable high-concurrency scaling.',
-    impact: 'Zero-downtime handling 10k+ daily transactions',
-    tech: ['Node.js', 'PostgreSQL', 'Docker', 'Redis'],
+    title: 'Custom Software Solutions',
+    category: 'Billing, Inventory, Fleet & Logistics',
+    description: 'Custom-engineered software including GST billing with thermal printing, warehouse inventory, fleet management GPS, and logistics software.',
+    impact: '100% custom-fit to unique business models',
+    tech: ['Billing & POS', 'Inventory', 'Fleet Software', 'Logistics Software'],
     icon: Code
   },
   {
-    id: 'brand-identity',
-    title: 'Creative Brand Systems & Assets',
-    category: 'Graphic Design & Branding',
-    description: 'End-to-end visual identity, bespoke corporate logos, packaging, visiting cards, and high-impact marketing brochures that elevate brand trust.',
-    impact: 'Unified digital & physical brand presence',
-    tech: ['Figma', 'Illustrator', 'Design Systems'],
+    id: 'web-design',
+    title: 'Web Development & Design',
+    category: '3D Websites, E-Commerce & Portals',
+    description: 'Immersive 3D interactive WebGL websites, full-featured e-commerce platforms, dynamic web applications, and high-converting SEO landing pages.',
+    impact: 'Sub-second speeds & 99+ Core Web Vitals',
+    tech: ['3D WebGL', 'Next.js', 'E-Commerce', 'Landing Pages'],
+    icon: Globe
+  },
+  {
+    id: 'ai-automation',
+    title: 'AI & Autonomous Automation',
+    category: 'Agentic AI, Workflows & Chatbots',
+    description: 'Autonomous agentic AI workflows, intelligent WhatsApp & web customer chatbots, OCR document parsing, and enterprise software API integrations.',
+    impact: 'Eliminates 80% of repetitive operational tasks',
+    tech: ['Agentic AI', 'LLMs', 'Chatbots', 'API Integrations'],
+    icon: Cpu
+  },
+  {
+    id: 'graphic-branding',
+    title: 'Graphic Design & Branding',
+    category: 'Logo, Flex, Pamphlets & Marketing',
+    description: 'Complete corporate visual identity, bespoke logo design, flex hoardings, brochures, pamphlets, visiting cards, and digital marketing creatives.',
+    impact: 'Unified high-trust brand presence across print & digital',
+    tech: ['Logo Design', 'Flex & Print', 'Pamphlets', 'Digital Marketing'],
     icon: PenTool
+  },
+  {
+    id: 'amc-support',
+    title: 'AMC & Support Services',
+    category: 'ERP, Software & Cloud AMC Maintenance',
+    description: 'Comprehensive Annual Maintenance Contracts (AMC), proactive ERPNext support, cloud server management (AWS, GCP), bug fixing, and 24/7 SLA uptime.',
+    impact: '99.9% uptime SLA & dedicated technical helpdesk',
+    tech: ['ERP Support', 'Cloud AMC', 'Bug Fixing', '24/7 SLA'],
+    icon: ShieldCheck
   }
 ];
 
@@ -107,12 +107,14 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
   useEffect(() => {
     const handleResize = () => {
       if (typeof window !== 'undefined') {
-        if (window.innerWidth < 640) {
-          setRadius(210);
+        if (window.innerWidth < 480) {
+          setRadius(165);
+        } else if (window.innerWidth < 640) {
+          setRadius(195);
         } else if (window.innerWidth < 1024) {
-          setRadius(260);
+          setRadius(270);
         } else {
-          setRadius(310);
+          setRadius(340);
         }
       }
     };
@@ -120,6 +122,32 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Touch Swipe Gesture Support for Mobile
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+
+    // Only trigger horizontal swipe if horizontal movement is dominant
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 35) {
+      if (deltaX < 0) {
+        nextCard();
+      } else {
+        prevCard();
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
 
   // SCROLL-LINKED ROTATION: As user scrolls down the page, every scroll gesture rotates the 3D cylinder
   const { scrollYProgress } = useScroll({
@@ -173,58 +201,62 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
       id="orbit-showcase"
       ref={containerRef}
       className={`relative w-full bg-[#050505] text-white select-none ${
-        viewMode === 'orbit' ? 'min-h-[260vh]' : 'py-16'
+        viewMode === 'orbit' ? 'min-h-[115vh] sm:min-h-[125vh]' : 'py-6 sm:py-10'
       }`}
     >
       {/* Background Ambience */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[550px] bg-[#39FF14]/5 rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[800px] h-[350px] sm:h-[550px] bg-[#39FF14]/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute inset-0 bg-grid-pattern opacity-15 pointer-events-none" />
 
       {viewMode === 'orbit' ? (
         /* =========================================================================
             STICKY COMPACT 3D CYLINDRICAL ORBIT (GUARANTEED ZERO OVERLAP ON ALL SCREENS)
             ========================================================================= */
-        <div className="sticky top-0 h-screen w-full flex flex-col justify-between items-center py-4 sm:py-6 px-4 sm:px-6 lg:px-8 overflow-hidden z-20">
+        <div 
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="sticky top-0 h-screen w-full flex flex-col justify-between items-center py-3 sm:py-6 px-3 sm:px-6 lg:px-8 overflow-hidden z-20"
+        >
           
           {/* Top Header & Telemetry Bar (Compact & High-Clearance) */}
           <div className="text-center max-w-2xl mx-auto space-y-1 relative z-30 shrink-0">
-            <div className="flex items-center justify-center gap-2.5">
-              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 text-[11px] font-mono text-[#39FF14]">
+            <div className="flex items-center justify-center gap-2">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 text-[10px] sm:text-[11px] font-mono text-[#39FF14]">
                 <Sparkles className="w-3 h-3 animate-pulse" />
-                <span>3D CYLINDRICAL ORBIT · SCROLL ROTATION</span>
+                <span>3D ORBIT · SCROLL ROTATION</span>
               </div>
 
-              {/* View Switcher Toggle */}
-              <div className="hidden sm:inline-flex items-center gap-1 p-0.5 rounded-full bg-[#0D0D0D] border border-white/10 text-[11px] font-mono">
+              {/* View Switcher Toggle (Fully Visible on Mobile & Desktop) */}
+              <div className="inline-flex items-center gap-1 p-0.5 rounded-full bg-[#0D0D0D] border border-white/10 text-[10px] sm:text-[11px] font-mono">
                 <button
                   onClick={() => setViewMode('orbit')}
-                  className="px-2.5 py-0.5 rounded-full bg-[#39FF14] text-black font-bold"
+                  className="px-2 sm:px-2.5 py-0.5 rounded-full bg-[#39FF14] text-black font-bold cursor-pointer"
                 >
                   3D ORBIT
                 </button>
                 <button
                   onClick={() => setViewMode('filmstrip')}
-                  className="px-2.5 py-0.5 rounded-full text-gray-400 hover:text-white"
+                  className="px-2 sm:px-2.5 py-0.5 rounded-full text-gray-400 hover:text-white cursor-pointer"
                 >
                   LIST
                 </button>
               </div>
             </div>
 
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight">
+            <h2 className="text-lg sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight leading-tight">
               Our Core{' '}
               <span className="text-[#39FF14] inline-block neon-glow-text">
                 Deliverables & Systems
               </span>
             </h2>
-            <p className="text-[11px] sm:text-xs text-gray-400 font-light flex items-center justify-center gap-1.5">
-              <MousePointer className="w-3 h-3 text-[#39FF14] animate-bounce" />
-              <span>Scroll down to automatically rotate through each system.</span>
+            <p className="text-[10px] sm:text-xs text-gray-400 font-light flex items-center justify-center gap-1.5">
+              <MousePointer className="w-3 h-3 text-[#39FF14] animate-bounce shrink-0" />
+              <span>Scroll down or swipe cards to explore systems.</span>
             </p>
           </div>
 
           {/* Center 3D Cylindrical Orbit Stage (Ample Vertical Clearance) */}
-          <div className="relative w-full h-[280px] sm:h-[300px] flex items-center justify-center perspective-1200 my-auto">
+          <div className="relative w-full h-[330px] sm:h-[390px] lg:h-[420px] flex items-center justify-center perspective-1200 my-auto">
             
             {/* The 3D Preserved World Rotating on Y-Axis */}
             <motion.div
@@ -239,6 +271,10 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
                 const isCurrent = i === activeIndex;
                 const IconComp = card.icon;
 
+                const isSmall = radius < 200;
+                const cardW = isSmall ? 215 : radius < 260 ? 250 : 285;
+                const cardH = isSmall ? 300 : radius < 260 ? 335 : 365;
+
                 return (
                   <div
                     key={card.id}
@@ -248,17 +284,17 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
                     style={{
                       transform: `rotateY(${cardAngle}deg) translateZ(${radius}px)`,
                       transformStyle: 'preserve-3d',
-                      width: radius < 250 ? '220px' : '260px',
-                      height: '250px',
-                      marginLeft: radius < 250 ? '-110px' : '-130px',
-                      marginTop: '-125px',
+                      width: `${cardW}px`,
+                      height: `${cardH}px`,
+                      marginLeft: `-${cardW / 2}px`,
+                      marginTop: `-${cardH / 2}px`,
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden'
                     }}
-                    className={`absolute top-0 left-0 rounded-2xl bg-[#0D0D0D] border transition-all duration-300 overflow-hidden flex flex-col justify-between p-3.5 sm:p-4 cursor-pointer select-none ${
+                    className={`absolute top-0 left-0 rounded-2xl bg-[#0D0D0D] border transition-all duration-300 overflow-hidden flex flex-col justify-between p-3 sm:p-4 cursor-pointer select-none ${
                       isCurrent
-                        ? 'border-[#39FF14] shadow-[0_0_40px_rgba(57,255,20,0.35)] scale-[1.02] z-30 opacity-100'
-                        : 'border-white/10 shadow-lg opacity-40 hover:opacity-75 z-10 hover:border-white/30'
+                        ? 'border-[#39FF14] shadow-[0_0_35px_rgba(57,255,20,0.35)] scale-[1.02] z-30 opacity-100'
+                        : 'border-white/10 shadow-lg opacity-35 hover:opacity-75 z-10 hover:border-white/30 scale-95'
                     }`}
                   >
                     {/* Inactive Darkness Vignette */}
@@ -286,27 +322,27 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
                       <span className="text-[8.5px] font-mono text-gray-400 block tracking-wider uppercase mt-1.5">
                         {card.category}
                       </span>
-                      <h3 className="text-sm sm:text-[15px] font-bold text-white mt-0.5 leading-snug line-clamp-1">
+                      <h3 className="text-sm sm:text-[15px] font-bold text-white mt-1 leading-snug">
                         {card.title}
                       </h3>
 
-                      <p className="text-[10px] sm:text-[10.5px] text-gray-300 mt-1 font-light leading-relaxed line-clamp-2">
+                      <p className="text-[10.5px] sm:text-[11.5px] text-gray-300 mt-1.5 font-light leading-relaxed">
                         {card.description}
                       </p>
                     </div>
 
                     {/* Card Bottom Details & Inquire CTA */}
-                    <div className="relative z-10 pt-2 border-t border-white/10">
-                      <div className="text-[9px] font-mono text-[#39FF14] flex items-center gap-1 mb-1.5">
+                    <div className="relative z-10 pt-2.5 border-t border-white/10 space-y-2">
+                      <div className="text-[9.5px] font-mono text-[#39FF14] flex items-center gap-1">
                         <Sparkles className="w-3 h-3 shrink-0" />
                         <span className="truncate">{card.impact}</span>
                       </div>
 
-                      <div className="flex flex-wrap gap-1 mb-2">
-                        {card.tech.slice(0, 3).map((t, idx) => (
+                      <div className="flex flex-wrap gap-1">
+                        {card.tech.map((t, idx) => (
                           <span
                             key={idx}
-                            className="text-[7.5px] font-mono px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-gray-300"
+                            className="text-[8px] sm:text-[8.5px] font-mono px-2 py-0.5 rounded bg-white/5 border border-white/10 text-gray-300"
                           >
                             {t}
                           </span>
@@ -319,10 +355,10 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
                           if (onSelectService) onSelectService(card.title);
                           else if (onSelectProject) onSelectProject(card.title);
                         }}
-                        className="w-full py-1.5 rounded-lg bg-[#39FF14] text-black font-mono text-[10px] font-bold uppercase tracking-wider hover:bg-[#45ff24] shadow-[0_0_12px_rgba(57,255,20,0.3)] transition-all flex items-center justify-center gap-1 cursor-pointer"
+                        className="w-full py-2 rounded-lg bg-[#39FF14] text-black font-mono text-[10.5px] sm:text-[11px] font-bold uppercase tracking-wider hover:bg-[#45ff24] shadow-[0_0_15px_rgba(57,255,20,0.3)] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                       >
                         <span>Inquire Solution</span>
-                        <ArrowRight className="w-3 h-3" />
+                        <ArrowRight className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   </div>
@@ -359,7 +395,7 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
           </div>
 
           {/* Bottom Telemetry Strip & Indicator Dots */}
-          <div className="w-full max-w-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 px-4 pt-1.5 border-t border-white/10 relative z-30 shrink-0">
+          <div className="w-full max-w-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-2 px-3 sm:px-4 pt-1 sm:pt-1.5 border-t border-white/10 relative z-30 shrink-0">
             {/* Direct Select Indicator Dots */}
             <div className="flex items-center gap-1.5">
               {CAROUSEL_CARDS.map((card, idx) => (
@@ -368,7 +404,7 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
                   onClick={() => scrollToCard(idx)}
                   className={`transition-all rounded-full cursor-pointer ${
                     activeIndex === idx
-                      ? 'w-6 h-1.5 bg-[#39FF14] shadow-[0_0_8px_#39FF14]'
+                      ? 'w-5 sm:w-6 h-1.5 bg-[#39FF14] shadow-[0_0_8px_#39FF14]'
                       : 'w-1.5 h-1.5 bg-white/20 hover:bg-white/40'
                   }`}
                   aria-label={`Scroll to system ${idx + 1}`}
@@ -377,11 +413,11 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
             </div>
 
             <div className="text-center sm:text-right">
-              <span className="text-[11px] font-mono text-[#39FF14] uppercase tracking-wider block">
+              <span className="text-[10px] sm:text-[11px] font-mono text-[#39FF14] uppercase tracking-wider block truncate max-w-[260px] sm:max-w-none">
                 FOCUS: {activeCard.title}
               </span>
-              <span className="text-[9.5px] font-mono text-gray-400 block">
-                SYSTEM [0{activeIndex + 1} / 0{cardCount}] · SCROLL TO ROTATE
+              <span className="text-[8.5px] sm:text-[9.5px] font-mono text-gray-400 block">
+                SYSTEM [0{activeIndex + 1} / 0{cardCount}] · SWIPE OR SCROLL
               </span>
             </div>
           </div>
