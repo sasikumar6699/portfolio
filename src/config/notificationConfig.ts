@@ -17,7 +17,7 @@ export const NOTIFICATION_CONFIG = {
    * Option A: Web3Forms (Recommended - Free 250 submissions/mo, high deliverability, no activation delays)
    * Get free key at https://web3forms.com (takes 10 seconds, enter connect.techyora@gmail.com)
    */
-  web3FormsAccessKey: '', // e.g. 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+  web3FormsAccessKey: '98a3a569-4680-47f1-8b00-3c4b9e96fc24',
 
   /**
    * 2. WHATSAPP AUTOMATED NOTIFICATION (CallMeBot API)
