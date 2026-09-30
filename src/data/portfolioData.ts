@@ -20,7 +20,7 @@ export const PERSONAL_INFO = {
   ],
   socials: {
     linkedin: "https://linkedin.com/in/techyora",
-    whatsapp: "https://wa.me/919524227511",
+    whatsapp: "https://web.whatsapp.com/send?phone=919524227511",
   },
   whatIBring: [
     "ERP, CRM & HCM Enterprise Architecture",

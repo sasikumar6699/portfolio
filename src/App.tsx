@@ -17,6 +17,7 @@ import { SmoothScroll } from './components/gravity/SmoothScroll';
 import { CyberDoorTransition } from './components/gravity/CyberDoorTransition';
 import { CyberDoorProvider } from './context/CyberDoorContext';
 import { CyberAudioControlWidget } from './components/gravity/CyberAudioControlWidget';
+import { WhatsAppChatWidget } from './components/WhatsAppChatWidget';
 
 export function App() {
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
@@ -103,6 +104,9 @@ export function App() {
 
           {/* Floating Cyber Audio & FX Control Widget */}
           <CyberAudioControlWidget />
+
+          {/* Floating WhatsApp Business Chat Widget (9524227511) */}
+          <WhatsAppChatWidget phoneNumber="9524227511" />
 
           {/* Interactive Resume View/Download Modal */}
           <ResumeModal

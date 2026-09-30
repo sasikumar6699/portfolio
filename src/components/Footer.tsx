@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Code2, Linkedin, MessageSquare, ArrowUp } from 'lucide-react';
+import { Code2, Linkedin, MessageSquare, ArrowUp, Mail } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 import { useCyberDoor } from '../context/CyberDoorContext';
 
@@ -97,9 +97,7 @@ export const Footer: React.FC = () => {
             </h4>
             <div className="space-y-2 text-xs font-mono">
               <a
-                href={PERSONAL_INFO.socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`mailto:${PERSONAL_INFO.email}`}
                 className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
                 onMouseEnter={(e) => {
                   e.currentTarget.style.color = primary;
@@ -108,8 +106,8 @@ export const Footer: React.FC = () => {
                   e.currentTarget.style.color = '';
                 }}
               >
-                <Linkedin className="w-4 h-4" style={{ color: primary }} />
-                <span>LinkedIn</span>
+                <Mail className="w-4 h-4" style={{ color: primary }} />
+                <span>{PERSONAL_INFO.email}</span>
               </a>
 
               <a
@@ -125,7 +123,23 @@ export const Footer: React.FC = () => {
                 }}
               >
                 <MessageSquare className="w-4 h-4" style={{ color: primary }} />
-                <span>WhatsApp</span>
+                <span>WhatsApp Business</span>
+              </a>
+
+              <a
+                href={PERSONAL_INFO.socials.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = primary;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '';
+                }}
+              >
+                <Linkedin className="w-4 h-4" style={{ color: primary }} />
+                <span>LinkedIn</span>
               </a>
             </div>
           </div>

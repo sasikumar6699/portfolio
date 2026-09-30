@@ -8,7 +8,10 @@ import {
   Sparkles, 
   X, 
   CheckCircle2,
-  ExternalLink
+  ExternalLink,
+  Copy,
+  Check,
+  MessageSquare
 } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 import { useCyberDoor } from '../../context/CyberDoorContext';
@@ -33,6 +36,17 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submittedData, setSubmittedData] = useState<{
+    name: string;
+    email: string;
+    service: string;
+    message: string;
+    gmailUrl: string;
+    mailtoUrl: string;
+    whatsappUrl: string;
+    detailsText: string;
+  } | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -42,18 +56,70 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
     e.preventDefault();
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitSuccess(true);
-      if (onSubmitted) {
-        onSubmitted(formData.name || 'Valued Partner');
+    const recipient = 'connect.techyora@gmail.com';
+    const subject = encodeURIComponent(`[Project Enquiry] ${formData.service} - ${formData.name}`);
+    const emailBody = encodeURIComponent(
+      `Hello Techyora Team,\n\n` +
+      `I would like to inquire about: ${formData.service}\n\n` +
+      `Client / Company Name: ${formData.name}\n` +
+      `Contact Email: ${formData.email}\n` +
+      `Service of Interest: ${formData.service}\n\n` +
+      `Project Specifications & Requirements:\n` +
+      `${formData.message}\n\n` +
+      `---\nDispatched via Techyora 3D Portal`
+    );
+
+    const plainText = 
+      `--- TECHYORA PROJECT ENQUIRY ---\n` +
+      `Recipient: ${recipient}\n` +
+      `Client Name: ${formData.name}\n` +
+      `Email: ${formData.email}\n` +
+      `Service: ${formData.service}\n` +
+      `Details:\n${formData.message}\n` +
+      `---------------------------------`;
+
+    const isMobile = typeof navigator !== 'undefined' && /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    const whatsappText = encodeURIComponent(
+      `Hello Techyora! I just submitted an enquiry to ${recipient}.\n\n` +
+      `*Name:* ${formData.name}\n` +
+      `*Email:* ${formData.email}\n` +
+      `*Service:* ${formData.service}\n` +
+      `*Details:* ${formData.message}`
+    );
+
+    const whatsappUrl = isMobile
+      ? `https://api.whatsapp.com/send?phone=919524227511&text=${whatsappText}`
+      : `https://web.whatsapp.com/send?phone=919524227511&text=${whatsappText}`;
+
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${subject}&body=${emailBody}`;
+    const mailtoUrl = `mailto:${recipient}?subject=${subject}&body=${emailBody}`;
+
+    setSubmittedData({
+      name: formData.name,
+      email: formData.email,
+      service: formData.service,
+      message: formData.message,
+      gmailUrl,
+      mailtoUrl,
+      whatsappUrl,
+      detailsText: plainText
+    });
+
+    // Open mail compose automatically
+    try {
+      const opened = window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+      if (!opened) {
+        window.location.href = mailtoUrl;
       }
-      setTimeout(() => {
-        setSubmitSuccess(false);
-        setModalOpen(false);
-        setFormData({ name: '', email: '', service: 'ERP, CRM, HCM & Business Solutions', message: '' });
-      }, 2500);
-    }, 1200);
+    } catch {
+      window.location.href = mailtoUrl;
+    }
+
+    setIsSubmitting(false);
+    setSubmitSuccess(true);
+    if (onSubmitted) {
+      onSubmitted(formData.name || 'Valued Partner');
+    }
   };
 
   const handleLaunchInquiry = () => {
@@ -392,23 +458,127 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
               <X className="w-5 h-5" />
             </button>
 
-            {submitSuccess ? (
-              <div className="py-12 text-center space-y-4">
-                <div
-                  className="w-16 h-16 rounded-full border flex items-center justify-center mx-auto"
-                  style={{
-                    backgroundColor: `rgba(${rgb}, 0.2)`,
-                    borderColor: primary,
-                    color: primary,
-                    boxShadow: `0 0 25px rgba(${rgb}, 0.5)`
-                  }}
-                >
-                  <CheckCircle2 className="w-8 h-8" />
+            {submitSuccess && submittedData ? (
+              <div className="py-4 space-y-4 text-left">
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-12 h-12 rounded-2xl border flex items-center justify-center shrink-0"
+                    style={{
+                      backgroundColor: `rgba(${rgb}, 0.15)`,
+                      borderColor: primary,
+                      color: primary,
+                      boxShadow: `0 0 25px rgba(${rgb}, 0.4)`
+                    }}
+                  >
+                    <CheckCircle2 className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <span
+                      className="text-[10px] font-mono tracking-widest uppercase block"
+                      style={{ color: primary }}
+                    >
+                      ENQUIRY COMPILED & DISPATCHED
+                    </span>
+                    <h3 className="text-xl font-bold text-white">
+                      Ready for Techyora
+                    </h3>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-white">Inquiry Launched!</h3>
-                <p className="text-sm text-gray-300">
-                  Thank you, {formData.name}. We will review your specifications and contact you shortly.
+
+                <div className="p-3.5 rounded-xl bg-[#050505] border border-white/10 space-y-2 text-xs font-mono">
+                  <div className="flex items-center justify-between text-[11px]">
+                    <span className="text-gray-400">TARGET MAILBOX:</span>
+                    <span className="font-bold underline" style={{ color: primary }}>
+                      connect.techyora@gmail.com
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between text-[11px]">
+                    <span className="text-gray-400">CLIENT:</span>
+                    <span className="text-gray-200">{submittedData.name} ({submittedData.email})</span>
+                  </div>
+                  <div className="flex items-center justify-between text-[11px]">
+                    <span className="text-gray-400">SERVICE:</span>
+                    <span className="text-gray-200 truncate max-w-[200px]">{submittedData.service}</span>
+                  </div>
+                </div>
+
+                <p className="text-xs text-gray-300 leading-relaxed">
+                  Your enquiry has been pre-formatted for <strong className="text-white">connect.techyora@gmail.com</strong>. Select an action below to complete transmission:
                 </p>
+
+                <div className="space-y-2 pt-1">
+                  {/* Primary Gmail Web compose button */}
+                  <a
+                    href={submittedData.gmailUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
+                    style={{
+                      backgroundColor: primary,
+                      color: '#000000',
+                      boxShadow: `0 0 20px rgba(${rgb}, 0.4)`
+                    }}
+                  >
+                    <Mail className="w-4 h-4" />
+                    <span>Open & Send via Gmail Web</span>
+                    <ExternalLink className="w-3.5 h-3.5 ml-auto" />
+                  </a>
+
+                  {/* WhatsApp Business Link */}
+                  <a
+                    href={submittedData.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 bg-[#25D366]/20 border border-[#25D366]/60 text-[#25D366] hover:bg-[#25D366]/30 transition-all cursor-pointer"
+                    style={{
+                      boxShadow: '0 0 20px rgba(37, 211, 102, 0.2)'
+                    }}
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    <span>Send to WhatsApp Business (+91 9524227511)</span>
+                    <ExternalLink className="w-3.5 h-3.5 ml-auto" />
+                  </a>
+
+                  {/* Copy Details & Reset Buttons */}
+                  <div className="grid grid-cols-2 gap-2 pt-1">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (submittedData) {
+                          navigator.clipboard.writeText(submittedData.detailsText);
+                          setCopied(true);
+                          setTimeout(() => setCopied(false), 2500);
+                        }
+                      }}
+                      className="py-2 px-3 rounded-lg border border-white/15 bg-white/5 hover:bg-white/10 text-xs font-mono text-gray-300 flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                    >
+                      {copied ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                          <span className="text-emerald-400 font-bold">Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5" />
+                          <span>Copy Details</span>
+                        </>
+                      )}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSubmitSuccess(false);
+                        setSubmittedData(null);
+                        setModalOpen(false);
+                        setFormData({ name: '', email: '', service: 'ERP, CRM, HCM & Business Solutions', message: '' });
+                      }}
+                      className="py-2 px-3 rounded-lg border border-white/15 bg-white/5 hover:bg-white/10 text-xs font-mono text-gray-300 flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                    >
+                      <span>Close Window</span>
+                    </button>
+                  </div>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4 text-left">
