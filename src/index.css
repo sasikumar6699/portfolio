@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --cyber-primary: #22c55e;
+  --cyber-secondary: #10b981;
+  --cyber-rgb: 34, 197, 94;
+}
+
 @layer base {
   html {
     overflow-x: hidden;
@@ -18,6 +24,11 @@
     width: 100%;
     position: relative;
   }
+
+  ::selection {
+    background-color: var(--cyber-primary) !important;
+    color: #000000 !important;
+  }
 }
 
 /* Custom Scrollbar */
@@ -32,11 +43,11 @@
 ::-webkit-scrollbar-thumb {
   background: #1e1e24;
   border-radius: 4px;
-  border: 1px solid rgba(57, 255, 20, 0.2);
+  border: 1px solid rgba(var(--cyber-rgb), 0.25);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #39FF14;
+  background: var(--cyber-primary);
 }
 
 /* Dark Cyber Grid Background Pattern */
@@ -50,8 +61,8 @@
 .bg-neon-grid {
   background-size: 50px 50px;
   background-image: 
-    linear-gradient(to right, rgba(57, 255, 20, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(57, 255, 20, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(var(--cyber-rgb), 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(var(--cyber-rgb), 0.06) 1px, transparent 1px);
 }
 
 .radial-gradient-mask {
@@ -59,13 +70,13 @@
   -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
 }
 
-/* Neon Glow Utilities */
+/* Neon Glow Utilities (Dynamically adapt to active theme) */
 .neon-glow-text {
-  text-shadow: 0 0 15px rgba(57, 255, 20, 0.6), 0 0 30px rgba(57, 255, 20, 0.3);
+  text-shadow: 0 0 15px rgba(var(--cyber-rgb), 0.65), 0 0 30px rgba(var(--cyber-rgb), 0.35) !important;
 }
 
 .neon-border-glow {
-  box-shadow: 0 0 20px -3px rgba(57, 255, 20, 0.4);
+  box-shadow: 0 0 20px -3px rgba(var(--cyber-rgb), 0.45) !important;
 }
 
 .glass-card {
@@ -76,24 +87,25 @@
 }
 
 .glass-card:hover {
-  border-color: rgba(57, 255, 20, 0.4);
-  box-shadow: 0 0 25px -5px rgba(57, 255, 20, 0.25);
+  border-color: rgba(var(--cyber-rgb), 0.5) !important;
+  box-shadow: 0 0 25px -5px rgba(var(--cyber-rgb), 0.3) !important;
 }
 
 /* Neon Pulse Animation for Dot */
 @keyframes neonPulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.7);
+    box-shadow: 0 0 0 0 rgba(var(--cyber-rgb), 0.7);
   }
   50% {
     transform: scale(1.1);
-    box-shadow: 0 0 0 8px rgba(57, 255, 20, 0);
+    box-shadow: 0 0 0 8px rgba(var(--cyber-rgb), 0);
   }
 }
 
 .pulse-neon-dot {
   animation: neonPulse 2s infinite ease-in-out;
+  background-color: var(--cyber-primary) !important;
 }
 
 /* SVG Laser Pipeline Data Flow */
@@ -114,102 +126,6 @@
   animation: laserFlow 1s linear infinite;
 }
 
-/* =========================================================================
-   GRAVITY DESIGN FORMATIONS & 3D ANIMATION ENGINE
-   ========================================================================= */
-
-/* 3D Perspective & Orbit Stage */
-.perspective-1400 {
-  perspective: 1400px;
-  -webkit-perspective: 1400px;
-  perspective-origin: 50% 50%;
-}
-
-.preserve-3d {
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
-}
-
-/* Concentric Orbit Track Spin */
-@keyframes orbitTrackSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-@keyframes orbitTrackSpinReverse {
-  from { transform: rotate(360deg); }
-  to   { transform: rotate(0deg); }
-}
-
-.animate-orbit-spin {
-  animation: orbitTrackSpin var(--orbit-dur, 30s) linear infinite;
-}
-
-.animate-orbit-counter {
-  animation: orbitTrackSpinReverse var(--orbit-dur, 30s) linear infinite;
-}
-
-/* Gyroscopic 3D Gimbal Rings */
-@keyframes gyroReif1 {
-  0%   { transform: rotateZ(0deg) rotateX(0deg); }
-  100% { transform: rotateZ(360deg) rotateX(720deg); }
-}
-
-@keyframes gyroReif2 {
-  0%   { transform: rotateZ(-25deg) rotateY(0deg); }
-  100% { transform: rotateZ(-385deg) rotateY(-720deg); }
-}
-
-.animate-gyro-ring-1 {
-  animation: gyroReif1 6s linear infinite;
-}
-
-.animate-gyro-ring-2 {
-  animation: gyroReif2 8s linear infinite;
-}
-
-/* Gravity Ticker Photon Pulse */
-@keyframes gravityTickerPulse {
-  0%   { transform: translateY(0); opacity: 0; }
-  15%  { opacity: 1; }
-  85%  { opacity: 1; }
-  100% { transform: translateY(80px); opacity: 0; }
-}
-
-.animate-gravity-ticker {
-  animation: gravityTickerPulse 2.4s cubic-bezier(0.55, 0.06, 0.45, 0.94) infinite;
-}
-
-/* Magnetic Bead Orbit Rotation */
-@keyframes magneticRingBead {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-.animate-bead-track {
-  animation: magneticRingBead 22s linear infinite;
-}
-
-/* Masked Word Slide Up */
-.word-mask {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
-  padding: 0.15em 0;
-  margin: -0.15em 0;
-}
-
-.word-reveal {
-  display: inline-block;
-  transform: translateY(115%);
-  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
-}
-
-.word-mask.is-active .word-reveal {
-  transform: translateY(0%);
-}
-
 /* Animated Strike-through */
 .strike-through-path {
   position: relative;
@@ -223,8 +139,8 @@
   right: 0;
   top: 50%;
   height: 2px;
-  background: #39FF14;
-  box-shadow: 0 0 10px rgba(57, 255, 20, 0.8);
+  background: var(--cyber-primary);
+  box-shadow: 0 0 10px rgba(var(--cyber-rgb), 0.8);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
@@ -247,8 +163,8 @@
   right: 0;
   bottom: -4px;
   height: 2px;
-  background: #39FF14;
-  box-shadow: 0 0 12px rgba(57, 255, 20, 0.7);
+  background: var(--cyber-primary);
+  box-shadow: 0 0 12px rgba(var(--cyber-rgb), 0.7);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
@@ -267,28 +183,17 @@
   scrollbar-width: none;
 }
 
-/* Auto Progress Keyframes */
-@keyframes autoProgress3s {
-  from { width: 0%; }
-  to   { width: 100%; }
-}
-
-@keyframes autoProgress2s {
-  from { width: 0%; }
-  to   { width: 100%; }
-}
-
 /* Anime Mecha Neural Audio Waveform Equalizer */
 @keyframes neuralEqualizer {
   0%, 100% { height: 4px; }
   50% { height: 16px; }
 }
 
-.animate-equalizer-1 { animation: neuralEqualizer 0.8s ease-in-out infinite; }
-.animate-equalizer-2 { animation: neuralEqualizer 0.6s ease-in-out 0.2s infinite; }
-.animate-equalizer-3 { animation: neuralEqualizer 0.9s ease-in-out 0.4s infinite; }
-.animate-equalizer-4 { animation: neuralEqualizer 0.7s ease-in-out 0.15s infinite; }
-.animate-equalizer-5 { animation: neuralEqualizer 0.85s ease-in-out 0.3s infinite; }
+.animate-equalizer-1 { animation: neuralEqualizer 0.8s ease-in-out infinite; background-color: var(--cyber-primary) !important; }
+.animate-equalizer-2 { animation: neuralEqualizer 0.6s ease-in-out 0.2s infinite; background-color: var(--cyber-primary) !important; }
+.animate-equalizer-3 { animation: neuralEqualizer 0.9s ease-in-out 0.4s infinite; background-color: var(--cyber-primary) !important; }
+.animate-equalizer-4 { animation: neuralEqualizer 0.7s ease-in-out 0.15s infinite; background-color: var(--cyber-primary) !important; }
+.animate-equalizer-5 { animation: neuralEqualizer 0.85s ease-in-out 0.3s infinite; background-color: var(--cyber-primary) !important; }
 
 /* Anime Circuit Packet Runner */
 @keyframes circuitPacketMove {
@@ -302,6 +207,254 @@
   animation: circuitPacketMove 1.8s ease-in-out infinite;
 }
 
+/* =========================================================================
+   GLOBAL DYNAMIC THEME COLOR CLASS OVERRIDES FOR ALL PAGES
+   Maps all legacy static green classes across the entire portfolio
+   to the active theme selected in the color switcher.
+   ========================================================================= */
+
+/* Text Colors */
+.text-\[\#39FF14\],
+.text-\[\#39ff14\],
+.text-\[\#22c55e\],
+.text-\[\#45ff24\],
+.text-emerald-400,
+.text-emerald-500,
+.group:hover .group-hover\:text-\[\#39FF14\],
+.group:hover .group-hover\:text-\[\#22c55e\],
+.hover\:text-\[\#39FF14\]:hover,
+.hover\:text-\[\#22c55e\]:hover {
+  color: var(--cyber-primary) !important;
+}
+
+.text-\[\#39FF14\]\/80,
+.text-\[\#22c55e\]\/80 {
+  color: rgba(var(--cyber-rgb), 0.8) !important;
+}
+
+/* SVG Fill & Stroke */
+.fill-\[\#39FF14\],
+.fill-\[\#39ff14\],
+.fill-\[\#22c55e\] {
+  fill: var(--cyber-primary) !important;
+}
+
+/* Solid Backgrounds */
+.bg-\[\#39FF14\],
+.bg-\[\#39ff14\],
+.bg-\[\#22c55e\],
+.bg-\[\#45ff24\],
+.hover\:bg-\[\#39FF14\]:hover,
+.hover\:bg-\[\#45ff24\]:hover,
+.group:hover .group-hover\:bg-\[\#39FF14\] {
+  background-color: var(--cyber-primary) !important;
+}
+
+/* Transparent Background Tints */
+.bg-\[\#39FF14\]\/5,
+.bg-\[\#22c55e\]\/5 {
+  background-color: rgba(var(--cyber-rgb), 0.05) !important;
+}
+
+.bg-\[\#39FF14\]\/10,
+.bg-\[\#22c55e\]\/10,
+.bg-emerald-500\/10 {
+  background-color: rgba(var(--cyber-rgb), 0.1) !important;
+}
+
+.bg-\[\#39FF14\]\/15,
+.bg-\[\#22c55e\]\/15,
+.bg-emerald-500\/15,
+.bg-emerald-500\/20 {
+  background-color: rgba(var(--cyber-rgb), 0.18) !important;
+}
+
+.bg-\[\#39FF14\]\/20,
+.bg-\[\#22c55e\]\/20 {
+  background-color: rgba(var(--cyber-rgb), 0.22) !important;
+}
+
+/* Borders */
+.border-\[\#39FF14\],
+.border-\[\#39ff14\],
+.border-\[\#22c55e\],
+.border-emerald-400,
+.border-emerald-500,
+.hover\:border-\[\#39FF14\]:hover,
+.hover\:border-\[\#22c55e\]:hover,
+.group:hover .group-hover\:border-\[\#39FF14\] {
+  border-color: var(--cyber-primary) !important;
+}
+
+.border-\[\#39FF14\]\/20,
+.border-\[\#22c55e\]\/20,
+.border-emerald-500\/20 {
+  border-color: rgba(var(--cyber-rgb), 0.2) !important;
+}
+
+.border-\[\#39FF14\]\/30,
+.border-\[\#22c55e\]\/30,
+.border-emerald-500\/30 {
+  border-color: rgba(var(--cyber-rgb), 0.3) !important;
+}
+
+.border-\[\#39FF14\]\/40,
+.border-\[\#22c55e\]\/40,
+.border-emerald-500\/40,
+.hover\:border-\[\#39FF14\]\/40:hover,
+.hover\:border-\[\#39FF14\]\/50:hover,
+.hover\:border-\[\#39FF14\]\/60:hover {
+  border-color: rgba(var(--cyber-rgb), 0.4) !important;
+}
+
+.border-\[\#39FF14\]\/50,
+.border-\[\#22c55e\]\/50,
+.border-emerald-500\/50,
+.border-\[\#39FF14\]\/60,
+.border-\[\#39FF14\]\/70,
+.group:hover .group-hover\:border-\[\#39FF14\]\/50 {
+  border-color: rgba(var(--cyber-rgb), 0.5) !important;
+}
+
+.border-\[\#39FF14\]\/80,
+.border-\[\#22c55e\]\/80 {
+  border-color: rgba(var(--cyber-rgb), 0.8) !important;
+}
+
+/* Rings & Focus */
+.ring-\[\#22c55e\]\/50,
+.ring-\[\#39FF14\]\/50 {
+  --tw-ring-color: rgba(var(--cyber-rgb), 0.5) !important;
+}
+
+.focus\:border-\[\#39FF14\]:focus,
+.focus\:border-\[\#39ff14\]:focus,
+.focus\:border-\[\#22c55e\]:focus,
+.focus\:border-emerald-500:focus,
+.focus\:border-\[var\(--cyber-primary\)\]:focus {
+  border-color: var(--cyber-primary) !important;
+}
+
+.focus\:ring-\[\#39FF14\]:focus,
+.focus\:ring-\[\#39ff14\]:focus,
+.focus\:ring-\[\#22c55e\]:focus,
+.focus\:ring-emerald-400:focus,
+.focus\:ring-emerald-500:focus,
+.focus\:ring-\[var\(--cyber-primary\)\]:focus {
+  --tw-ring-color: var(--cyber-primary) !important;
+}
+
+/* Gradients via / from / to */
+.from-\[\#39FF14\],
+.from-\[\#39ff14\],
+.from-\[\#22c55e\],
+.from-emerald-400,
+.from-emerald-500 {
+  --tw-gradient-from: var(--cyber-primary) var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgba(var(--cyber-rgb), 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+.from-\[\#39FF14\]\/15,
+.from-\[\#22c55e\]\/15 {
+  --tw-gradient-from: rgba(var(--cyber-rgb), 0.15) var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgba(var(--cyber-rgb), 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+.from-emerald-950\/80,
+.from-green-950\/80,
+.from-emerald-900\/60 {
+  --tw-gradient-from: rgba(var(--cyber-rgb), 0.25) var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgba(var(--cyber-rgb), 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+.via-\[\#39FF14\],
+.via-\[\#39ff14\],
+.via-\[\#22c55e\],
+.via-emerald-400,
+.via-emerald-500 {
+  --tw-gradient-to: rgba(var(--cyber-rgb), 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--cyber-primary) var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+}
+
+.via-\[\#39FF14\]\/10,
+.via-\[\#22c55e\]\/10 {
+  --tw-gradient-to: rgba(var(--cyber-rgb), 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), rgba(var(--cyber-rgb), 0.1) var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+}
+
+.via-\[\#39FF14\]\/15,
+.via-\[\#22c55e\]\/15 {
+  --tw-gradient-to: rgba(var(--cyber-rgb), 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), rgba(var(--cyber-rgb), 0.15) var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+}
+
+.to-\[\#39FF14\],
+.to-\[\#39ff14\],
+.to-\[\#22c55e\] {
+  --tw-gradient-to: var(--cyber-primary) var(--tw-gradient-to-position) !important;
+}
+
+/* Box Shadows */
+[class*="shadow-\[0_0_"][class*="57,255,20"],
+[class*="shadow-\[0_0_"][class*="34,197,94"],
+[class*="shadow-\[0_0_"][class*="\#39FF14"],
+[class*="shadow-\[0_0_"][class*="\#22c55e"] {
+  box-shadow: 0 0 25px rgba(var(--cyber-rgb), 0.4) !important;
+}
+
+/* Underline Decorations */
+.decoration-\[\#39FF14\]\/40 {
+  text-decoration-color: rgba(var(--cyber-rgb), 0.4) !important;
+}
+
+/* Direct SVG attribute overrides for inline SVG strokes, fills, stop-colors */
+svg [stroke="#39FF14"],
+svg [stroke="#39ff14"],
+svg [stroke="#22c55e"],
+svg [stroke="rgba(57, 255, 20, 0.55)"],
+svg [stroke="rgba(57, 255, 20, 0.6)"],
+svg [stroke="rgba(57, 255, 20, 0.4)"],
+svg [stroke="rgba(57, 255, 20, 0.3)"],
+[stroke="#39FF14"],
+[stroke="#39ff14"],
+[stroke="#22c55e"] {
+  stroke: var(--cyber-primary) !important;
+}
+
+svg [fill="#39FF14"],
+svg [fill="#39ff14"],
+svg [fill="#22c55e"],
+[fill="#39FF14"],
+[fill="#39ff14"],
+[fill="#22c55e"] {
+  fill: var(--cyber-primary) !important;
+}
+
+stop[stop-color="#39FF14"],
+stop[stop-color="#39ff14"],
+stop[stop-color="#22c55e"],
+stop[stop-color="#9eff7a"] {
+  stop-color: var(--cyber-primary) !important;
+}
+
+stop[stop-color="#146a09"],
+stop[stop-color="#10b981"] {
+  stop-color: var(--cyber-secondary) !important;
+}
+
+/* Global Selection */
+::selection {
+  background-color: var(--cyber-primary) !important;
+  color: #000000 !important;
+}
+::-moz-selection {
+  background-color: var(--cyber-primary) !important;
+  color: #000000 !important;
+}
+
 /* Print Optimization for Company Profile PDF Export */
 @media print {
   body {
@@ -310,7 +463,6 @@
     overflow: visible !important;
   }
 
-  /* Hide everything outside the modal content */
   nav, footer, canvas, #hero-canvas {
     display: none !important;
   }
@@ -331,5 +483,3 @@
     size: A4 portrait;
   }
 }
-
-

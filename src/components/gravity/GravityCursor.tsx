@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useCyberDoor } from '../../context/CyberDoorContext';
 
 export const GravityCursor: React.FC = () => {
+  const { currentTheme } = useCyberDoor();
+  const { primary, rgb } = currentTheme;
   const [isHovering, setIsHovering] = useState(false);
   const [cursorText, setCursorText] = useState<string | null>(null);
   const [isDragMode, setIsDragMode] = useState(false);
@@ -99,16 +102,27 @@ export const GravityCursor: React.FC = () => {
     >
       {/* Outer Magnetic Ring */}
       <div
-        className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#39FF14] transition-all duration-150 ease-out flex items-center justify-center ${
+        className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-150 ease-out flex items-center justify-center ${
           isHovering
             ? isDragMode
-              ? 'w-16 h-16 bg-[#39FF14]/15 border-[#39FF14] shadow-[0_0_20px_rgba(57,255,20,0.4)] backdrop-blur-[1px]'
-              : 'w-12 h-12 bg-[#39FF14]/20 border-[#39FF14] shadow-[0_0_15px_rgba(57,255,20,0.5)]'
-            : 'w-8 h-8 bg-transparent border-[#39FF14]/60'
+              ? 'w-16 h-16 backdrop-blur-[1px]'
+              : 'w-12 h-12'
+            : 'w-8 h-8'
         }`}
+        style={{
+          borderColor: isHovering ? primary : `rgba(${rgb}, 0.6)`,
+          backgroundColor: isHovering ? `rgba(${rgb}, 0.18)` : 'transparent',
+          boxShadow: isHovering ? `0 0 20px rgba(${rgb}, 0.5)` : `0 0 8px rgba(${rgb}, 0.2)`,
+        }}
       >
         {cursorText && (
-          <span className="text-[9px] font-mono font-bold tracking-widest text-[#39FF14] uppercase drop-shadow-[0_0_8px_rgba(57,255,20,0.8)]">
+          <span
+            className="text-[9px] font-mono font-bold tracking-widest uppercase"
+            style={{
+              color: primary,
+              filter: `drop-shadow(0 0 8px ${primary})`,
+            }}
+          >
             {cursorText}
           </span>
         )}
@@ -116,9 +130,13 @@ export const GravityCursor: React.FC = () => {
 
       {/* Core Dot */}
       <div
-        className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#39FF14] shadow-[0_0_10px_#39FF14] transition-all duration-100 ${
+        className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-100 ${
           isHovering ? 'w-1.5 h-1.5 opacity-90' : 'w-2 h-2 opacity-100'
         }`}
+        style={{
+          backgroundColor: primary,
+          boxShadow: `0 0 10px ${primary}`,
+        }}
       />
     </div>
   );

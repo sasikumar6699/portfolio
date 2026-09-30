@@ -19,6 +19,7 @@ import {
   MousePointer,
   ShieldCheck
 } from 'lucide-react';
+import { useCyberDoor } from '../../context/CyberDoorContext';
 
 interface GravityOrbitCarouselProps {
   onSelectProject?: (projectTitle: string) => void;
@@ -96,6 +97,9 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
   onSelectProject,
   onSelectService
 }) => {
+  const { currentTheme } = useCyberDoor();
+  const { primary, rgb } = currentTheme;
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [radius, setRadius] = useState(310);
   const [viewMode, setViewMode] = useState<'orbit' | 'filmstrip'>('orbit');
@@ -205,7 +209,10 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
       }`}
     >
       {/* Background Ambience */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[800px] h-[350px] sm:h-[550px] bg-[#39FF14]/5 rounded-full blur-[140px] pointer-events-none" />
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[800px] h-[350px] sm:h-[550px] rounded-full blur-[140px] pointer-events-none transition-colors duration-700"
+        style={{ backgroundColor: `rgba(${rgb}, 0.08)` }}
+      />
       <div className="absolute inset-0 bg-grid-pattern opacity-15 pointer-events-none" />
 
       {viewMode === 'orbit' ? (
@@ -221,7 +228,14 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
           {/* Top Header & Telemetry Bar (Compact & High-Clearance) */}
           <div className="text-center max-w-2xl mx-auto space-y-1 relative z-30 shrink-0">
             <div className="flex items-center justify-center gap-2">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 text-[10px] sm:text-[11px] font-mono text-[#39FF14]">
+              <div
+                className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#0D0D0D] border text-[10px] sm:text-[11px] font-mono transition-colors"
+                style={{
+                  borderColor: `${primary}50`,
+                  color: primary,
+                  boxShadow: `0 0 12px rgba(${rgb}, 0.15)`
+                }}
+              >
                 <Sparkles className="w-3 h-3 animate-pulse" />
                 <span>3D ORBIT · SCROLL ROTATION</span>
               </div>
@@ -230,7 +244,12 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
               <div className="inline-flex items-center gap-1 p-0.5 rounded-full bg-[#0D0D0D] border border-white/10 text-[10px] sm:text-[11px] font-mono">
                 <button
                   onClick={() => setViewMode('orbit')}
-                  className="px-2 sm:px-2.5 py-0.5 rounded-full bg-[#39FF14] text-black font-bold cursor-pointer"
+                  className="px-2 sm:px-2.5 py-0.5 rounded-full font-bold cursor-pointer transition-all"
+                  style={{
+                    backgroundColor: primary,
+                    color: '#000000',
+                    boxShadow: `0 0 10px rgba(${rgb}, 0.3)`
+                  }}
                 >
                   3D ORBIT
                 </button>
@@ -245,12 +264,18 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
 
             <h2 className="text-lg sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight leading-tight">
               Our Core{' '}
-              <span className="text-[#39FF14] inline-block neon-glow-text">
+              <span
+                className="inline-block transition-colors duration-500"
+                style={{
+                  color: primary,
+                  textShadow: `0 0 20px rgba(${rgb}, 0.4)`
+                }}
+              >
                 Deliverables & Systems
               </span>
             </h2>
             <p className="text-[10px] sm:text-xs text-gray-400 font-light flex items-center justify-center gap-1.5">
-              <MousePointer className="w-3 h-3 text-[#39FF14] animate-bounce shrink-0" />
+              <MousePointer className="w-3 h-3 animate-bounce shrink-0" style={{ color: primary }} />
               <span>Scroll down or swipe cards to explore systems.</span>
             </p>
           </div>
@@ -289,12 +314,14 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
                       marginLeft: `-${cardW / 2}px`,
                       marginTop: `-${cardH / 2}px`,
                       backfaceVisibility: 'hidden',
-                      WebkitBackfaceVisibility: 'hidden'
+                      WebkitBackfaceVisibility: 'hidden',
+                      borderColor: isCurrent ? primary : 'rgba(255, 255, 255, 0.1)',
+                      boxShadow: isCurrent ? `0 0 35px rgba(${rgb}, 0.35)` : 'none'
                     }}
                     className={`absolute top-0 left-0 rounded-2xl bg-[#0D0D0D] border transition-all duration-300 overflow-hidden flex flex-col justify-between p-3 sm:p-4 cursor-pointer select-none ${
                       isCurrent
-                        ? 'border-[#39FF14] shadow-[0_0_35px_rgba(57,255,20,0.35)] scale-[1.02] z-30 opacity-100'
-                        : 'border-white/10 shadow-lg opacity-35 hover:opacity-75 z-10 hover:border-white/30 scale-95'
+                        ? 'scale-[1.02] z-30 opacity-100'
+                        : 'shadow-lg opacity-35 hover:opacity-75 z-10 hover:border-white/30 scale-95'
                     }`}
                   >
                     {/* Inactive Darkness Vignette */}
@@ -307,14 +334,33 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
                     {/* Card Header Top */}
                     <div className="relative z-10">
                       <div className="flex items-center justify-between pb-2 border-b border-white/10">
-                        <div className="w-7 h-7 rounded-lg bg-[#050505] border border-[#39FF14]/40 flex items-center justify-center text-[#39FF14] shadow-[0_0_10px_rgba(57,255,20,0.2)]">
+                        <div
+                          className="w-7 h-7 rounded-lg bg-[#050505] border flex items-center justify-center"
+                          style={{
+                            borderColor: `${primary}50`,
+                            color: primary,
+                            boxShadow: `0 0 10px rgba(${rgb}, 0.2)`
+                          }}
+                        >
                           <IconComp className="w-3.5 h-3.5" />
                         </div>
-                        <span className={`text-[8.5px] font-mono tracking-wider px-1.5 py-0.5 rounded border ${
-                          isCurrent
-                            ? 'bg-[#39FF14]/15 border-[#39FF14] text-[#39FF14] font-bold shadow-[0_0_6px_rgba(57,255,20,0.3)]'
-                            : 'bg-white/5 border-white/10 text-gray-400'
-                        }`}>
+                        <span
+                          className="text-[8.5px] font-mono tracking-wider px-1.5 py-0.5 rounded border"
+                          style={
+                            isCurrent
+                              ? {
+                                  backgroundColor: `rgba(${rgb}, 0.18)`,
+                                  borderColor: primary,
+                                  color: primary,
+                                  boxShadow: `0 0 6px rgba(${rgb}, 0.3)`
+                                }
+                              : {
+                                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                                  borderColor: 'rgba(255, 255, 255, 0.1)',
+                                  color: '#9ca3af'
+                                }
+                          }
+                        >
                           0{i + 1} // {isCurrent ? 'ACTIVE' : 'NODE'}
                         </span>
                       </div>
@@ -333,7 +379,7 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
 
                     {/* Card Bottom Details & Inquire CTA */}
                     <div className="relative z-10 pt-2.5 border-t border-white/10 space-y-2">
-                      <div className="text-[9.5px] font-mono text-[#39FF14] flex items-center gap-1">
+                      <div className="text-[9.5px] font-mono flex items-center gap-1" style={{ color: primary }}>
                         <Sparkles className="w-3 h-3 shrink-0" />
                         <span className="truncate">{card.impact}</span>
                       </div>
@@ -355,7 +401,12 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
                           if (onSelectService) onSelectService(card.title);
                           else if (onSelectProject) onSelectProject(card.title);
                         }}
-                        className="w-full py-2 rounded-lg bg-[#39FF14] text-black font-mono text-[10.5px] sm:text-[11px] font-bold uppercase tracking-wider hover:bg-[#45ff24] shadow-[0_0_15px_rgba(57,255,20,0.3)] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                        className="w-full py-2 rounded-lg font-mono text-[10.5px] sm:text-[11px] font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                        style={{
+                          backgroundColor: primary,
+                          color: '#000000',
+                          boxShadow: `0 0 15px rgba(${rgb}, 0.35)`
+                        }}
                       >
                         <span>Inquire Solution</span>
                         <ArrowRight className="w-3.5 h-3.5" />
@@ -402,9 +453,17 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
                 <button
                   key={card.id}
                   onClick={() => scrollToCard(idx)}
+                  style={
+                    activeIndex === idx
+                      ? {
+                          backgroundColor: primary,
+                          boxShadow: `0 0 8px ${primary}`
+                        }
+                      : undefined
+                  }
                   className={`transition-all rounded-full cursor-pointer ${
                     activeIndex === idx
-                      ? 'w-5 sm:w-6 h-1.5 bg-[#39FF14] shadow-[0_0_8px_#39FF14]'
+                      ? 'w-5 sm:w-6 h-1.5'
                       : 'w-1.5 h-1.5 bg-white/20 hover:bg-white/40'
                   }`}
                   aria-label={`Scroll to system ${idx + 1}`}
@@ -413,7 +472,10 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
             </div>
 
             <div className="text-center sm:text-right">
-              <span className="text-[10px] sm:text-[11px] font-mono text-[#39FF14] uppercase tracking-wider block truncate max-w-[260px] sm:max-w-none">
+              <span
+                className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider block truncate max-w-[260px] sm:max-w-none"
+                style={{ color: primary }}
+              >
                 FOCUS: {activeCard.title}
               </span>
               <span className="text-[8.5px] sm:text-[9.5px] font-mono text-gray-400 block">
@@ -430,7 +492,7 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
             <div>
-              <span className="text-xs font-mono text-[#39FF14] tracking-widest uppercase">
+              <span className="text-xs font-mono tracking-widest uppercase" style={{ color: primary }}>
                 SYSTEMS ARCHIVE
               </span>
               <h3 className="text-3xl font-extrabold text-white mt-1">
@@ -439,7 +501,12 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
             </div>
             <button
               onClick={() => setViewMode('orbit')}
-              className="px-4 py-2 rounded-full bg-[#39FF14] text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#45ff24] transition-all"
+              className="px-4 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all"
+              style={{
+                backgroundColor: primary,
+                color: '#000000',
+                boxShadow: `0 0 15px rgba(${rgb}, 0.35)`
+              }}
             >
               Return to 3D Orbit
             </button>
@@ -451,14 +518,28 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
               return (
                 <div
                   key={card.id}
-                  className="rounded-2xl bg-[#0D0D0D] border border-white/10 hover:border-[#39FF14] p-5 flex flex-col justify-between transition-all duration-300 hover:shadow-[0_0_30px_rgba(57,255,20,0.2)]"
+                  className="rounded-2xl bg-[#0D0D0D] border border-white/10 p-5 flex flex-col justify-between transition-all duration-300"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = primary;
+                    e.currentTarget.style.boxShadow = `0 0 30px rgba(${rgb}, 0.25)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
                 >
                   <div>
                     <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                      <div className="w-8 h-8 rounded-xl bg-[#050505] border border-[#39FF14]/40 flex items-center justify-center text-[#39FF14]">
+                      <div
+                        className="w-8 h-8 rounded-xl bg-[#050505] border flex items-center justify-center"
+                        style={{
+                          borderColor: `${primary}50`,
+                          color: primary
+                        }}
+                      >
                         <IconComp className="w-4 h-4" />
                       </div>
-                      <span className="text-xs font-mono text-[#39FF14]">
+                      <span className="text-xs font-mono" style={{ color: primary }}>
                         SYSTEM 0{i + 1}
                       </span>
                     </div>
@@ -475,7 +556,7 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
                   </div>
 
                   <div className="mt-5 pt-3 border-t border-white/10">
-                    <div className="text-xs font-mono text-[#39FF14] flex items-center gap-1.5 mb-2.5">
+                    <div className="text-xs font-mono flex items-center gap-1.5 mb-2.5" style={{ color: primary }}>
                       <Sparkles className="w-3.5 h-3.5 shrink-0" />
                       <span>{card.impact}</span>
                     </div>
@@ -484,7 +565,12 @@ export const GravityOrbitCarousel: React.FC<GravityOrbitCarouselProps> = ({
                         if (onSelectService) onSelectService(card.title);
                         else if (onSelectProject) onSelectProject(card.title);
                       }}
-                      className="w-full py-2 rounded-lg bg-[#39FF14] text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#45ff24] transition-all flex items-center justify-center gap-2"
+                      className="w-full py-2 rounded-lg font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer"
+                      style={{
+                        backgroundColor: primary,
+                        color: '#000000',
+                        boxShadow: `0 0 15px rgba(${rgb}, 0.35)`
+                      }}
                     >
                       <span>Inquire System</span>
                       <ArrowRight className="w-3.5 h-3.5" />

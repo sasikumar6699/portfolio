@@ -1,5 +1,6 @@
 import React from 'react';
 import { CheckCircle, AlertCircle, X } from 'lucide-react';
+import { useCyberDoor } from '../context/CyberDoorContext';
 
 interface ToastProps {
   message: string;
@@ -8,10 +9,19 @@ interface ToastProps {
 }
 
 export const Toast: React.FC<ToastProps> = ({ message, type = 'success', onClose }) => {
+  const { currentTheme } = useCyberDoor();
+  const { primary, rgb } = currentTheme;
+
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-[#0D0D0D] text-white border border-[#39FF14]/50 px-5 py-4 rounded-xl shadow-[0_0_30px_rgba(57,255,20,0.3)] animate-slide-up">
-      {type === 'success' && <CheckCircle className="w-5 h-5 text-[#39FF14] shrink-0" />}
-      {type === 'info' && <AlertCircle className="w-5 h-5 text-emerald-400 shrink-0" />}
+    <div
+      className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-[#0D0D0D] text-white border px-5 py-4 rounded-xl animate-slide-up"
+      style={{
+        borderColor: type === 'error' ? 'rgba(239, 68, 68, 0.5)' : `rgba(${rgb}, 0.5)`,
+        boxShadow: type === 'error' ? '0 0 30px rgba(239, 68, 68, 0.3)' : `0 0 30px rgba(${rgb}, 0.3)`,
+      }}
+    >
+      {type === 'success' && <CheckCircle className="w-5 h-5 shrink-0" style={{ color: primary }} />}
+      {type === 'info' && <AlertCircle className="w-5 h-5 shrink-0" style={{ color: primary }} />}
       {type === 'error' && <AlertCircle className="w-5 h-5 text-red-500 shrink-0" />}
       <span className="text-sm font-medium pr-2">{message}</span>
       <button 

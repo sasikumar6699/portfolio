@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, Download, Copy, Printer, CheckCircle, Briefcase, Code, ShieldCheck, Globe, Cpu, PenTool, Database, Layers } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { useCyberDoor } from '../context/CyberDoorContext';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -9,6 +10,8 @@ interface ResumeModalProps {
 }
 
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose, onCopySuccess }) => {
+  const { currentTheme } = useCyberDoor();
+  const { primary, rgb } = currentTheme;
   if (!isOpen) return null;
 
   const handleCopyResume = () => {
@@ -45,12 +48,25 @@ COMPANY TRACK RECORD:
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 lg:p-8 bg-black/85 backdrop-blur-md animate-fade-in overflow-y-auto print:p-0 print:bg-white print:static">
-      <div className="relative w-full max-w-4xl bg-[#0D0D0D] border border-[#39FF14]/40 rounded-2xl shadow-[0_0_50px_rgba(57,255,20,0.3)] overflow-hidden my-auto max-h-[92vh] flex flex-col print:border-none print:shadow-none print:max-h-none print:h-auto print:rounded-none">
+      <div
+        className="relative w-full max-w-4xl bg-[#0D0D0D] border rounded-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col print:border-none print:shadow-none print:max-h-none print:h-auto print:rounded-none transition-all"
+        style={{
+          borderColor: `${primary}60`,
+          boxShadow: `0 0 50px rgba(${rgb}, 0.3)`
+        }}
+      >
         
         {/* Modal Top Bar (Hidden in Print) */}
         <div className="px-6 py-4 bg-[#050505] border-b border-white/10 flex items-center justify-between shrink-0 print:hidden">
           <div className="flex items-center gap-3">
-            <span className="px-3 py-1 rounded-full bg-[#39FF14]/10 border border-[#39FF14]/30 text-xs font-mono text-[#39FF14] font-bold">
+            <span
+              className="px-3 py-1 rounded-full border text-xs font-mono font-bold"
+              style={{
+                backgroundColor: `${primary}18`,
+                borderColor: `${primary}50`,
+                color: primary
+              }}
+            >
               TECHYORA // CORPORATE SPECIFICATION
             </span>
             <span className="text-xs font-mono text-gray-400">EXECUTIVE COMPANY PROFILE</span>
@@ -74,11 +90,21 @@ COMPANY TRACK RECORD:
                 <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight print:text-black">
                   {PERSONAL_INFO.brandName}
                 </h1>
-                <span className="px-2.5 py-0.5 rounded-full bg-[#39FF14]/15 border border-[#39FF14]/40 text-[10px] font-mono font-bold text-[#39FF14] print:border-green-700 print:text-green-800">
+                <span
+                  className="px-2.5 py-0.5 rounded-full border text-[10px] font-mono font-bold print:border-green-700 print:text-green-800"
+                  style={{
+                    backgroundColor: `${primary}20`,
+                    borderColor: `${primary}60`,
+                    color: primary
+                  }}
+                >
                   VERIFIED ENTERPRISE
                 </span>
               </div>
-              <p className="text-sm font-mono text-[#39FF14] font-semibold print:text-green-700">
+              <p
+                className="text-sm font-mono font-semibold print:text-green-700"
+                style={{ color: primary }}
+              >
                 Enterprise Software Engineering & Digital Solutions Company
               </p>
             </div>
@@ -92,7 +118,10 @@ COMPANY TRACK RECORD:
 
           {/* Executive Summary */}
           <div className="space-y-2.5">
-            <h2 className="text-xs font-mono font-bold text-[#39FF14] uppercase tracking-wider flex items-center gap-2 print:text-green-800">
+            <h2
+              className="text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2 print:text-green-800"
+              style={{ color: primary }}
+            >
               <Briefcase className="w-4 h-4 print:text-green-800" /> Executive Overview
             </h2>
             <p className="text-xs sm:text-sm text-gray-300 leading-relaxed print:text-gray-800">
@@ -102,7 +131,10 @@ COMPANY TRACK RECORD:
 
           {/* Six Core Enterprise Solutions */}
           <div className="space-y-4">
-            <h2 className="text-xs font-mono font-bold text-[#39FF14] uppercase tracking-wider flex items-center gap-2 print:text-green-800">
+            <h2
+              className="text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2 print:text-green-800"
+              style={{ color: primary }}
+            >
               <Code className="w-4 h-4 print:text-green-800" /> Six Core Enterprise Services
             </h2>
             
@@ -111,7 +143,7 @@ COMPANY TRACK RECORD:
               {/* Service 1 */}
               <div className="p-4 rounded-xl bg-[#070709] border border-white/10 space-y-2 print:border-gray-300 print:bg-gray-50">
                 <div className="flex items-center gap-2 text-white font-bold print:text-black">
-                  <Database className="w-4 h-4 text-[#39FF14] print:text-green-700 shrink-0" />
+                  <Database className="w-4 h-4 print:text-green-700 shrink-0" style={{ color: primary }} />
                   <span>ERP, CRM, HCM & Business Solutions</span>
                 </div>
                 <ul className="text-gray-400 space-y-1 pl-4 list-disc text-[11px] leading-relaxed print:text-gray-700">
@@ -125,7 +157,7 @@ COMPANY TRACK RECORD:
               {/* Service 2 */}
               <div className="p-4 rounded-xl bg-[#070709] border border-white/10 space-y-2 print:border-gray-300 print:bg-gray-50">
                 <div className="flex items-center gap-2 text-white font-bold print:text-black">
-                  <Code className="w-4 h-4 text-[#39FF14] print:text-green-700 shrink-0" />
+                  <Code className="w-4 h-4 print:text-green-700 shrink-0" style={{ color: primary }} />
                   <span>Custom Software Solutions</span>
                 </div>
                 <ul className="text-gray-400 space-y-1 pl-4 list-disc text-[11px] leading-relaxed print:text-gray-700">
@@ -139,7 +171,7 @@ COMPANY TRACK RECORD:
               {/* Service 3 */}
               <div className="p-4 rounded-xl bg-[#070709] border border-white/10 space-y-2 print:border-gray-300 print:bg-gray-50">
                 <div className="flex items-center gap-2 text-white font-bold print:text-black">
-                  <Globe className="w-4 h-4 text-[#39FF14] print:text-green-700 shrink-0" />
+                  <Globe className="w-4 h-4 print:text-green-700 shrink-0" style={{ color: primary }} />
                   <span>Web Development & Design</span>
                 </div>
                 <ul className="text-gray-400 space-y-1 pl-4 list-disc text-[11px] leading-relaxed print:text-gray-700">
@@ -153,7 +185,7 @@ COMPANY TRACK RECORD:
               {/* Service 4 */}
               <div className="p-4 rounded-xl bg-[#070709] border border-white/10 space-y-2 print:border-gray-300 print:bg-gray-50">
                 <div className="flex items-center gap-2 text-white font-bold print:text-black">
-                  <Cpu className="w-4 h-4 text-[#39FF14] print:text-green-700 shrink-0" />
+                  <Cpu className="w-4 h-4 print:text-green-700 shrink-0" style={{ color: primary }} />
                   <span>AI & Autonomous Automation</span>
                 </div>
                 <ul className="text-gray-400 space-y-1 pl-4 list-disc text-[11px] leading-relaxed print:text-gray-700">
@@ -167,7 +199,7 @@ COMPANY TRACK RECORD:
               {/* Service 5 */}
               <div className="p-4 rounded-xl bg-[#070709] border border-white/10 space-y-2 print:border-gray-300 print:bg-gray-50">
                 <div className="flex items-center gap-2 text-white font-bold print:text-black">
-                  <PenTool className="w-4 h-4 text-[#39FF14] print:text-green-700 shrink-0" />
+                  <PenTool className="w-4 h-4 print:text-green-700 shrink-0" style={{ color: primary }} />
                   <span>Graphic Design & Branding</span>
                 </div>
                 <ul className="text-gray-400 space-y-1 pl-4 list-disc text-[11px] leading-relaxed print:text-gray-700">
@@ -181,7 +213,7 @@ COMPANY TRACK RECORD:
               {/* Service 6 */}
               <div className="p-4 rounded-xl bg-[#070709] border border-white/10 space-y-2 print:border-gray-300 print:bg-gray-50">
                 <div className="flex items-center gap-2 text-white font-bold print:text-black">
-                  <ShieldCheck className="w-4 h-4 text-[#39FF14] print:text-green-700 shrink-0" />
+                  <ShieldCheck className="w-4 h-4 print:text-green-700 shrink-0" style={{ color: primary }} />
                   <span>AMC & 24/7 Support Services</span>
                 </div>
                 <ul className="text-gray-400 space-y-1 pl-4 list-disc text-[11px] leading-relaxed print:text-gray-700">
@@ -197,7 +229,10 @@ COMPANY TRACK RECORD:
 
           {/* Delivery Methodology & Engagement Models */}
           <div className="space-y-3 pt-2">
-            <h2 className="text-xs font-mono font-bold text-[#39FF14] uppercase tracking-wider flex items-center gap-2 print:text-green-800">
+            <h2
+              className="text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2 print:text-green-800"
+              style={{ color: primary }}
+            >
               <Layers className="w-4 h-4 print:text-green-800" /> Enterprise Engagement Models
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
@@ -225,7 +260,7 @@ COMPANY TRACK RECORD:
           {/* Key Metrics & Verified Guarantee */}
           <div className="border-t border-white/10 pt-4 print:border-gray-300 print:pt-3 flex flex-wrap items-center justify-between gap-3 text-[11px] font-mono text-gray-400 print:text-gray-700">
             <div className="flex items-center gap-2 text-white print:text-black font-bold">
-              <CheckCircle className="w-4 h-4 text-[#39FF14] print:text-green-700" />
+              <CheckCircle className="w-4 h-4 print:text-green-700" style={{ color: primary }} />
               <span>50+ Global Enterprise Deployments</span>
             </div>
             <div>• 99.9% Uptime SLA Commitment</div>
@@ -240,7 +275,7 @@ COMPANY TRACK RECORD:
             onClick={handleCopyResume}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:text-white text-xs font-semibold cursor-pointer"
           >
-            <Copy className="w-4 h-4 text-[#39FF14]" />
+            <Copy className="w-4 h-4" style={{ color: primary }} />
             <span>Copy Text Summary</span>
           </button>
 
@@ -255,7 +290,11 @@ COMPANY TRACK RECORD:
 
             <button
               onClick={handlePrint}
-              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-[#39FF14] text-black text-xs font-bold shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:bg-[#45ff24] cursor-pointer"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-black text-xs font-bold cursor-pointer transition-all"
+              style={{
+                backgroundColor: primary,
+                boxShadow: `0 0 20px rgba(${rgb}, 0.45)`,
+              }}
             >
               <Download className="w-4 h-4" />
               <span>Download PDF</span>

@@ -15,6 +15,8 @@ import { ContactPage } from './pages/ContactPage';
 import { GravityCursor } from './components/gravity/GravityCursor';
 import { SmoothScroll } from './components/gravity/SmoothScroll';
 import { CyberDoorTransition } from './components/gravity/CyberDoorTransition';
+import { CyberDoorProvider } from './context/CyberDoorContext';
+import { CyberAudioControlWidget } from './components/gravity/CyberAudioControlWidget';
 
 export function App() {
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
@@ -39,80 +41,85 @@ export function App() {
 
   return (
     <SmoothScroll>
-      <div className="bg-[#050505] text-white min-h-screen font-sans selection:bg-[#39FF14] selection:text-black flex flex-col justify-between">
-        {/* Custom Magnetic Gravity Cursor */}
-        <GravityCursor />
+      <CyberDoorProvider>
+        <div className="bg-[#050505] text-white min-h-screen font-sans selection:bg-[var(--cyber-primary)] selection:text-black flex flex-col justify-between">
+          {/* Custom Magnetic Gravity Cursor */}
+          <GravityCursor />
 
-        {/* Sticky Navbar */}
-        <Navbar onOpenContact={() => handleOpenContact()} />
+          {/* Sticky Navbar */}
+          <Navbar onOpenContact={() => handleOpenContact()} />
 
-        {/* Main Content Views with React Router */}
-        <main className="flex-grow">
-          <CyberDoorTransition>
-            {(displayLocation) => (
-              <Routes location={displayLocation}>
-                <Route
-                  path="/"
-                  element={
-                    <HomePage
-                      onOpenContact={handleOpenContact}
-                      onOpenResume={() => setResumeModalOpen(true)}
-                      onFormSubmitted={handleFormSubmitted}
-                    />
-                  }
-                />
-                <Route
-                  path="/about"
-                  element={<AboutPage onOpenContact={() => handleOpenContact()} />}
-                />
-                <Route
-                  path="/services"
-                  element={<ServicesPage onOpenContact={handleOpenContact} />}
-                />
-                <Route
-                  path="/skills"
-                  element={<SkillsPage onOpenContact={() => handleOpenContact()} />}
-                />
-                <Route
-                  path="/projects"
-                  element={<ProjectsPage onOpenContact={handleOpenContact} />}
-                />
-                <Route
-                  path="/experience"
-                  // element={<ExperiencePage onOpenContact={() => handleOpenContact()} />}
-                />
-                <Route
-                  path="/contact"
-                  element={
-                    <ContactPage
-                      selectedService={selectedService}
-                      onSubmitted={handleFormSubmitted}
-                    />
-                  }
-                />
-              </Routes>
-            )}
-          </CyberDoorTransition>
-        </main>
+          {/* Main Content Views with React Router */}
+          <main className="flex-grow">
+            <CyberDoorTransition>
+              {(displayLocation) => (
+                <Routes location={displayLocation}>
+                  <Route
+                    path="/"
+                    element={
+                      <HomePage
+                        onOpenContact={handleOpenContact}
+                        onOpenResume={() => setResumeModalOpen(true)}
+                        onFormSubmitted={handleFormSubmitted}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/about"
+                    element={<AboutPage onOpenContact={() => handleOpenContact()} />}
+                  />
+                  <Route
+                    path="/services"
+                    element={<ServicesPage onOpenContact={handleOpenContact} />}
+                  />
+                  <Route
+                    path="/skills"
+                    element={<SkillsPage onOpenContact={() => handleOpenContact()} />}
+                  />
+                  <Route
+                    path="/projects"
+                    element={<ProjectsPage onOpenContact={handleOpenContact} />}
+                  />
+                  <Route
+                    path="/experience"
+                    // element={<ExperiencePage onOpenContact={() => handleOpenContact()} />}
+                  />
+                  <Route
+                    path="/contact"
+                    element={
+                      <ContactPage
+                        selectedService={selectedService}
+                        onSubmitted={handleFormSubmitted}
+                      />
+                    }
+                  />
+                </Routes>
+              )}
+            </CyberDoorTransition>
+          </main>
 
-      {/* Footer */}
-      <Footer />
+          {/* Footer */}
+          <Footer />
 
-      {/* Interactive Resume View/Download Modal */}
-      <ResumeModal
-        isOpen={resumeModalOpen}
-        onClose={() => setResumeModalOpen(false)}
-        onCopySuccess={handleResumeCopySuccess}
-      />
+          {/* Floating Cyber Audio & FX Control Widget */}
+          <CyberAudioControlWidget />
 
-      {/* Toast Notification Container */}
-      {toastMessage && (
-        <Toast
-          message={toastMessage}
-          onClose={() => setToastMessage(null)}
-        />
-      )}
-    </div>
+          {/* Interactive Resume View/Download Modal */}
+          <ResumeModal
+            isOpen={resumeModalOpen}
+            onClose={() => setResumeModalOpen(false)}
+            onCopySuccess={handleResumeCopySuccess}
+          />
+
+          {/* Toast Notification Container */}
+          {toastMessage && (
+            <Toast
+              message={toastMessage}
+              onClose={() => setToastMessage(null)}
+            />
+          )}
+        </div>
+      </CyberDoorProvider>
     </SmoothScroll>
   );
 }

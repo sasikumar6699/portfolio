@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FAQS } from '../data/portfolioData';
 import { Terminal, Crosshair } from 'lucide-react';
+import { useCyberDoor } from '../context/CyberDoorContext';
 
 export const FAQ: React.FC = () => {
+  const { currentTheme } = useCyberDoor();
+  const { primary, secondary, rgb } = currentTheme;
+
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleFaq = (index: number) => {
@@ -13,21 +17,37 @@ export const FAQ: React.FC = () => {
   return (
     <section className="py-6 sm:py-10 bg-[#050505] relative overflow-hidden border-t border-white/5 select-none">
       {/* Backdrop Glow */}
-      <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#39FF14]/5 rounded-full blur-[160px] pointer-events-none" />
+      <div
+        className="absolute bottom-10 left-10 w-96 h-96 rounded-full blur-[160px] pointer-events-none transition-colors duration-700"
+        style={{ backgroundColor: `rgba(${rgb}, 0.08)` }}
+      />
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-6 space-y-2 sm:space-y-2.5">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 text-xs font-mono text-[#39FF14] shadow-[0_0_15px_rgba(57,255,20,0.15)]">
+          <div
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0D0D0D] border text-xs font-mono transition-colors"
+            style={{
+              borderColor: `rgba(${rgb}, 0.4)`,
+              color: secondary,
+              boxShadow: `0 0 15px rgba(${rgb}, 0.15)`,
+            }}
+          >
             <Terminal className="w-3.5 h-3.5 animate-pulse" />
             <span>CIRCUIT DECRYPTION // ARCHITECTURAL Q&A</span>
           </div>
 
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Frequently Asked{' '}
-            <span className="text-[#39FF14] inline-block neon-glow-text">
+            <span
+              className="inline-block transition-colors"
+              style={{
+                color: primary,
+                textShadow: `0 0 20px rgba(${rgb}, 0.4)`,
+              }}
+            >
               Questions
             </span>
           </h2>
@@ -44,17 +64,22 @@ export const FAQ: React.FC = () => {
             return (
               <div
                 key={idx}
-                className={`relative rounded-2xl border transition-all duration-300 overflow-hidden ${
-                  isOpen
-                    ? 'bg-[#0D0D0D] border-[#39FF14] shadow-[0_0_30px_rgba(57,255,20,0.18)]'
-                    : 'bg-[#0D0D0D]/70 border-white/10 hover:border-white/25'
-                }`}
+                className="relative rounded-2xl border transition-all duration-300 overflow-hidden"
+                style={{
+                  backgroundColor: isOpen ? '#0D0D0D' : 'rgba(13, 13, 13, 0.7)',
+                  borderColor: isOpen ? primary : 'rgba(255, 255, 255, 0.1)',
+                  boxShadow: isOpen ? `0 0 30px rgba(${rgb}, 0.2)` : 'none',
+                }}
               >
-                {/* =========================================================================
-                    ANIME EFFECT 1: CYBER CIRCUIT TRACE RUNNER ALONG LEFT EDGE
-                    ========================================================================= */}
+                {/* CYBER CIRCUIT TRACE RUNNER ALONG LEFT EDGE */}
                 {isOpen && (
-                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#39FF14] via-[#9eff7a] to-[#39FF14] shadow-[0_0_12px_#39FF14]">
+                  <div
+                    className="absolute left-0 top-0 bottom-0 w-1.5"
+                    style={{
+                      background: `linear-gradient(to bottom, ${primary}, ${secondary}, ${primary})`,
+                      boxShadow: `0 0 12px ${primary}`,
+                    }}
+                  >
                     {/* Animated Circuit Energy Packet */}
                     <div className="absolute left-0 w-full h-8 bg-white shadow-[0_0_15px_#ffffff] rounded-full animate-circuit-packet" />
                   </div>
@@ -67,40 +92,55 @@ export const FAQ: React.FC = () => {
                 >
                   <div className="flex items-start gap-2.5 sm:gap-4">
                     {/* System Query Badge */}
-                    <span className="text-[9.5px] sm:text-[10px] font-mono text-[#39FF14] px-1.5 sm:px-2 py-0.5 rounded bg-[#39FF14]/10 border border-[#39FF14]/30 shrink-0 mt-0.5">
+                    <span
+                      className="text-[9.5px] sm:text-[10px] font-mono px-1.5 sm:px-2 py-0.5 rounded border shrink-0 mt-0.5 transition-colors"
+                      style={{
+                        backgroundColor: `rgba(${rgb}, 0.12)`,
+                        borderColor: `rgba(${rgb}, 0.35)`,
+                        color: primary,
+                      }}
+                    >
                       SYS // 0{idx + 1}
                     </span>
 
                     <div>
-                      <span className="text-sm sm:text-lg font-bold text-white group-hover:text-[#39FF14] transition-colors block leading-snug">
+                      <span className="text-sm sm:text-lg font-bold text-white group-hover:text-white transition-colors block leading-snug">
                         {faq.question}
                       </span>
                       {isOpen && (
-                        <span className="text-[9.5px] sm:text-[10px] font-mono text-[#39FF14]/80 mt-1 block flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#39FF14] animate-ping" />
+                        <span className="text-[9.5px] sm:text-[10px] font-mono mt-1 block flex items-center gap-1.5" style={{ color: secondary }}>
+                          <span className="w-1.5 h-1.5 rounded-full animate-ping" style={{ backgroundColor: primary }} />
                           <span>[STATUS: DECRYPTED & RESOLVED]</span>
                         </span>
                       )}
                     </div>
                   </div>
 
-                  {/* =========================================================================
-                      ANIME EFFECT 2: MECHA APERTURE CROSSHAIR TOGGLE (+ to × rotation)
-                      ========================================================================= */}
+                  {/* MECHA APERTURE CROSSHAIR TOGGLE */}
                   <div 
                     className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl border flex items-center justify-center transition-all duration-300 shrink-0 ${
-                      isOpen
-                        ? 'border-[#39FF14] bg-[#39FF14]/15 text-[#39FF14] shadow-[0_0_15px_rgba(57,255,20,0.4)] rotate-45'
-                        : 'border-white/10 bg-[#050505] text-gray-400 group-hover:border-white/30 group-hover:text-white'
+                      isOpen ? 'rotate-45' : 'group-hover:border-white/30 group-hover:text-white'
                     }`}
+                    style={
+                      isOpen
+                        ? {
+                            borderColor: primary,
+                            backgroundColor: `rgba(${rgb}, 0.15)`,
+                            color: primary,
+                            boxShadow: `0 0 15px rgba(${rgb}, 0.4)`,
+                          }
+                        : {
+                            borderColor: 'rgba(255, 255, 255, 0.1)',
+                            backgroundColor: '#050505',
+                            color: '#9ca3af',
+                          }
+                    }
                   >
                     <Crosshair className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
                 </button>
 
-                {/* =========================================================================
-                    ANIME EFFECT 3: HOLOGRAPHIC SCANLINE DATA STREAM ANSWER REVEAL
-                    ========================================================================= */}
+                {/* HOLOGRAPHIC SCANLINE DATA STREAM ANSWER REVEAL */}
                 <AnimatePresence>
                   {isOpen && (
                     <motion.div
@@ -113,7 +153,7 @@ export const FAQ: React.FC = () => {
                       <div className="px-4 sm:px-6 pb-5 sm:pb-6 pt-2 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-white/5 pl-4 sm:pl-16 relative">
                         {/* Terminal Prompt Indicator */}
                         <div className="flex items-center gap-2 text-[9.5px] sm:text-[10px] font-mono text-gray-500 mb-2">
-                          <span className="text-[#39FF14]">&gt;&gt;</span>
+                          <span style={{ color: primary }}>&gt;&gt;</span>
                           <span className="tracking-widest uppercase">DATA_PAYLOAD_OUTPUT:</span>
                         </div>
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, CheckCircle, Cpu, ArrowUpRight, ShieldCheck, Terminal } from 'lucide-react';
 import { Project } from '../types/portfolio';
+import { useCyberDoor } from '../context/CyberDoorContext';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -9,16 +10,31 @@ interface ProjectModalProps {
 }
 
 export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, onInquire }) => {
+  const { currentTheme } = useCyberDoor();
+  const { primary, secondary, rgb } = currentTheme;
+
   if (!project) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-black/80 backdrop-blur-md animate-fade-in overflow-y-auto">
-      <div className="relative w-full max-w-4xl bg-[#0D0D0D] border border-[#39FF14]/40 rounded-2xl shadow-[0_0_50px_rgba(57,255,20,0.25)] overflow-hidden my-auto max-h-[90vh] flex flex-col">
-        
+      <div
+        className="relative w-full max-w-4xl bg-[#0D0D0D] border rounded-2xl overflow-hidden my-auto max-h-[90vh] flex flex-col transition-all duration-300"
+        style={{
+          borderColor: `rgba(${rgb}, 0.4)`,
+          boxShadow: `0 0 50px rgba(${rgb}, 0.25)`,
+        }}
+      >
         {/* Header Bar */}
         <div className="px-6 py-4 bg-[#050505] border-b border-white/10 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
-            <span className="px-3 py-1 rounded-full bg-[#39FF14]/10 border border-[#39FF14]/30 text-xs font-mono text-[#39FF14]">
+            <span
+              className="px-3 py-1 rounded-full border text-xs font-mono"
+              style={{
+                backgroundColor: `rgba(${rgb}, 0.1)`,
+                borderColor: `rgba(${rgb}, 0.35)`,
+                color: primary,
+              }}
+            >
               {project.category} CASE STUDY
             </span>
             <span className="text-xs font-mono text-gray-400 hidden sm:inline-block">ID: {project.id}</span>
@@ -46,8 +62,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, on
 
           {/* Visual Graphic Banner */}
           <div className={`w-full h-48 sm:h-64 rounded-xl bg-gradient-to-br ${project.gradientFrom} border border-white/10 p-6 flex flex-col justify-between relative overflow-hidden`}>
-            <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
-            <div className="relative z-10 flex items-center justify-between text-xs font-mono text-[#39FF14]">
+            <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+            <div className="relative z-10 flex items-center justify-between text-xs font-mono" style={{ color: primary }}>
               <span className="flex items-center gap-2">
                 <Terminal className="w-4 h-4" /> SYSTEM DIAGRAM ARCHITECTURE
               </span>
@@ -55,8 +71,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, on
             </div>
             
             <div className="relative z-10 text-center py-4">
-              <div className="inline-block px-6 py-3 rounded-xl bg-[#050505]/90 border border-[#39FF14]/50 shadow-[0_0_20px_rgba(57,255,20,0.3)]">
-                <span className="text-lg sm:text-xl font-mono font-bold tracking-wider text-[#39FF14]">
+              <div
+                className="inline-block px-6 py-3 rounded-xl bg-[#050505]/90 border"
+                style={{
+                  borderColor: `rgba(${rgb}, 0.5)`,
+                  boxShadow: `0 0 20px rgba(${rgb}, 0.3)`,
+                }}
+              >
+                <span className="text-lg sm:text-xl font-mono font-bold tracking-wider" style={{ color: primary }}>
                   {project.imagePlaceholderText}
                 </span>
               </div>
@@ -71,13 +93,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, on
           {/* Key Deliverables & Features */}
           <div className="space-y-4">
             <h4 className="text-lg font-bold text-white flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-[#39FF14]" />
+              <CheckCircle className="w-5 h-5" style={{ color: primary }} />
               <span>Key Capabilities & Implemented Features</span>
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {project.features.map((feature, idx) => (
                 <div key={idx} className="p-3.5 rounded-xl bg-[#050505] border border-white/10 text-xs sm:text-sm text-gray-300 flex items-start gap-2.5">
-                  <span className="text-[#39FF14] font-mono shrink-0 mt-0.5">➔</span>
+                  <span className="font-mono shrink-0 mt-0.5" style={{ color: primary }}>➔</span>
                   <span>{feature}</span>
                 </div>
               ))}
@@ -88,7 +110,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, on
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             <div className="p-5 rounded-xl bg-[#050505] border border-white/10 space-y-2">
-              <h5 className="text-xs font-mono text-[#39FF14] uppercase tracking-wider flex items-center gap-2">
+              <h5 className="text-xs font-mono uppercase tracking-wider flex items-center gap-2" style={{ color: secondary }}>
                 <Cpu className="w-4 h-4" /> Technical Architecture
               </h5>
               <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
@@ -97,7 +119,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, on
             </div>
 
             <div className="p-5 rounded-xl bg-[#050505] border border-white/10 space-y-2">
-              <h5 className="text-xs font-mono text-[#39FF14] uppercase tracking-wider flex items-center gap-2">
+              <h5 className="text-xs font-mono uppercase tracking-wider flex items-center gap-2" style={{ color: secondary }}>
                 <ShieldCheck className="w-4 h-4" /> Measurable Business Impact
               </h5>
               <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
@@ -114,7 +136,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, on
               {project.technologies.map((tech, idx) => (
                 <span
                   key={idx}
-                  className="px-3 py-1 rounded-lg bg-[#050505] border border-[#39FF14]/30 text-xs font-mono text-[#39FF14]"
+                  className="px-3 py-1 rounded-lg bg-[#050505] border text-xs font-mono"
+                  style={{
+                    borderColor: `rgba(${rgb}, 0.3)`,
+                    color: primary,
+                  }}
                 >
                   {tech}
                 </span>
@@ -141,7 +167,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, on
                 onClose();
                 onInquire(`Custom Build like ${project.title}`);
               }}
-              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-[#39FF14] text-black text-xs font-bold shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:bg-[#45ff24]"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-black text-xs font-bold transition-all"
+              style={{
+                backgroundColor: primary,
+                boxShadow: `0 0 20px rgba(${rgb}, 0.45)`,
+              }}
             >
               <span>Build Similar Solution</span>
               <ArrowUpRight className="w-4 h-4" />

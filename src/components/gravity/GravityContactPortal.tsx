@@ -11,6 +11,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
+import { useCyberDoor } from '../../context/CyberDoorContext';
 
 interface GravityContactPortalProps {
   onOpenContact?: () => void;
@@ -21,6 +22,8 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
   onOpenContact,
   onSubmitted
 }) => {
+  const { currentTheme } = useCyberDoor();
+  const { primary, rgb } = currentTheme;
   const [modalOpen, setModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -68,27 +71,51 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
     >
       {/* Background Precision Wave Contours & Active Gravitational Well */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
-        <div className="w-[1000px] h-[1000px] rounded-full border border-[#39FF14] animate-pulse" />
-        <div className="absolute w-[750px] h-[750px] rounded-full border border-[#39FF14]/60" />
-        <div className="absolute w-[500px] h-[500px] rounded-full border border-[#39FF14]/40" />
-        <div className="absolute w-[300px] h-[300px] rounded-full border border-[#39FF14]/30" />
+        <div className="w-[1000px] h-[1000px] rounded-full border animate-pulse" style={{ borderColor: primary }} />
+        <div className="absolute w-[750px] h-[750px] rounded-full border" style={{ borderColor: `rgba(${rgb}, 0.6)` }} />
+        <div className="absolute w-[500px] h-[500px] rounded-full border" style={{ borderColor: `rgba(${rgb}, 0.4)` }} />
+        <div className="absolute w-[300px] h-[300px] rounded-full border" style={{ borderColor: `rgba(${rgb}, 0.3)` }} />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center z-10">
         
         {/* Animated Gravity Ticker Pulse Line */}
-        <div className="w-[1px] h-8 sm:h-10 bg-gradient-to-b from-transparent via-[#39FF14] to-[#39FF14] mb-3 relative">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#39FF14] shadow-[0_0_12px_#39FF14] animate-gravity-ticker" />
+        <div
+          className="w-[1px] h-8 sm:h-10 mb-3 relative"
+          style={{
+            background: `linear-gradient(to bottom, transparent, ${primary}, ${primary})`
+          }}
+        >
+          <div
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full animate-gravity-ticker"
+            style={{
+              backgroundColor: primary,
+              boxShadow: `0 0 12px ${primary}`
+            }}
+          />
         </div>
 
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 text-xs font-mono text-[#39FF14] mb-3 sm:mb-4 shadow-[0_0_15px_rgba(57,255,20,0.15)]">
+        <div
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0D0D0D] border text-xs font-mono mb-3 sm:mb-4 transition-colors"
+          style={{
+            borderColor: `${primary}50`,
+            color: primary,
+            boxShadow: `0 0 15px rgba(${rgb}, 0.15)`
+          }}
+        >
           <Sparkles className="w-3.5 h-3.5" />
           <span>INNOVATIVE 3D GYROSCOPIC GRAVITY PORTAL</span>
         </div>
 
         <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-2 sm:mb-3">
           Initiate Your{' '}
-          <span className="text-[#39FF14] inline-block neon-glow-text">
+          <span
+            className="inline-block transition-colors duration-500"
+            style={{
+              color: primary,
+              textShadow: `0 0 20px rgba(${rgb}, 0.5)`
+            }}
+          >
             Digital Transformation
           </span>
         </h2>
@@ -104,7 +131,11 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
           
           {/* Active 3D Gyroscopic Gimbal Ring 1 */}
           <div 
-            className="absolute w-[240px] h-[240px] sm:w-[380px] sm:h-[380px] rounded-full border-2 border-[#39FF14]/60 pointer-events-none shadow-[0_0_30px_rgba(57,255,20,0.25)] animate-gyro-ring-1" 
+            className="absolute w-[240px] h-[240px] sm:w-[380px] sm:h-[380px] rounded-full border-2 pointer-events-none animate-gyro-ring-1"
+            style={{
+              borderColor: `rgba(${rgb}, 0.6)`,
+              boxShadow: `0 0 30px rgba(${rgb}, 0.25)`
+            }}
           />
 
           {/* Active 3D Gyroscopic Gimbal Ring 2 */}
@@ -114,10 +145,19 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
 
           {/* Active 3D Gyroscopic Gimbal Ring 3 */}
           <div 
-            className="absolute w-[310px] h-[310px] sm:w-[470px] sm:h-[470px] rounded-full border border-[#39FF14]/30 pointer-events-none animate-orbit-spin"
-            style={{ '--orbit-dur': '20s' } as React.CSSProperties}
+            className="absolute w-[310px] h-[310px] sm:w-[470px] sm:h-[470px] rounded-full border pointer-events-none animate-orbit-spin"
+            style={{
+              borderColor: `rgba(${rgb}, 0.3)`,
+              '--orbit-dur': '20s'
+            } as React.CSSProperties}
           >
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#39FF14] shadow-[0_0_15px_#39FF14]" />
+            <div
+              className="absolute top-0 left-1/2 -translate-x-1/2 w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full"
+              style={{
+                backgroundColor: primary,
+                boxShadow: `0 0 15px ${primary}`
+              }}
+            />
           </div>
 
           {/* Orbiting Satellite Nodes */}
@@ -125,18 +165,35 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
             className="absolute w-[240px] h-[240px] sm:w-[340px] sm:h-[340px] rounded-full pointer-events-none animate-orbit-counter"
             style={{ '--orbit-dur': '16s' } as React.CSSProperties}
           >
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 p-1.5 sm:p-2 rounded-full bg-[#0D0D0D] border border-[#39FF14] shadow-[0_0_15px_rgba(57,255,20,0.5)]">
-              <Mail className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#39FF14]" />
+            <div
+              className="absolute -top-3 left-1/2 -translate-x-1/2 p-1.5 sm:p-2 rounded-full bg-[#0D0D0D] border"
+              style={{
+                borderColor: primary,
+                boxShadow: `0 0 15px rgba(${rgb}, 0.5)`
+              }}
+            >
+              <Mail className="w-3 sm:w-3.5 h-3 sm:h-3.5" style={{ color: primary }} />
             </div>
-            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 p-1.5 sm:p-2 rounded-full bg-[#0D0D0D] border border-[#39FF14] shadow-[0_0_15px_rgba(57,255,20,0.5)]">
-              <Phone className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#39FF14]" />
+            <div
+              className="absolute -bottom-3 left-1/2 -translate-x-1/2 p-1.5 sm:p-2 rounded-full bg-[#0D0D0D] border"
+              style={{
+                borderColor: primary,
+                boxShadow: `0 0 15px rgba(${rgb}, 0.5)`
+              }}
+            >
+              <Phone className="w-3 sm:w-3.5 h-3 sm:h-3.5" style={{ color: primary }} />
             </div>
           </div>
 
           {/* Core Interactive Gravitational Sphere */}
           <button
             onClick={handleLaunchInquiry}
-            className="relative z-10 w-44 h-44 sm:w-60 sm:h-60 rounded-full bg-[#39FF14] text-black font-extrabold flex flex-col items-center justify-center p-4 sm:p-6 text-center shadow-[0_0_50px_rgba(57,255,20,0.6)] sm:shadow-[0_0_70px_rgba(57,255,20,0.7)] hover:shadow-[0_0_110px_rgba(57,255,20,1)] transform hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group"
+            className="relative z-10 w-44 h-44 sm:w-60 sm:h-60 rounded-full font-extrabold flex flex-col items-center justify-center p-4 sm:p-6 text-center transform hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group"
+            style={{
+              backgroundColor: primary,
+              color: '#000000',
+              boxShadow: `0 0 50px rgba(${rgb}, 0.6)`
+            }}
           >
             <span className="text-[9.5px] sm:text-[11px] font-mono tracking-widest uppercase opacity-85 mb-0.5 sm:mb-1 group-hover:tracking-[0.2em] transition-all">
               CLICK TO LAUNCH
@@ -159,23 +216,43 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
           {/* 1. EMAIL - ANIME ENERGY HYPERLINK */}
           <a
             href={`mailto:${PERSONAL_INFO.email}`}
-            className="relative overflow-hidden group p-4 sm:p-6 rounded-2xl bg-[#0D0D0D] border border-[#39FF14]/30 hover:border-[#39FF14] transition-all duration-300 hover:shadow-[0_0_35px_rgba(57,255,20,0.5)] transform hover:-translate-y-1 text-left flex flex-col justify-between min-h-[135px] sm:min-h-[145px] cursor-pointer"
+            className="relative overflow-hidden group p-4 sm:p-6 rounded-2xl bg-[#0D0D0D] border transition-all duration-300 transform hover:-translate-y-1 text-left flex flex-col justify-between min-h-[135px] sm:min-h-[145px] cursor-pointer"
+            style={{ borderColor: `rgba(${rgb}, 0.3)` }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = primary;
+              e.currentTarget.style.boxShadow = `0 0 35px rgba(${rgb}, 0.5)`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = `rgba(${rgb}, 0.3)`;
+              e.currentTarget.style.boxShadow = 'none';
+            }}
           >
             {/* Anime Diagonal Laser Sweep Glow Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#39FF14]/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
+            <div
+              className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none"
+              style={{
+                background: `linear-gradient(to right, transparent, rgba(${rgb}, 0.2), transparent)`
+              }}
+            />
             
             <div className="flex items-center justify-between mb-3 sm:mb-4">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#050505] border border-[#39FF14]/40 flex items-center justify-center text-[#39FF14] group-hover:scale-110 group-hover:shadow-[0_0_20px_#39FF14] transition-all shrink-0">
+              <div
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#050505] border flex items-center justify-center transition-all shrink-0"
+                style={{
+                  borderColor: `${primary}60`,
+                  color: primary
+                }}
+              >
                 <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-500 group-hover:text-[#39FF14] transition-colors" />
+              <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-500 transition-colors" />
             </div>
 
             <div>
               <span className="text-[9.5px] sm:text-[10px] text-gray-400 block uppercase tracking-wider font-semibold mb-1">
                 PRIMARY EMAIL
               </span>
-              <span className="text-xs sm:text-[13px] font-bold text-white group-hover:text-[#39FF14] transition-colors break-all block leading-relaxed">
+              <span className="text-xs sm:text-[13px] font-bold text-white break-all block leading-relaxed">
                 {PERSONAL_INFO.email}
               </span>
             </div>
@@ -186,22 +263,42 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
             href={PERSONAL_INFO.socials.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative overflow-hidden group p-4 sm:p-6 rounded-2xl bg-[#0D0D0D] border border-[#39FF14]/30 hover:border-[#39FF14] transition-all duration-300 hover:shadow-[0_0_35px_rgba(57,255,20,0.5)] transform hover:-translate-y-1 text-left flex flex-col justify-between min-h-[135px] sm:min-h-[145px] cursor-pointer"
+            className="relative overflow-hidden group p-4 sm:p-6 rounded-2xl bg-[#0D0D0D] border transition-all duration-300 transform hover:-translate-y-1 text-left flex flex-col justify-between min-h-[135px] sm:min-h-[145px] cursor-pointer"
+            style={{ borderColor: `rgba(${rgb}, 0.3)` }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = primary;
+              e.currentTarget.style.boxShadow = `0 0 35px rgba(${rgb}, 0.5)`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = `rgba(${rgb}, 0.3)`;
+              e.currentTarget.style.boxShadow = 'none';
+            }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#39FF14]/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
+            <div
+              className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none"
+              style={{
+                background: `linear-gradient(to right, transparent, rgba(${rgb}, 0.2), transparent)`
+              }}
+            />
             
             <div className="flex items-center justify-between mb-3 sm:mb-4">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#050505] border border-[#39FF14]/40 flex items-center justify-center text-[#39FF14] group-hover:scale-110 group-hover:shadow-[0_0_20px_#39FF14] transition-all shrink-0">
+              <div
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#050505] border flex items-center justify-center transition-all shrink-0"
+                style={{
+                  borderColor: `${primary}60`,
+                  color: primary
+                }}
+              >
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-500 group-hover:text-[#39FF14] transition-colors" />
+              <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-500 transition-colors" />
             </div>
 
             <div>
               <span className="text-[9.5px] sm:text-[10px] text-gray-400 block uppercase tracking-wider font-semibold mb-1">
                 WHATSAPP / PHONE
               </span>
-              <span className="text-xs sm:text-[13px] font-bold text-white group-hover:text-[#39FF14] transition-colors break-all block leading-relaxed">
+              <span className="text-xs sm:text-[13px] font-bold text-white break-all block leading-relaxed">
                 {PERSONAL_INFO.Mobile.split(',')[0]}
               </span>
             </div>
@@ -212,22 +309,42 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
             href={PERSONAL_INFO.socials.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative overflow-hidden group p-4 sm:p-6 rounded-2xl bg-[#0D0D0D] border border-[#39FF14]/30 hover:border-[#39FF14] transition-all duration-300 hover:shadow-[0_0_35px_rgba(57,255,20,0.5)] transform hover:-translate-y-1 text-left flex flex-col justify-between min-h-[135px] sm:min-h-[145px] cursor-pointer"
+            className="relative overflow-hidden group p-4 sm:p-6 rounded-2xl bg-[#0D0D0D] border transition-all duration-300 transform hover:-translate-y-1 text-left flex flex-col justify-between min-h-[135px] sm:min-h-[145px] cursor-pointer"
+            style={{ borderColor: `rgba(${rgb}, 0.3)` }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = primary;
+              e.currentTarget.style.boxShadow = `0 0 35px rgba(${rgb}, 0.5)`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = `rgba(${rgb}, 0.3)`;
+              e.currentTarget.style.boxShadow = 'none';
+            }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#39FF14]/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
+            <div
+              className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none"
+              style={{
+                background: `linear-gradient(to right, transparent, rgba(${rgb}, 0.2), transparent)`
+              }}
+            />
             
             <div className="flex items-center justify-between mb-3 sm:mb-4">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#050505] border border-[#39FF14]/40 flex items-center justify-center text-[#39FF14] group-hover:scale-110 group-hover:shadow-[0_0_20px_#39FF14] transition-all shrink-0">
+              <div
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#050505] border flex items-center justify-center transition-all shrink-0"
+                style={{
+                  borderColor: `${primary}60`,
+                  color: primary
+                }}
+              >
                 <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-500 group-hover:text-[#39FF14] transition-colors" />
+              <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-500 transition-colors" />
             </div>
 
             <div>
               <span className="text-[9.5px] sm:text-[10px] text-gray-400 block uppercase tracking-wider font-semibold mb-1">
                 LINKEDIN PROFILE
               </span>
-              <span className="text-xs sm:text-[13px] font-bold text-white group-hover:text-[#39FF14] transition-colors break-all block leading-relaxed">
+              <span className="text-xs sm:text-[13px] font-bold text-white break-all block leading-relaxed">
                 {PERSONAL_INFO.socials.linkedin.replace(/^https?:\/\//, '')}
               </span>
             </div>
@@ -238,7 +355,17 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
         <div className="pt-6 sm:pt-8">
           <button
             onClick={scrollToTop}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 hover:border-[#39FF14] text-xs font-mono text-gray-400 hover:text-[#39FF14] transition-all bg-[#0D0D0D]/80 hover:shadow-[0_0_20px_rgba(57,255,20,0.3)]"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 text-xs font-mono text-gray-400 transition-all bg-[#0D0D0D]/80 cursor-pointer"
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = primary;
+              e.currentTarget.style.color = primary;
+              e.currentTarget.style.boxShadow = `0 0 20px rgba(${rgb}, 0.3)`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+              e.currentTarget.style.color = '#9ca3af';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
           >
             <ArrowUp className="w-3.5 h-3.5" />
             <span>BACK TO TOP</span>
@@ -250,7 +377,13 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
       {/* Direct Inquiry Modal */}
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl">
-          <div className="relative w-full max-w-lg rounded-3xl bg-[#0D0D0D] border border-[#39FF14]/50 p-6 sm:p-8 shadow-[0_0_60px_rgba(57,255,20,0.3)]">
+          <div
+            className="relative w-full max-w-lg rounded-3xl bg-[#0D0D0D] border p-6 sm:p-8 transition-all"
+            style={{
+              borderColor: `${primary}80`,
+              boxShadow: `0 0 60px rgba(${rgb}, 0.3)`
+            }}
+          >
             
             <button
               onClick={() => setModalOpen(false)}
@@ -261,7 +394,15 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
 
             {submitSuccess ? (
               <div className="py-12 text-center space-y-4">
-                <div className="w-16 h-16 rounded-full bg-[#39FF14]/20 border border-[#39FF14] flex items-center justify-center text-[#39FF14] mx-auto shadow-[0_0_25px_rgba(57,255,20,0.5)]">
+                <div
+                  className="w-16 h-16 rounded-full border flex items-center justify-center mx-auto"
+                  style={{
+                    backgroundColor: `rgba(${rgb}, 0.2)`,
+                    borderColor: primary,
+                    color: primary,
+                    boxShadow: `0 0 25px rgba(${rgb}, 0.5)`
+                  }}
+                >
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
                 <h3 className="text-2xl font-bold text-white">Inquiry Launched!</h3>
@@ -272,7 +413,10 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4 text-left">
                 <div>
-                  <span className="text-[10px] font-mono tracking-widest text-[#39FF14] uppercase block">
+                  <span
+                    className="text-[10px] font-mono tracking-widest uppercase block"
+                    style={{ color: primary }}
+                  >
                     DIRECT INQUIRY // ZERO LATENCY
                   </span>
                   <h3 className="text-2xl font-bold text-white mt-1">
@@ -288,7 +432,9 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. John Doe / Business Name"
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#050505] border border-white/15 focus:border-[#39FF14] text-white text-sm focus:outline-none"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#050505] border border-white/15 text-white text-sm focus:outline-none"
+                    onFocus={(e) => { e.currentTarget.style.borderColor = primary; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)'; }}
                   />
                 </div>
 
@@ -300,7 +446,9 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="john@company.com"
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#050505] border border-white/15 focus:border-[#39FF14] text-white text-sm focus:outline-none"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#050505] border border-white/15 text-white text-sm focus:outline-none"
+                    onFocus={(e) => { e.currentTarget.style.borderColor = primary; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)'; }}
                   />
                 </div>
 
@@ -309,7 +457,9 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
                   <select
                     value={formData.service}
                     onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#050505] border border-white/15 focus:border-[#39FF14] text-white text-sm focus:outline-none"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#050505] border border-white/15 text-white text-sm focus:outline-none"
+                    onFocus={(e) => { e.currentTarget.style.borderColor = primary; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)'; }}
                   >
                     <option value="ERP, CRM, HCM & Business Solutions">ERP, CRM, HCM & Business Solutions (ERPNext, Custom CRM, HCM)</option>
                     <option value="Custom Software Solutions">Custom Software Solutions (Billing, Inventory, Fleet & Logistics Software)</option>
@@ -328,14 +478,21 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Describe your goals, requirements, or timeframe..."
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#050505] border border-white/15 focus:border-[#39FF14] text-white text-sm focus:outline-none resize-none"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#050505] border border-white/15 text-white text-sm focus:outline-none resize-none"
+                    onFocus={(e) => { e.currentTarget.style.borderColor = primary; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)'; }}
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 rounded-xl bg-[#39FF14] text-black font-bold text-xs uppercase tracking-wider hover:bg-[#45ff24] shadow-[0_0_25px_rgba(57,255,20,0.5)] transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  style={{
+                    backgroundColor: primary,
+                    color: '#000000',
+                    boxShadow: `0 0 25px rgba(${rgb}, 0.5)`
+                  }}
                 >
                   {isSubmitting ? (
                     <span>Launching Inquiry...</span>

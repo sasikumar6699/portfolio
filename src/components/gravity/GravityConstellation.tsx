@@ -12,12 +12,15 @@ import {
   ShieldCheck 
 } from 'lucide-react';
 import { SERVICES } from '../../data/portfolioData';
+import { useCyberDoor } from '../../context/CyberDoorContext';
 
 interface GravityConstellationProps {
   onSelectService: (serviceTitle: string) => void;
 }
 
 export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSelectService }) => {
+  const { currentTheme } = useCyberDoor();
+  const { primary, secondary, rgb } = currentTheme;
   const [selectedServiceIndex, setSelectedServiceIndex] = useState(0);
 
   // 6 Planetary nodes directly tied to the service cards and their core deliverables
@@ -105,7 +108,10 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
     >
       {/* Background Ambience */}
       <div className="absolute inset-0 bg-grid-pattern opacity-15 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#39FF14]/5 rounded-full blur-[200px] pointer-events-none" />
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-[200px] pointer-events-none transition-colors duration-700"
+        style={{ backgroundColor: `rgba(${rgb}, 0.05)` }}
+      />
 
       {/* Twinkling Background Cosmos Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -122,9 +128,11 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
             style={{
               left: star.x,
               top: star.y,
-              animationDelay: star.d
+              animationDelay: star.d,
+              backgroundColor: primary,
+              boxShadow: `0 0 10px ${primary}`,
             }}
-            className="absolute w-1.5 h-1.5 rounded-full bg-[#39FF14] shadow-[0_0_10px_#39FF14] animate-pulse"
+            className="absolute w-1.5 h-1.5 rounded-full animate-pulse"
           />
         ))}
       </div>
@@ -133,13 +141,25 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
         
         {/* Section Header */}
         <div className="mb-4 sm:mb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 text-xs font-mono text-[#39FF14] mb-2 sm:mb-3">
+          <div
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0D0D0D] border text-xs font-mono mb-2 sm:mb-3"
+            style={{
+              borderColor: `rgba(${rgb}, 0.4)`,
+              color: primary,
+            }}
+          >
             <Layers className="w-3.5 h-3.5" />
             <span>GRAVITATIONAL CONSTELLATION · 3S AUTO-CYCLE</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
             The Multi-Ring{' '}
-            <span className="text-[#39FF14] inline-block neon-glow-text">
+            <span
+              className="inline-block neon-glow-text"
+              style={{
+                color: primary,
+                textShadow: `0 0 20px rgba(${rgb}, 0.4)`,
+              }}
+            >
               Services Ecosystem
             </span>
           </h2>
@@ -184,7 +204,7 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
                     cy="0"
                     r={node.radius}
                     fill="none"
-                    stroke={isSelected ? "#39FF14" : "rgba(57, 255, 20, 0.2)"}
+                    stroke={isSelected ? primary : `rgba(${rgb}, 0.2)`}
                     strokeWidth={isSelected ? "2.5" : "1"}
                     strokeDasharray={isSelected ? "10 5" : (i % 2 === 0 ? "4 8" : "none")}
                     filter={isSelected ? "url(#nodeGlowAll)" : undefined}
@@ -199,7 +219,7 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
                 cx="0"
                 cy="0"
                 r="36"
-                fill="#39FF14"
+                fill={primary}
                 opacity="0.12"
                 filter="url(#nodeGlowAll)"
               />
@@ -208,20 +228,23 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
                 cy="0"
                 r="24"
                 fill="#0D0D0D"
-                stroke="#39FF14"
+                stroke={primary}
                 strokeWidth="2"
               />
               <circle
                 cx="0"
                 cy="0"
                 r="6"
-                fill="#39FF14"
+                fill={primary}
                 className="animate-pulse"
               />
 
               {/* Dynamic Revolving Circular Orbit Text Ring Based on Current Card Content */}
               <g className="animate-orbit-spin" style={{ '--orbit-dur': '45s' } as React.CSSProperties}>
-                <text className="text-[10px] font-mono fill-[#39FF14] tracking-[0.25em] uppercase font-bold">
+                <text
+                  className="text-[10px] font-mono tracking-[0.25em] uppercase font-bold"
+                  fill={primary}
+                >
                   <textPath href="#casesTrackPathAll" startOffset="0%">
                     {activeOrbitTicker}
                   </textPath>
@@ -253,7 +276,7 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
                           cx="0"
                           cy="0"
                           r={isSelected ? "26" : "18"}
-                          fill="#39FF14"
+                          fill={primary}
                           opacity={isSelected ? "0.6" : "0.22"}
                           filter="url(#nodeGlowAll)"
                           className="animate-pulse"
@@ -261,7 +284,7 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
                         />
 
                         {/* Starlight 4-Point Twinkle Cross on all discs */}
-                        <g stroke="#39FF14" strokeWidth="1.2" opacity={isSelected ? "0.9" : "0.45"}>
+                        <g stroke={primary} strokeWidth="1.2" opacity={isSelected ? "0.9" : "0.45"}>
                           <line x1="-18" y1="0" x2="18" y2="0" />
                           <line x1="0" y1="-18" x2="0" y2="18" />
                         </g>
@@ -272,9 +295,9 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
                           cy="0"
                           r={isSelected ? "18" : "14"}
                           fill="#0D0D0D"
-                          stroke={isSelected ? "#39FF14" : "rgba(57, 255, 20, 0.6)"}
+                          stroke={isSelected ? primary : `rgba(${rgb}, 0.6)`}
                           strokeWidth={isSelected ? "2.5" : "1.5"}
-                          className="transition-all duration-300 group-hover:stroke-[#39FF14]"
+                          className="transition-all duration-300"
                         />
 
                         {/* Centered Vector Icon */}
@@ -285,7 +308,7 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
                           height={isSelected ? "18" : "15"} 
                           className="pointer-events-none"
                         >
-                          <IconComp className={`w-full h-full ${isSelected ? 'text-[#39FF14]' : 'text-gray-300'}`} />
+                          <IconComp className="w-full h-full" style={{ color: isSelected ? primary : '#d1d5db' }} />
                         </foreignObject>
 
                         {/* Visible Discipline Label Badge Next to Planetary Disc */}
@@ -297,14 +320,14 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
                             height={isSelected ? "22" : "18"}
                             rx="5"
                             fill="#070709"
-                            stroke={isSelected ? "#39FF14" : "rgba(255, 255, 255, 0.2)"}
+                            stroke={isSelected ? primary : "rgba(255, 255, 255, 0.2)"}
                             strokeWidth={isSelected ? "1.4" : "0.8"}
                             opacity="0.95"
                           />
                           <text
                             x="6"
                             y={isSelected ? "10" : "9"}
-                            fill={isSelected ? "#39FF14" : "#E4E4E7"}
+                            fill={isSelected ? primary : "#E4E4E7"}
                             fontSize={isSelected ? "8.5" : "7.5"}
                             fontFamily="monospace"
                             fontWeight="bold"
@@ -316,7 +339,7 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
                             <text
                               x="6"
                               y="16.5"
-                              fill="#9eff7a"
+                              fill={secondary}
                               fontSize="6"
                               fontFamily="monospace"
                               dominantBaseline="middle"
@@ -332,7 +355,7 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
                             cx={isSelected ? "23" : "18"}
                             cy="0"
                             r="2"
-                            fill="#39FF14"
+                            fill={primary}
                             opacity={isSelected ? "1" : "0.5"}
                           />
                         </g>
@@ -346,7 +369,12 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
             {/* Central Interactive Magnetic Capsule Button */}
             <button
               onClick={() => onSelectService(activeService.title)}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1.5 rounded-full bg-[#39FF14] text-black font-mono font-bold text-[10px] tracking-wider uppercase shadow-[0_0_20px_rgba(57,255,20,0.6)] hover:scale-110 transition-transform flex items-center gap-1.5 z-20 pointer-events-auto cursor-pointer"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1.5 rounded-full font-mono font-bold text-[10px] tracking-wider uppercase hover:scale-110 transition-transform flex items-center gap-1.5 z-20 pointer-events-auto cursor-pointer"
+              style={{
+                backgroundColor: primary,
+                color: '#000000',
+                boxShadow: `0 0 20px rgba(${rgb}, 0.6)`
+              }}
             >
               <span>EXPLORE</span>
               <ArrowRight className="w-3 h-3" />
@@ -359,9 +387,18 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
               <button
                 key={i}
                 onClick={() => setSelectedServiceIndex(i)}
+                style={
+                  selectedServiceIndex === i
+                    ? {
+                        backgroundColor: primary,
+                        color: '#000000',
+                        boxShadow: `0 0 10px ${primary}`
+                      }
+                    : undefined
+                }
                 className={`px-2.5 py-1 rounded-full text-[10px] font-mono transition-all cursor-pointer ${
                   selectedServiceIndex === i
-                    ? 'bg-[#39FF14] text-black font-bold shadow-[0_0_10px_#39FF14]'
+                    ? 'font-bold'
                     : 'bg-[#0D0D0D] border border-white/10 text-gray-300 hover:text-white'
                 }`}
               >
@@ -372,21 +409,29 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
 
           {/* RIGHT: Auto-Cycling Service Card (3-Second Smooth Left-Entrance & Fade Transition) */}
           <div className="lg:col-span-5">
-            <div className="rounded-2xl bg-[#0D0D0D]/95 border border-[#39FF14]/40 p-5 sm:p-8 backdrop-blur-xl shadow-[0_0_40px_rgba(57,255,20,0.15)] relative overflow-hidden min-h-[400px] sm:min-h-[460px] flex flex-col justify-between">
+            <div
+              className="rounded-2xl bg-[#0D0D0D]/95 border p-5 sm:p-8 backdrop-blur-xl relative overflow-hidden min-h-[400px] sm:min-h-[460px] flex flex-col justify-between transition-all"
+              style={{
+                borderColor: `rgba(${rgb}, 0.4)`,
+                boxShadow: `0 0 40px rgba(${rgb}, 0.15)`
+              }}
+            >
               
               {/* 3-Second Progress Countdown Bar */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-white/10 overflow-hidden">
                 <div
                   key={selectedServiceIndex}
-                  className="h-full bg-[#39FF14] shadow-[0_0_10px_#39FF14]"
+                  className="h-full"
                   style={{
+                    backgroundColor: primary,
+                    boxShadow: `0 0 10px ${primary}`,
                     animation: 'autoProgress3s 3s linear forwards'
                   }}
                 />
               </div>
 
               {/* Corner Counter */}
-              <div className="flex items-center justify-between text-xs font-mono text-[#39FF14] pt-1 mb-2">
+              <div className="flex items-center justify-between text-xs font-mono pt-1 mb-2" style={{ color: primary }}>
                 <span>ORBIT // 0{selectedServiceIndex + 1} OF 0{serviceNodes.length}</span>
                 <span className="text-[10px] text-gray-400">
                   [3S AUTO-ADVANCE]
@@ -406,11 +451,21 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
                   >
                     {/* Service Header */}
                     <div className="flex items-center gap-3.5">
-                      <div className="w-12 h-12 rounded-xl bg-[#050505] border border-[#39FF14] flex items-center justify-center text-[#39FF14] shadow-[0_0_20px_rgba(57,255,20,0.3)] shrink-0">
+                      <div
+                        className="w-12 h-12 rounded-xl bg-[#050505] border flex items-center justify-center shrink-0"
+                        style={{
+                          borderColor: primary,
+                          color: primary,
+                          boxShadow: `0 0 20px rgba(${rgb}, 0.3)`
+                        }}
+                      >
                         {React.createElement(serviceNodes[selectedServiceIndex].icon, { className: 'w-6 h-6' })}
                       </div>
                       <div>
-                        <span className="text-[10px] font-mono tracking-widest text-[#39FF14] uppercase block">
+                        <span
+                          className="text-[10px] font-mono tracking-widest uppercase block"
+                          style={{ color: primary }}
+                        >
                           ACTIVE ARCHITECTURAL DISCIPLINE
                         </span>
                         <h3 className="text-xl sm:text-2xl font-bold text-white leading-tight">
@@ -431,7 +486,7 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
                       </span>
                       {activeService.features.map((feat, idx) => (
                         <div key={idx} className="flex items-start gap-2.5 text-xs text-gray-200">
-                          <CheckCircle2 className="w-4 h-4 text-[#39FF14] shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" style={{ color: primary }} />
                           <span>{feat}</span>
                         </div>
                       ))}
@@ -444,7 +499,12 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10 mt-2">
                 <button
                   onClick={() => onSelectService(activeService.title)}
-                  className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#39FF14] text-black font-bold text-xs uppercase tracking-wider hover:bg-[#45ff24] shadow-[0_0_25px_rgba(57,255,20,0.4)] transition-all transform hover:-translate-y-0.5 cursor-pointer"
+                  className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all transform hover:-translate-y-0.5 cursor-pointer"
+                  style={{
+                    backgroundColor: primary,
+                    color: '#000000',
+                    boxShadow: `0 0 25px rgba(${rgb}, 0.4)`
+                  }}
                 >
                   <span>Start With {activeService.title.split(' ')[0]}</span>
                   <ArrowRight className="w-4 h-4" />
@@ -456,9 +516,17 @@ export const GravityConstellation: React.FC<GravityConstellationProps> = ({ onSe
                     <button
                       key={i}
                       onClick={() => setSelectedServiceIndex(i)}
+                      style={
+                        selectedServiceIndex === i
+                          ? {
+                              backgroundColor: primary,
+                              boxShadow: `0 0 8px ${primary}`
+                            }
+                          : undefined
+                      }
                       className={`h-2.5 rounded-full transition-all cursor-pointer ${
                         selectedServiceIndex === i
-                          ? 'w-7 bg-[#39FF14] shadow-[0_0_8px_#39FF14]'
+                          ? 'w-7'
                           : 'w-2.5 bg-white/20 hover:bg-white/40'
                       }`}
                       aria-label={`Select service ${i + 1}`}

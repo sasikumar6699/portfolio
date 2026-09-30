@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useCyberDoor } from '../../context/CyberDoorContext';
 
 export const GravityElasticCurve: React.FC = () => {
+  const { currentTheme } = useCyberDoor();
+  const { primary } = currentTheme;
   const curveRef = useRef<HTMLDivElement>(null);
   const [controlY, setControlY] = useState(0);
   const isBouncingRef = useRef(false);
@@ -92,7 +95,7 @@ export const GravityElasticCurve: React.FC = () => {
         <path
           d={`M0,0 Q500,${controlY} 1000,0 L1000,160 L0,160 Z`}
           fill="#0D0D0D"
-          stroke="#39FF14"
+          stroke={primary}
           strokeWidth="1.5"
           filter="url(#curveNeonGlow)"
         />
@@ -102,7 +105,7 @@ export const GravityElasticCurve: React.FC = () => {
           cx="500"
           cy={controlY}
           r="4"
-          fill="#39FF14"
+          fill={primary}
           filter="url(#curveNeonGlow)"
         />
       </svg>

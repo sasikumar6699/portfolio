@@ -3,12 +3,16 @@ import { PROJECTS } from '../data/portfolioData';
 import { Project } from '../types/portfolio';
 import { ArrowRight, Layers, Terminal } from 'lucide-react';
 import { ProjectModal } from './ProjectModal';
+import { useCyberDoor } from '../context/CyberDoorContext';
 
 interface ProjectsProps {
   onInquireProject: (projectTitle: string) => void;
 }
 
 export const Projects: React.FC<ProjectsProps> = ({ onInquireProject }) => {
+  const { currentTheme } = useCyberDoor();
+  const { primary, secondary, rgb } = currentTheme;
+
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
 
@@ -21,13 +25,22 @@ export const Projects: React.FC<ProjectsProps> = ({ onInquireProject }) => {
   return (
     <section id="projects" className="py-24 bg-[#050505] relative overflow-hidden border-t border-white/5">
       {/* Ambient Backdrop Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#39FF14]/5 rounded-full blur-[180px] pointer-events-none"></div>
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full blur-[180px] pointer-events-none transition-colors duration-700"
+        style={{ backgroundColor: `rgba(${rgb}, 0.06)` }}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/30 text-xs font-mono text-[#39FF14] mb-4">
+          <div
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0D0D0D] border text-xs font-mono mb-4 transition-colors"
+            style={{
+              borderColor: `rgba(${rgb}, 0.35)`,
+              color: secondary,
+            }}
+          >
             <span>PORTFOLIO & CASE STUDIES</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
@@ -40,19 +53,24 @@ export const Projects: React.FC<ProjectsProps> = ({ onInquireProject }) => {
 
         {/* Category Filter Pills */}
         <div className="flex flex-wrap gap-2 sm:gap-3 mb-12">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-5 py-2 rounded-full text-xs font-mono font-semibold transition-all duration-200 ${
-                selectedCategory === cat
-                  ? 'bg-[#39FF14] text-black shadow-[0_0_20px_rgba(57,255,20,0.4)]'
-                  : 'bg-[#0D0D0D] text-gray-300 border border-white/10 hover:border-[#39FF14]/40 hover:text-white'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+          {categories.map((cat) => {
+            const isSelected = selectedCategory === cat;
+            return (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className="px-5 py-2 rounded-full text-xs font-mono font-semibold transition-all duration-200 border"
+                style={{
+                  backgroundColor: isSelected ? primary : '#0D0D0D',
+                  color: isSelected ? '#000000' : '#d1d5db',
+                  borderColor: isSelected ? primary : 'rgba(255, 255, 255, 0.1)',
+                  boxShadow: isSelected ? `0 0 20px rgba(${rgb}, 0.45)` : 'none',
+                }}
+              >
+                {cat}
+              </button>
+            );
+          })}
         </div>
 
         {/* Projects Grid */}
@@ -60,27 +78,41 @@ export const Projects: React.FC<ProjectsProps> = ({ onInquireProject }) => {
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="bg-[#0D0D0D] rounded-2xl border border-white/10 overflow-hidden flex flex-col justify-between transition-all duration-300 hover:border-[#39FF14]/70 hover:shadow-[0_0_30px_rgba(57,255,20,0.2)] hover:-translate-y-2 group"
+              className="bg-[#0D0D0D] rounded-2xl border border-white/10 overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 group"
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = primary;
+                e.currentTarget.style.boxShadow = `0 0 30px rgba(${rgb}, 0.25)`;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
             >
               <div>
                 {/* Visual Graphics Header Container */}
-                <div className={`h-48 bg-gradient-to-br ${project.gradientFrom} p-5 relative flex flex-col justify-between border-b border-white/10 group-hover:border-[#39FF14]/40 transition-colors`}>
-                  <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
+                <div className={`h-48 bg-gradient-to-br ${project.gradientFrom} p-5 relative flex flex-col justify-between border-b border-white/10 group-hover:border-white/20 transition-colors`}>
+                  <div className="absolute inset-0 bg-grid-pattern opacity-20" />
                   
                   {/* Top Badges */}
                   <div className="relative z-10 flex items-center justify-between">
-                    <span className="px-3 py-1 rounded-full bg-[#050505]/90 border border-[#39FF14]/40 text-[11px] font-mono text-[#39FF14]">
+                    <span
+                      className="px-3 py-1 rounded-full bg-[#050505]/90 border text-[11px] font-mono transition-colors"
+                      style={{
+                        borderColor: `rgba(${rgb}, 0.4)`,
+                        color: primary,
+                      }}
+                    >
                       {project.category}
                     </span>
                     <span className="text-[10px] font-mono text-gray-400 flex items-center gap-1">
-                      <Terminal className="w-3 h-3 text-[#39FF14]" /> SOLUTION ARCHITECTURE
+                      <Terminal className="w-3 h-3" style={{ color: primary }} /> SOLUTION ARCHITECTURE
                     </span>
                   </div>
 
                   {/* Center Visual Mock Graphic */}
                   <div className="relative z-10 text-center py-2">
-                    <div className="inline-block px-4 py-2 rounded-lg bg-[#050505]/90 border border-white/10 group-hover:border-[#39FF14]/50 transition-colors">
-                      <span className="text-xs font-mono font-bold text-gray-200 group-hover:text-[#39FF14] tracking-wider transition-colors">
+                    <div className="inline-block px-4 py-2 rounded-lg bg-[#050505]/90 border border-white/10 group-hover:border-white/30 transition-colors">
+                      <span className="text-xs font-mono font-bold text-gray-200 tracking-wider transition-colors">
                         {project.imagePlaceholderText}
                       </span>
                     </div>
@@ -95,7 +127,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onInquireProject }) => {
 
                 {/* Card Content Body */}
                 <div className="p-6 space-y-4">
-                  <h3 className="text-xl font-bold text-white group-hover:text-[#39FF14] transition-colors">
+                  <h3 className="text-xl font-bold text-white transition-colors">
                     {project.title}
                   </h3>
 
@@ -126,10 +158,16 @@ export const Projects: React.FC<ProjectsProps> = ({ onInquireProject }) => {
               <div className="px-6 py-4 bg-[#08080A] border-t border-white/10">
                 <button
                   onClick={() => setActiveModalProject(project)}
-                  className="w-full flex items-center justify-between text-xs font-mono font-semibold text-gray-300 group-hover:text-[#39FF14] transition-colors"
+                  className="w-full flex items-center justify-between text-xs font-mono font-semibold text-gray-300 transition-colors group-hover:text-white"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = primary;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '';
+                  }}
                 >
                   <span className="flex items-center gap-2">
-                    <Layers className="w-4 h-4 text-[#39FF14]" /> View Project Case Study
+                    <Layers className="w-4 h-4" style={{ color: primary }} /> View Project Case Study
                   </span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>

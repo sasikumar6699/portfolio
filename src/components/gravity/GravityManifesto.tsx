@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Database, Globe, Cpu, Code, PenTool, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { useCyberDoor } from '../../context/CyberDoorContext';
 
 export const GravityManifesto: React.FC = () => {
+  const { currentTheme } = useCyberDoor();
+  const { primary, rgb } = currentTheme;
   const sectionRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isStruck, setIsStruck] = useState(false);
@@ -81,9 +84,18 @@ export const GravityManifesto: React.FC = () => {
         <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none" />
 
         {/* Concentric Neon Orbit Ring with Magnetic Rotating Bead */}
-        <div className="absolute pointer-events-none w-[60vmin] h-[60vmin] rounded-full border border-[#39FF14]/20 flex items-center justify-center">
-          <div className="w-[82vmin] h-[82vmin] rounded-full border border-[#39FF14]/10" />
-          <div className="w-[42vmin] h-[42vmin] rounded-full border border-[#39FF14]/25" />
+        <div
+          className="absolute pointer-events-none w-[60vmin] h-[60vmin] rounded-full border flex items-center justify-center transition-colors"
+          style={{ borderColor: `rgba(${rgb}, 0.2)` }}
+        >
+          <div
+            className="w-[82vmin] h-[82vmin] rounded-full border transition-colors"
+            style={{ borderColor: `rgba(${rgb}, 0.1)` }}
+          />
+          <div
+            className="w-[42vmin] h-[42vmin] rounded-full border transition-colors"
+            style={{ borderColor: `rgba(${rgb}, 0.25)` }}
+          />
 
           {/* Orbiting Rotating Container */}
           <div className="absolute inset-0 animate-bead-track">
@@ -91,9 +103,11 @@ export const GravityManifesto: React.FC = () => {
             <div
               ref={beadRef}
               style={{
-                transform: `translate3d(${beadOffset.x}px, ${beadOffset.y}px, 0)`
+                transform: `translate3d(${beadOffset.x}px, ${beadOffset.y}px, 0)`,
+                backgroundColor: primary,
+                boxShadow: `0 0 25px ${primary}`
               }}
-              className="absolute -top-3 left-1/2 -translate-x-1/2 w-5 sm:w-6 h-5 sm:h-6 rounded-full bg-[#39FF14] shadow-[0_0_25px_#39FF14] flex items-center justify-center transition-transform duration-100 ease-out"
+              className="absolute -top-3 left-1/2 -translate-x-1/2 w-5 sm:w-6 h-5 sm:h-6 rounded-full flex items-center justify-center transition-transform duration-100 ease-out"
             >
               <div className="w-2 h-2 rounded-full bg-black" />
             </div>
@@ -111,8 +125,11 @@ export const GravityManifesto: React.FC = () => {
           
           {/* Eyebrow Label */}
           <div className="flex items-center gap-2 sm:gap-3">
-            <span className="w-5 sm:w-8 h-[2px] bg-[#39FF14]" />
-            <span className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.2em] sm:tracking-[0.25em] text-[#39FF14] uppercase">
+            <span className="w-5 sm:w-8 h-[2px]" style={{ backgroundColor: primary }} />
+            <span
+              className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase"
+              style={{ color: primary }}
+            >
               TECHYORA MANIFESTO // STRATEGY · EXECUTION
             </span>
           </div>
@@ -123,7 +140,13 @@ export const GravityManifesto: React.FC = () => {
               ONE COMPANY. ONE DEDICATED TEAM.
             </div>
 
-            <div className="flex flex-wrap items-center gap-x-2 sm:gap-x-3 text-[#39FF14] neon-glow-text">
+            <div
+              className="flex flex-wrap items-center gap-x-2 sm:gap-x-3 transition-colors duration-500"
+              style={{
+                color: primary,
+                textShadow: `0 0 20px rgba(${rgb}, 0.5)`
+              }}
+            >
               COMPLETE ENTERPRISE DIGITAL SOLUTIONS.
             </div>
 
@@ -133,7 +156,10 @@ export const GravityManifesto: React.FC = () => {
                 MIDDLEMEN.
               </span>
               <span className="text-white">JUST BOLD</span>
-              <span className={`neon-draw-underline text-[#39FF14] ${isDrawn ? 'is-drawn' : ''}`}>
+              <span
+                className={`neon-draw-underline ${isDrawn ? 'is-drawn' : ''}`}
+                style={{ color: primary }}
+              >
                 RESULTS.
               </span>
             </div>
@@ -163,9 +189,18 @@ export const GravityManifesto: React.FC = () => {
               return (
                 <div
                   key={idx}
-                  className="p-2 sm:p-2.5 rounded-xl bg-[#070709] border border-white/10 hover:border-[#39FF14]/50 transition-colors flex items-center gap-2 group"
+                  className="p-2 sm:p-2.5 rounded-xl bg-[#070709] border border-white/10 transition-colors flex items-center gap-2 group"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = `rgba(${rgb}, 0.5)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                  }}
                 >
-                  <div className="p-1 sm:p-1.5 rounded-lg bg-white/5 border border-white/10 text-[#39FF14] group-hover:bg-[#39FF14] group-hover:text-black transition-colors shrink-0">
+                  <div
+                    className="p-1 sm:p-1.5 rounded-lg bg-white/5 border border-white/10 transition-colors shrink-0"
+                    style={{ color: primary }}
+                  >
                     <IconComp className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                   </div>
                   <div className="min-w-0">
@@ -183,7 +218,7 @@ export const GravityManifesto: React.FC = () => {
 
           {/* Quality Badges */}
           <div className="pt-1.5 sm:pt-2 flex flex-wrap items-center gap-2.5 sm:gap-4 text-[10px] sm:text-[11px] font-mono text-gray-400">
-            <span className="flex items-center gap-1.5 text-[#39FF14]">
+            <span className="flex items-center gap-1.5" style={{ color: primary }}>
               <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               <span>100% Quality & SLA Guaranteed</span>
             </span>

@@ -2,8 +2,12 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Code2, Linkedin, MessageSquare, ArrowUp } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { useCyberDoor } from '../context/CyberDoorContext';
 
 export const Footer: React.FC = () => {
+  const { currentTheme } = useCyberDoor();
+  const { primary, rgb } = currentTheme;
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -18,13 +22,26 @@ export const Footer: React.FC = () => {
           <div className="md:col-span-5 space-y-4">
             <NavLink
               to="/"
-              className="flex items-center gap-2 font-mono text-xl font-bold tracking-tight text-white"
+              className="flex items-center gap-2 font-mono text-xl font-bold tracking-tight text-white group"
             >
-              <div className="w-8 h-8 rounded-lg bg-[#0D0D0D] border border-[#39FF14]/40 flex items-center justify-center text-[#39FF14]">
+              <div
+                className="w-8 h-8 rounded-lg bg-[#0D0D0D] border flex items-center justify-center transition-all group-hover:scale-105"
+                style={{
+                  borderColor: `rgba(${rgb}, 0.45)`,
+                  color: primary,
+                  boxShadow: `0 0 12px rgba(${rgb}, 0.25)`,
+                }}
+              >
                 <Code2 className="w-4 h-4" />
               </div>
               <span>{PERSONAL_INFO.brandName}</span>
-              <span className="w-2 h-2 rounded-full bg-[#39FF14] inline-block"></span>
+              <span
+                className="w-2 h-2 rounded-full inline-block"
+                style={{
+                  backgroundColor: primary,
+                  boxShadow: `0 0 6px ${primary}`,
+                }}
+              />
             </NavLink>
 
             <p className="text-sm text-gray-400 max-w-sm leading-relaxed">
@@ -38,40 +55,76 @@ export const Footer: React.FC = () => {
 
           {/* Navigation Links with React Router */}
           <div className="md:col-span-4 space-y-3">
-            <h4 className="text-xs font-mono text-[#39FF14] uppercase tracking-wider">NAVIGATION</h4>
+            <h4
+              className="text-xs font-mono uppercase tracking-wider font-bold"
+              style={{ color: primary }}
+            >
+              NAVIGATION
+            </h4>
             <div className="grid grid-cols-2 gap-2 text-sm text-gray-300 font-medium">
-              <NavLink to="/" className="hover:text-[#39FF14] transition-colors">Home</NavLink>
-              <NavLink to="/about" className="hover:text-[#39FF14] transition-colors">About</NavLink>
-              <NavLink to="/services" className="hover:text-[#39FF14] transition-colors">Services</NavLink>
-              <NavLink to="/skills" className="hover:text-[#39FF14] transition-colors">Skills</NavLink>
-              <NavLink to="/projects" className="hover:text-[#39FF14] transition-colors">Projects</NavLink>
-              {/* <NavLink to="/experience" className="hover:text-[#39FF14] transition-colors">Experience</NavLink> */}
-              <NavLink to="/contact" className="hover:text-[#39FF14] transition-colors">Contact</NavLink>
+              {[
+                { name: 'Home', path: '/' },
+                { name: 'About', path: '/about' },
+                { name: 'Services', path: '/services' },
+                { name: 'Skills', path: '/skills' },
+                { name: 'Projects', path: '/projects' },
+                { name: 'Contact', path: '/contact' },
+              ].map((link) => (
+                <NavLink
+                  key={link.path}
+                  to={link.path}
+                  className="hover:text-white transition-colors"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = primary;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '';
+                  }}
+                >
+                  {link.name}
+                </NavLink>
+              ))}
             </div>
           </div>
 
           {/* Social Channels */}
           <div className="md:col-span-3 space-y-3">
-            <h4 className="text-xs font-mono text-[#39FF14] uppercase tracking-wider">CONNECT</h4>
+            <h4
+              className="text-xs font-mono uppercase tracking-wider font-bold"
+              style={{ color: primary }}
+            >
+              CONNECT
+            </h4>
             <div className="space-y-2 text-xs font-mono">
               <a
                 href={PERSONAL_INFO.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gray-400 hover:text-[#39FF14] transition-colors"
+                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = primary;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '';
+                }}
               >
-                <Linkedin className="w-4 h-4 text-[#39FF14]" />
+                <Linkedin className="w-4 h-4" style={{ color: primary }} />
                 <span>LinkedIn</span>
               </a>
-
 
               <a
                 href={PERSONAL_INFO.socials.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gray-400 hover:text-[#39FF14] transition-colors"
+                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = primary;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '';
+                }}
               >
-                <MessageSquare className="w-4 h-4 text-[#39FF14]" />
+                <MessageSquare className="w-4 h-4" style={{ color: primary }} />
                 <span>WhatsApp</span>
               </a>
             </div>
@@ -87,10 +140,16 @@ export const Footer: React.FC = () => {
 
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-2 text-gray-400 hover:text-[#39FF14] transition-colors"
+            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = primary;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = '';
+            }}
           >
             <span>BACK TO TOP</span>
-            <ArrowUp className="w-4 h-4 text-[#39FF14]" />
+            <ArrowUp className="w-4 h-4" style={{ color: primary }} />
           </button>
         </div>
 

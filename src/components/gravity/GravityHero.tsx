@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { ArrowRight, Eye, Download, Database, Globe, Cpu, Code } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
+import { useCyberDoor } from '../../context/CyberDoorContext';
 
 interface GravityHeroProps {
   onOpenContact: (serviceTitle?: string) => void;
@@ -19,6 +20,8 @@ interface Satellite {
 }
 
 export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenResume }) => {
+  const { currentTheme } = useCyberDoor();
+  const { primary, secondary, rgb } = currentTheme;
   const heroRef = useRef<HTMLElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const [activeSatId, setActiveSatId] = useState<string | null>(null);
@@ -49,7 +52,7 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
       radius: isMobile ? 65 : 105,
       omega: 0.85, // automatic continuous rotation
       theta: 0.4,
-      color: '#39FF14',
+      color: primary,
       size: isMobile ? 12 : 16
     },
     {
@@ -59,7 +62,7 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
       radius: isMobile ? 110 : 165,
       omega: -0.65,
       theta: 1.9,
-      color: '#39FF14',
+      color: primary,
       size: isMobile ? 13 : 18
     },
     {
@@ -69,7 +72,7 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
       radius: isMobile ? 155 : 225,
       omega: 0.52,
       theta: 3.5,
-      color: '#39FF14',
+      color: primary,
       size: isMobile ? 12 : 17
     },
     {
@@ -79,7 +82,7 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
       radius: isMobile ? 200 : 285,
       omega: -0.42,
       theta: 4.9,
-      color: '#39FF14',
+      color: primary,
       size: isMobile ? 11 : 16
     }
   ];
@@ -314,9 +317,9 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
           </feMerge>
         </filter>
         <radialGradient id="heroSunGrad" cx="35%" cy="35%" r="65%">
-          <stop offset="0%" stopColor="#9eff7a" />
-          <stop offset="65%" stopColor="#39FF14" />
-          <stop offset="100%" stopColor="#146a09" />
+          <stop offset="0%" stopColor={primary} stopOpacity="0.9" />
+          <stop offset="65%" stopColor={primary} />
+          <stop offset="100%" stopColor={secondary} />
         </radialGradient>
       </defs>
 
@@ -329,7 +332,7 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
           rx={r}
           ry={r}
           fill="none"
-          stroke="#39FF14"
+          stroke={primary}
           strokeWidth="1"
           strokeDasharray={i % 2 === 0 ? "4 8" : "none"}
           opacity={i % 2 === 0 ? "0.25" : "0.12"}
@@ -346,7 +349,7 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
               y1={sat.y}
               x2={convergeRef.current.targetX}
               y2={convergeRef.current.targetY}
-              stroke="#39FF14"
+              stroke={primary}
               strokeWidth="1.5"
               strokeDasharray="6 4"
               filter="url(#heroNeonGlow)"
@@ -363,7 +366,7 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
             cy={clickWave.y}
             r={clickWave.radius}
             fill="none"
-            stroke="#39FF14"
+            stroke={primary}
             strokeWidth="2.5"
             opacity={clickWave.opacity}
             filter="url(#heroNeonGlow)"
@@ -373,7 +376,7 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
             cy={clickWave.y}
             r={clickWave.radius * 0.5}
             fill="none"
-            stroke="#39FF14"
+            stroke={primary}
             strokeWidth="1.2"
             opacity={clickWave.opacity * 0.8}
           />
@@ -381,7 +384,7 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
             cx={clickWave.x}
             cy={clickWave.y}
             r="6"
-            fill="#39FF14"
+            fill={primary}
             opacity={clickWave.opacity}
             filter="url(#heroNeonGlow)"
           />
@@ -394,7 +397,7 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
           cx={CX}
           cy={CY}
           r={MASS_R + (isMobile ? 10 : 14)}
-          fill="#39FF14"
+          fill={primary}
           opacity="0.12"
           filter="url(#heroNeonGlow)"
         />
@@ -447,7 +450,7 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
               cx={sat.x}
               cy={sat.y}
               r={sat.size + (isMobile ? 3.5 : 5)}
-              fill="#39FF14"
+              fill={primary}
               opacity={isHovered ? "0.5" : "0.2"}
               filter="url(#heroNeonGlow)"
             />
@@ -456,7 +459,7 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
               cy={sat.y}
               r={sat.size}
               fill="#0D0D0D"
-              stroke="#39FF14"
+              stroke={primary}
               strokeWidth="2"
               filter="url(#heroNeonGlow)"
             />
@@ -464,7 +467,7 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
               cx={sat.x}
               cy={sat.y}
               r={isMobile ? "2.5" : "3.5"}
-              fill="#39FF14"
+              fill={primary}
             />
 
             {/* Satellite Name Badge Label */}
@@ -488,7 +491,7 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
                 height={badgeH}
                 rx={isMobile ? "4" : "5"}
                 fill="#070709"
-                stroke={isHovered ? "#39FF14" : "rgba(57, 255, 20, 0.55)"}
+                stroke={isHovered ? primary : `${primary}88`}
                 strokeWidth="1"
                 opacity="0.95"
               />
@@ -519,8 +522,14 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
     >
       {/* Background Precision Grid & Ambient Void Glows */}
       <div className="absolute inset-0 bg-grid-pattern opacity-25 pointer-events-none" />
-      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] bg-[#39FF14]/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/2 right-10 w-[350px] sm:w-[700px] h-[350px] sm:h-[700px] bg-[#39FF14]/5 rounded-full blur-[160px] pointer-events-none" />
+      <div
+        className="absolute top-1/4 left-1/3 -translate-x-1/2 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] rounded-full blur-[140px] pointer-events-none transition-colors duration-700"
+        style={{ backgroundColor: `rgba(${rgb}, 0.08)` }}
+      />
+      <div
+        className="absolute top-1/2 right-10 w-[350px] sm:w-[700px] h-[350px] sm:h-[700px] rounded-full blur-[160px] pointer-events-none transition-colors duration-700"
+        style={{ backgroundColor: `rgba(${rgb}, 0.08)` }}
+      />
 
       {/* DESKTOP FULL-SCREEN KEPLERIAN SVG ENGINE */}
       {!isMobile && (
@@ -543,10 +552,23 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
           <div className="lg:col-span-6 space-y-5 sm:space-y-6 pointer-events-auto">
             
             {/* Live Status Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#0D0D0D] border border-[#39FF14]/40 shadow-[0_0_15px_rgba(57,255,20,0.15)] text-[10px] sm:text-xs font-mono text-[#39FF14]">
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#0D0D0D] border text-[10px] sm:text-xs font-mono transition-colors"
+              style={{
+                borderColor: `${primary}50`,
+                color: primary,
+                boxShadow: `0 0 15px rgba(${rgb}, 0.18)`
+              }}
+            >
               <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#39FF14] opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-[#39FF14]" />
+                <span
+                  className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                  style={{ backgroundColor: primary }}
+                />
+                <span
+                  className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5"
+                  style={{ backgroundColor: primary }}
+                />
               </span>
               <span className="tracking-wide uppercase font-semibold">
                 TECHYORA ENGINEERING TEAM // ENTERPRISE & GLOBAL CLIENTS
@@ -556,7 +578,14 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
             {/* Main Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12]">
               Engineering{' '}
-              <span className="text-[#39FF14] inline-block neon-glow-text underline decoration-[#39FF14]/40 underline-offset-4 sm:underline-offset-8">
+              <span
+                className="inline-block underline underline-offset-4 sm:underline-offset-8 transition-colors duration-500"
+                style={{
+                  color: primary,
+                  textShadow: `0 0 20px rgba(${rgb}, 0.5)`,
+                  textDecorationColor: `${primary}66`
+                }}
+              >
                 Digital Systems
               </span>{' '}
               That Drive Enterprise Growth.
@@ -569,19 +598,19 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
 
             {/* Service Pillars */}
             <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-1 text-[11px] sm:text-xs font-mono text-gray-400">
-              <span className="px-2.5 py-1 rounded bg-[#0D0D0D] border border-white/10 text-[#39FF14]">
+              <span className="px-2.5 py-1 rounded bg-[#0D0D0D] border border-white/10" style={{ color: primary }}>
                 • ERP, CRM & HCM (ERPNext)
               </span>
               <span className="px-2.5 py-1 rounded bg-[#0D0D0D] border border-white/10 text-gray-300">
                 • Custom Software (Billing, Fleet, Logistics)
               </span>
-              <span className="px-2.5 py-1 rounded bg-[#0D0D0D] border border-white/10 text-[#39FF14]">
+              <span className="px-2.5 py-1 rounded bg-[#0D0D0D] border border-white/10" style={{ color: primary }}>
                 • 3D Web & E-Commerce
               </span>
               <span className="px-2.5 py-1 rounded bg-[#0D0D0D] border border-white/10 text-gray-300">
                 • Agentic AI & Chatbots
               </span>
-              <span className="px-2.5 py-1 rounded bg-[#0D0D0D] border border-white/10 text-[#39FF14]">
+              <span className="px-2.5 py-1 rounded bg-[#0D0D0D] border border-white/10" style={{ color: primary }}>
                 • Branding & Flex Design
               </span>
               <span className="px-2.5 py-1 rounded bg-[#0D0D0D] border border-white/10 text-gray-300">
@@ -593,7 +622,12 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-3 sm:pt-4">
               <button
                 onClick={() => onOpenContact()}
-                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-[#39FF14] text-black font-bold text-xs sm:text-sm tracking-wider uppercase hover:bg-[#45ff24] shadow-[0_0_25px_rgba(57,255,20,0.5)] hover:shadow-[0_0_40px_rgba(57,255,20,0.8)] transition-all transform hover:-translate-y-1 active:translate-y-0 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-xs sm:text-sm tracking-wider uppercase transition-all transform hover:-translate-y-1 active:translate-y-0 cursor-pointer"
+                style={{
+                  backgroundColor: primary,
+                  color: '#000000',
+                  boxShadow: `0 0 25px rgba(${rgb}, 0.5)`
+                }}
               >
                 <span>Consult Our Team</span>
                 <ArrowRight className="w-4 h-4" />
@@ -601,7 +635,15 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
 
               <a
                 href="#services"
-                className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 sm:py-4 rounded-xl bg-[#0D0D0D] text-white border border-white/20 hover:border-[#39FF14]/60 hover:text-[#39FF14] font-semibold text-xs sm:text-sm tracking-wider uppercase transition-all transform hover:-translate-y-1 text-center"
+                className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 sm:py-4 rounded-xl bg-[#0D0D0D] text-white border border-white/20 hover:text-white font-semibold text-xs sm:text-sm tracking-wider uppercase transition-all transform hover:-translate-y-1 text-center"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = primary;
+                  e.currentTarget.style.color = primary;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                  e.currentTarget.style.color = '#FFFFFF';
+                }}
               >
                 <Eye className="w-4 h-4" />
                 <span>Explore Services</span>
@@ -609,9 +651,9 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
 
               <button
                 onClick={onOpenResume}
-                className="inline-flex items-center justify-center gap-1.5 py-2 sm:py-3 px-2 sm:px-3 text-[11px] sm:text-xs font-mono text-gray-400 hover:text-[#39FF14] transition-colors underline underline-offset-4 decoration-gray-600 hover:decoration-[#39FF14] cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 py-2 sm:py-3 px-2 sm:px-3 text-[11px] sm:text-xs font-mono text-gray-400 hover:text-white transition-colors underline underline-offset-4 decoration-gray-600 cursor-pointer"
               >
-                <Download className="w-3.5 h-3.5 text-[#39FF14]" />
+                <Download className="w-3.5 h-3.5" style={{ color: primary }} />
                 <span>Download Company Profile</span>
               </button>
             </div>
@@ -621,11 +663,11 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
               {PERSONAL_INFO.stats.map((stat, idx) => (
                 <div
                   key={idx}
-                  className="p-2.5 sm:p-3.5 rounded-xl bg-[#0D0D0D]/90 border border-white/10 hover:border-[#39FF14]/40 transition-colors"
+                  className="p-2.5 sm:p-3.5 rounded-xl bg-[#0D0D0D]/90 border border-white/10 hover:border-white/30 transition-colors"
                 >
                   <div className="text-xl sm:text-2xl font-bold font-mono text-white flex items-center">
                     <span>{stat.value}</span>
-                    <span className="text-[#39FF14] ml-0.5">{stat.suffix}</span>
+                    <span className="ml-0.5" style={{ color: primary }}>{stat.suffix}</span>
                   </div>
                   <div className="text-[10px] sm:text-[11px] text-gray-400 font-medium mt-0.5 leading-tight">
                     {stat.label}
@@ -640,8 +682,15 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
           <div className="lg:col-span-6 w-full flex flex-col items-center justify-center relative">
             {isMobile && (
               <div className="w-full flex flex-col items-center justify-center pt-2 sm:pt-4 pointer-events-auto">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0D0D0D] border border-[#39FF14]/30 text-[10px] font-mono text-[#39FF14] mb-3 shadow-[0_0_12px_rgba(57,255,20,0.15)]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#39FF14] animate-ping" />
+                <div
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0D0D0D] border text-[10px] font-mono mb-3"
+                  style={{
+                    borderColor: `${primary}50`,
+                    color: primary,
+                    boxShadow: `0 0 12px rgba(${rgb}, 0.2)`
+                  }}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full animate-ping" style={{ backgroundColor: primary }} />
                   <span>ORBITAL PHYSICS // TAP ANYWHERE TO ATTRACT</span>
                 </div>
                 

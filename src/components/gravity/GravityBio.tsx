@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Sparkles, ShieldCheck } from 'lucide-react';
+import { useCyberDoor } from '../../context/CyberDoorContext';
 
 interface GravityBioProps {
   onOpenContact?: () => void;
 }
 
 export const GravityBio: React.FC<GravityBioProps> = ({ onOpenContact: _onOpenContact }) => {
+  const { currentTheme } = useCyberDoor();
+  const { primary, rgb } = currentTheme;
   const bioRef = useRef<HTMLDivElement>(null);
   const [activeMilestone, setActiveMilestone] = useState(0);
 
@@ -64,8 +67,11 @@ export const GravityBio: React.FC<GravityBioProps> = ({ onOpenContact: _onOpenCo
             <div className="lg:sticky lg:top-28 space-y-4 sm:space-y-6">
               
               <div className="flex items-center gap-2">
-                <span className="w-6 h-[2px] bg-[#39FF14]" />
-                <h2 className="text-xs sm:text-sm font-mono tracking-[0.2em] sm:tracking-[0.25em] text-[#39FF14] uppercase font-bold">
+                <span className="w-6 h-[2px]" style={{ backgroundColor: primary }} />
+                <h2
+                  className="text-xs sm:text-sm font-mono tracking-[0.2em] sm:tracking-[0.25em] uppercase font-bold"
+                  style={{ color: primary }}
+                >
                   ABOUT TECHYORA // MILESTONES
                 </h2>
               </div>
@@ -75,13 +81,15 @@ export const GravityBio: React.FC<GravityBioProps> = ({ onOpenContact: _onOpenCo
                 {milestones.map((m, idx) => (
                   <div
                     key={idx}
-                    className={`transition-all duration-300 border-l-2 pl-3 sm:pl-4 ${
-                      activeMilestone === idx
-                        ? 'border-[#39FF14] text-white'
-                        : 'border-white/10 text-gray-400'
-                    }`}
+                    className="transition-all duration-300 border-l-2 pl-3 sm:pl-4"
+                    style={{
+                      borderColor: activeMilestone === idx ? primary : 'rgba(255, 255, 255, 0.1)'
+                    }}
                   >
-                    <span className="text-[9.5px] sm:text-[10px] font-mono tracking-widest uppercase block text-[#39FF14]">
+                    <span
+                      className="text-[9.5px] sm:text-[10px] font-mono tracking-widest uppercase block"
+                      style={{ color: primary }}
+                    >
                       0{idx + 1} //
                     </span>
                     <h3 className={`text-lg sm:text-2xl font-bold tracking-tight ${
@@ -95,7 +103,7 @@ export const GravityBio: React.FC<GravityBioProps> = ({ onOpenContact: _onOpenCo
 
               {/* Trust Badge Card */}
               <div className="hidden lg:block p-4 rounded-2xl bg-[#0D0D0D] border border-white/10 mt-6">
-                <div className="flex items-center gap-2 text-xs font-mono text-[#39FF14] mb-2">
+                <div className="flex items-center gap-2 text-xs font-mono mb-2" style={{ color: primary }}>
                   <ShieldCheck className="w-4 h-4" />
                   <span>DIRECT TEAM COLLABORATION</span>
                 </div>
@@ -112,13 +120,25 @@ export const GravityBio: React.FC<GravityBioProps> = ({ onOpenContact: _onOpenCo
             {milestones.map((m, idx) => (
               <div
                 key={idx}
-                className="bio-milestone-slot p-5 sm:p-10 rounded-2xl bg-[#0D0D0D]/90 border border-white/10 hover:border-[#39FF14]/40 transition-all duration-300 shadow-2xl relative"
+                className="bio-milestone-slot p-5 sm:p-10 rounded-2xl bg-[#0D0D0D]/90 border border-white/10 transition-all duration-300 shadow-2xl relative"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = `rgba(${rgb}, 0.5)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                }}
               >
                 <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-white/10 mb-4 sm:mb-6">
-                  <span className="text-xs font-mono text-[#39FF14] tracking-widest uppercase">
+                  <span className="text-xs font-mono tracking-widest uppercase" style={{ color: primary }}>
                     STAGE 0{idx + 1} · {m.label}
                   </span>
-                  <span className="w-2 h-2 rounded-full bg-[#39FF14] shadow-[0_0_8px_#39FF14]" />
+                  <span
+                    className="w-2 h-2 rounded-full"
+                    style={{
+                      backgroundColor: primary,
+                      boxShadow: `0 0 8px ${primary}`
+                    }}
+                  />
                 </div>
 
                 <h4 className="text-xl sm:text-3xl font-extrabold text-white leading-snug mb-3 sm:mb-4">
@@ -130,9 +150,12 @@ export const GravityBio: React.FC<GravityBioProps> = ({ onOpenContact: _onOpenCo
                 </p>
 
                 {/* Highlight Pill */}
-                <div className="p-3 sm:p-4 rounded-xl bg-white/5 border border-[#39FF14]/30 flex items-center gap-2.5 sm:gap-3">
-                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#39FF14] shrink-0" />
-                  <span className="text-xs sm:text-sm font-mono text-[#39FF14] font-medium">
+                <div
+                  className="p-3 sm:p-4 rounded-xl bg-white/5 border flex items-center gap-2.5 sm:gap-3"
+                  style={{ borderColor: `rgba(${rgb}, 0.3)` }}
+                >
+                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" style={{ color: primary }} />
+                  <span className="text-xs sm:text-sm font-mono font-medium" style={{ color: primary }}>
                     {m.highlight}
                   </span>
                 </div>

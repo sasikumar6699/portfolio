@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, ArrowUpRight, Code2 } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { useCyberDoor } from '../context/CyberDoorContext';
 
 interface NavbarProps {
   onOpenContact: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
+  const { currentTheme } = useCyberDoor();
+  const { primary, rgb } = currentTheme;
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -60,11 +63,24 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
           to="/"
           className="flex items-center gap-2 group font-mono text-xl font-bold tracking-tight text-white transition-opacity hover:opacity-90"
         >
-          <div className="w-8 h-8 rounded-lg bg-[#0D0D0D] border border-[#39FF14]/40 flex items-center justify-center text-[#39FF14] group-hover:border-[#39FF14] group-hover:shadow-[0_0_15px_rgba(57,255,20,0.5)] transition-all">
+          <div
+            className="w-8 h-8 rounded-lg bg-[#0D0D0D] border flex items-center justify-center transition-all group-hover:scale-105"
+            style={{
+              borderColor: `rgba(${rgb}, 0.45)`,
+              color: primary,
+              boxShadow: `0 0 12px rgba(${rgb}, 0.25)`,
+            }}
+          >
             <Code2 className="w-4 h-4" />
           </div>
           <span>{PERSONAL_INFO.brandName}</span>
-          <span className="w-2 h-2 rounded-full bg-[#39FF14] inline-block pulse-neon-dot"></span>
+          <span
+            className="w-2 h-2 rounded-full inline-block"
+            style={{
+              backgroundColor: primary,
+              boxShadow: `0 0 8px ${primary}`,
+            }}
+          />
         </NavLink>
 
         {/* Desktop Navigation Links */}
@@ -73,11 +89,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
             <NavLink
               key={link.name}
               to={link.path}
+              style={({ isActive }) =>
+                isActive
+                  ? {
+                      color: primary,
+                      backgroundColor: `rgba(${rgb}, 0.12)`,
+                      borderColor: `rgba(${rgb}, 0.35)`,
+                      boxShadow: `0 0 12px rgba(${rgb}, 0.2)`,
+                    }
+                  : undefined
+              }
               className={({ isActive }) =>
-                `px-3 py-1.5 rounded-full text-xs lg:text-sm font-medium transition-all duration-200 ${
-                  isActive
-                    ? 'text-[#39FF14] bg-[#39FF14]/10 border border-[#39FF14]/30 shadow-[0_0_10px_rgba(57,255,20,0.2)] font-semibold'
-                    : 'text-gray-300 hover:text-white hover:bg-white/5'
+                `px-3 py-1.5 rounded-full text-xs lg:text-sm font-medium transition-all duration-200 border border-transparent ${
+                  isActive ? 'font-semibold' : 'text-gray-300 hover:text-white hover:bg-white/5'
                 }`
               }
             >
@@ -90,7 +114,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
         <div className="hidden md:flex items-center">
           <button
             onClick={handleCtaClick}
-            className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs lg:text-sm font-semibold tracking-wide bg-[#39FF14] text-black hover:bg-[#45ff24] shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:shadow-[0_0_30px_rgba(57,255,20,0.7)] transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+            className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs lg:text-sm font-semibold tracking-wide text-black transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+            style={{
+              backgroundColor: primary,
+              boxShadow: `0 0 25px rgba(${rgb}, 0.45)`,
+            }}
           >
             <span>Let's Work Together</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -101,10 +129,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
         <div className="md:hidden flex items-center">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg bg-[#0D0D0D] border border-white/10 text-gray-300 hover:text-[#39FF14] hover:border-[#39FF14]/40 focus:outline-none"
+            className="p-2 rounded-lg bg-[#0D0D0D] border border-white/10 text-gray-300 focus:outline-none transition-colors"
+            style={{
+              borderColor: mobileMenuOpen ? primary : undefined,
+            }}
             aria-label="Toggle Navigation Menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-6 h-6" style={{ color: primary }} /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
@@ -117,11 +148,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
               key={link.name}
               to={link.path}
               onClick={() => setMobileMenuOpen(false)}
+              style={({ isActive }) =>
+                isActive
+                  ? {
+                      color: primary,
+                      backgroundColor: `rgba(${rgb}, 0.12)`,
+                    }
+                  : undefined
+              }
               className={({ isActive }) =>
                 `block px-4 py-2.5 rounded-lg text-base font-medium transition-colors ${
-                  isActive
-                    ? 'text-[#39FF14] bg-[#39FF14]/10 font-semibold'
-                    : 'text-gray-300 hover:text-[#39FF14] hover:bg-white/5'
+                  isActive ? 'font-semibold' : 'text-gray-300 hover:bg-white/5'
                 }`
               }
             >
@@ -134,7 +171,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
                 setMobileMenuOpen(false);
                 handleCtaClick();
               }}
-              className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-[#39FF14] text-black shadow-[0_0_20px_rgba(57,255,20,0.4)]"
+              className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-black transition-all"
+              style={{
+                backgroundColor: primary,
+                boxShadow: `0 0 25px rgba(${rgb}, 0.45)`,
+              }}
             >
               <span>Let's Work Together</span>
               <ArrowUpRight className="w-4 h-4" />
