@@ -32,8 +32,8 @@ export function App() {
     navigate('/contact');
   };
 
-  const handleFormSubmitted = (name: string) => {
-    setToastMessage(`Inquiry sent successfully! Thank you, ${name}.`);
+  const handleFormSubmitted = () => {
+    setToastMessage('Thanks for your enquiry. Our team will contact you soon.');
   };
 
   const handleResumeCopySuccess = () => {

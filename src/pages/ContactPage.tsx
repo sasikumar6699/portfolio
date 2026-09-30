@@ -3,7 +3,7 @@ import { Contact } from '../components/Contact';
 
 interface ContactPageProps {
   selectedService?: string;
-  onSubmitted: (name: string) => void;
+  onSubmitted?: (name?: string) => void;
 }
 
 export const ContactPage: React.FC<ContactPageProps> = ({ selectedService, onSubmitted }) => {

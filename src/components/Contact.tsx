@@ -11,7 +11,6 @@ import {
   Sparkles, 
   Activity, 
   ShieldCheck,
-  ExternalLink,
   RefreshCw
 } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
@@ -19,18 +18,7 @@ import { useCyberDoor } from '../context/CyberDoorContext';
 
 interface ContactProps {
   initialService?: string;
-  onSubmitted: (name: string) => void;
-}
-
-interface SubmittedEnquiry {
-  name: string;
-  email: string;
-  phone: string;
-  company: string;
-  projectType: string;
-  budgetRange: string;
-  description: string;
-  whatsappUrl: string;
+  onSubmitted?: (name?: string) => void;
 }
 
 export const Contact: React.FC<ContactProps> = ({ initialService, onSubmitted }) => {
@@ -48,7 +36,6 @@ export const Contact: React.FC<ContactProps> = ({ initialService, onSubmitted })
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [submittedEnquiry, setSubmittedEnquiry] = useState<SubmittedEnquiry | null>(null);
 
   useEffect(() => {
     if (initialService) {
@@ -66,103 +53,39 @@ export const Contact: React.FC<ContactProps> = ({ initialService, onSubmitted })
     setIsSubmitting(true);
 
     const targetEmail = "connect.techyora@gmail.com";
-    const phone = "919524227511";
 
-    // 1. WhatsApp formatted text & URL to automatically open
-    const whatsappText = encodeURIComponent(
-      `*TECHYORA - NEW PROJECT ENQUIRY*\n` +
-      `================================\n` +
-      `*Client Name:* ${formData.name}\n` +
-      `*Email:* ${formData.email}\n` +
-      `*Phone:* ${formData.phone || 'Not provided'}\n` +
-      `*Company:* ${formData.company || 'Not provided'}\n` +
-      `*Service Required:* ${formData.projectType}\n` +
-      `*Budget Range:* ${formData.budgetRange}\n\n` +
-      `*Project Specifications:*\n${formData.description}\n` +
-      `================================\n` +
-      `Dispatched via Techyora Website`
-    );
-
-    const isMobile = typeof window !== 'undefined' && /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    const whatsappUrl = isMobile 
-      ? `https://api.whatsapp.com/send?phone=${phone}&text=${whatsappText}` 
-      : `https://web.whatsapp.com/send?phone=${phone}&text=${whatsappText}`;
-
-    // 2. Automatically open WhatsApp to share enquiry with 9524227511
+    // Dispatch enquiry email in the background to connect.techyora@gmail.com with standard table template
     try {
-      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-    } catch {
-      // Browser popup blocked fallback handled in UI
-    }
+      const fd = new FormData();
+      fd.append('name', formData.name);
+      fd.append('email', formData.email);
+      fd.append('phone', formData.phone || 'Not provided');
+      fd.append('company', formData.company || 'Not provided');
+      fd.append('service', formData.projectType);
+      fd.append('budget', formData.budgetRange);
+      fd.append('message', formData.description);
+      fd.append('_subject', `[Techyora Project Enquiry] ${formData.projectType} - ${formData.name}`);
+      fd.append('_template', 'table');
+      fd.append('_captcha', 'false');
+      fd.append('_replyto', formData.email);
+      fd.append('_autoresponse', 'Thank you for your enquiry. The Techyora team will contact you shortly.');
 
-    // 3. Dispatch enquiry details to connect.techyora@gmail.com in the background with standard table template
-    try {
-      const templatePayload = {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone || 'Not provided',
-        company: formData.company || 'Not provided',
-        service: formData.projectType,
-        budget: formData.budgetRange,
-        message: formData.description,
-        _subject: `[Techyora Project Enquiry] ${formData.projectType} - ${formData.name}`,
-        _template: 'table',
-        _captcha: 'false',
-        _replyto: formData.email,
-        _autoresponse: 'Thank you for your enquiry. The Techyora team will contact you shortly.'
-      };
-
-      // Background JSON fetch
-      fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
+      // Background POST - mode 'no-cors' guarantees zero page redirect or popup
+      fetch(`https://formsubmit.co/${targetEmail}`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(templatePayload)
+        body: fd,
+        mode: 'no-cors',
       }).catch(() => {});
-
-      // Hidden Form fallback to ensure delivery via standard browser form submission
-      const formEl = document.createElement('form');
-      formEl.method = 'POST';
-      formEl.action = `https://formsubmit.co/${targetEmail}`;
-      formEl.target = 'hidden_contact_iframe';
-      formEl.style.display = 'none';
-
-      Object.entries(templatePayload).forEach(([k, v]) => {
-        const inp = document.createElement('input');
-        inp.type = 'hidden';
-        inp.name = k;
-        inp.value = String(v);
-        formEl.appendChild(inp);
-      });
-
-      document.body.appendChild(formEl);
-      formEl.submit();
-      setTimeout(() => {
-        if (formEl.parentNode) formEl.parentNode.removeChild(formEl);
-      }, 2000);
     } catch {
-      // Silently handle background errors
+      // Silently handle
     }
-
-    const compiledData: SubmittedEnquiry = {
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      company: formData.company,
-      projectType: formData.projectType,
-      budgetRange: formData.budgetRange,
-      description: formData.description,
-      whatsappUrl
-    };
-
-    setSubmittedEnquiry(compiledData);
 
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSuccess(true);
-      onSubmitted(formData.name);
+      if (onSubmitted) {
+        onSubmitted(formData.name);
+      }
 
       setFormData({
         name: '',
@@ -178,7 +101,6 @@ export const Contact: React.FC<ContactProps> = ({ initialService, onSubmitted })
 
   const handleResetForm = () => {
     setIsSuccess(false);
-    setSubmittedEnquiry(null);
   };
 
   return (
@@ -481,12 +403,12 @@ export const Contact: React.FC<ContactProps> = ({ initialService, onSubmitted })
                 </span>
               </div>
               
-              {isSuccess && submittedEnquiry ? (
+              {isSuccess ? (
                 <motion.div 
                   initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4 }}
-                  className="space-y-6 text-center py-4"
+                  className="space-y-6 text-center py-10 px-4"
                 >
                   {/* Glowing Animated Success Icon */}
                   <div
@@ -511,68 +433,12 @@ export const Contact: React.FC<ContactProps> = ({ initialService, onSubmitted })
                     </p>
                   </div>
 
-                  {/* Telemetry Summary */}
-                  <div className="p-4 sm:p-5 rounded-xl bg-[#050505] border border-white/10 text-left font-mono text-xs space-y-2.5">
-                    <div className="flex items-center justify-between pb-2 border-b border-white/10 text-[11px]">
-                      <span className="text-gray-400">DISPATCHED TO:</span>
-                      <span className="font-bold underline" style={{ color: primary }}>connect.techyora@gmail.com</span>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
-                      <div>
-                        <span className="text-gray-500 block text-[9.5px]">CLIENT NAME:</span>
-                        <span className="text-white font-semibold">{submittedEnquiry.name}</span>
-                      </div>
-                      <div>
-                        <span className="text-gray-500 block text-[9.5px]">EMAIL:</span>
-                        <span className="text-white font-semibold">{submittedEnquiry.email}</span>
-                      </div>
-                      <div>
-                        <span className="text-gray-500 block text-[9.5px]">SERVICE:</span>
-                        <span className="text-white font-semibold truncate block">{submittedEnquiry.projectType}</span>
-                      </div>
-                      <div>
-                        <span className="text-gray-500 block text-[9.5px]">BUDGET TIER:</span>
-                        <span className="font-semibold" style={{ color: primary }}>{submittedEnquiry.budgetRange}</span>
-                      </div>
-                    </div>
-                    <div className="pt-2 border-t border-white/5">
-                      <span className="text-gray-500 block text-[9.5px] mb-1">PROJECT OBJECTIVES:</span>
-                      <p className="text-gray-300 text-xs font-sans bg-[#08080A] p-2.5 rounded-lg border border-white/5">
-                        "{submittedEnquiry.description}"
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* WhatsApp Forwarding Notification */}
-                  <div className="p-3.5 rounded-xl bg-[#0B1510] border border-[#25D366]/40 flex items-center justify-between gap-3 text-left">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-lg bg-[#25D366] text-black flex items-center justify-center shrink-0">
-                        <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current">
-                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 00-3.48-8.413z" />
-                        </svg>
-                      </div>
-                      <div>
-                        <span className="text-xs font-bold text-[#25D366] block">WhatsApp Notification</span>
-                        <span className="text-[10px] font-mono text-gray-300 block">Enquiry forwarded to +91 9524227511</span>
-                      </div>
-                    </div>
-                    <a
-                      href={submittedEnquiry.whatsappUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-3 py-1.5 rounded-lg bg-[#25D366] hover:bg-[#22c55e] text-black text-xs font-mono font-bold flex items-center gap-1 transition-all"
-                    >
-                      <span>Open Chat</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  </div>
-
                   {/* Reset / Submit Another */}
-                  <div className="pt-2">
+                  <div className="pt-4">
                     <button
                       type="button"
                       onClick={handleResetForm}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-white/10 hover:border-white/30 text-xs font-mono text-gray-300 hover:text-white transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/10 hover:border-white/30 text-xs font-mono text-gray-300 hover:text-white transition-colors cursor-pointer"
                     >
                       <RefreshCw className="w-3.5 h-3.5" />
                       <span>Submit Another Project Enquiry</span>
@@ -736,14 +602,6 @@ export const Contact: React.FC<ContactProps> = ({ initialService, onSubmitted })
         </div>
 
       </div>
-
-      {/* Hidden Iframe for zero-redirect background form transmission */}
-      <iframe
-        name="hidden_contact_iframe"
-        title="Background Submission Sink"
-        style={{ display: 'none' }}
-        className="hidden"
-      />
     </section>
   );
 };
