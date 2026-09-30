@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 import { useCyberDoor } from '../context/CyberDoorContext';
+import { dispatchEnquiry } from '../services/notificationService';
 
 interface ContactProps {
   initialService?: string;
@@ -52,33 +53,16 @@ export const Contact: React.FC<ContactProps> = ({ initialService, onSubmitted })
 
     setIsSubmitting(true);
 
-    const targetEmail = "connect.techyora@gmail.com";
-
-    // Dispatch enquiry email in the background to connect.techyora@gmail.com with standard table template
-    try {
-      const fd = new FormData();
-      fd.append('name', formData.name);
-      fd.append('email', formData.email);
-      fd.append('phone', formData.phone || 'Not provided');
-      fd.append('company', formData.company || 'Not provided');
-      fd.append('service', formData.projectType);
-      fd.append('budget', formData.budgetRange);
-      fd.append('message', formData.description);
-      fd.append('_subject', `[Techyora Project Enquiry] ${formData.projectType} - ${formData.name}`);
-      fd.append('_template', 'table');
-      fd.append('_captcha', 'false');
-      fd.append('_replyto', formData.email);
-      fd.append('_autoresponse', 'Thank you for your enquiry. The Techyora team will contact you shortly.');
-
-      // Background POST - mode 'no-cors' guarantees zero page redirect or popup
-      fetch(`https://formsubmit.co/${targetEmail}`, {
-        method: 'POST',
-        body: fd,
-        mode: 'no-cors',
-      }).catch(() => {});
-    } catch {
-      // Silently handle
-    }
+    // Silently dispatch enquiry to configured Email & WhatsApp channels in background
+    dispatchEnquiry({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      company: formData.company,
+      service: formData.projectType,
+      budget: formData.budgetRange,
+      message: formData.description,
+    });
 
     setTimeout(() => {
       setIsSubmitting(false);

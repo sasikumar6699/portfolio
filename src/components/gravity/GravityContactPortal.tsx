@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 import { useCyberDoor } from '../../context/CyberDoorContext';
+import { dispatchEnquiry } from '../../services/notificationService';
 
 interface GravityContactPortalProps {
   onOpenContact?: () => void;
@@ -42,28 +43,13 @@ export const GravityContactPortal: React.FC<GravityContactPortalProps> = ({
     e.preventDefault();
     setIsSubmitting(true);
 
-    const recipient = 'connect.techyora@gmail.com';
-
-    // Dispatch enquiry email in the background to connect.techyora@gmail.com with standard table template
-    try {
-      const fd = new FormData();
-      fd.append('name', formData.name);
-      fd.append('email', formData.email);
-      fd.append('service', formData.service);
-      fd.append('message', formData.message);
-      fd.append('_subject', `[Techyora Project Enquiry] ${formData.service} - ${formData.name}`);
-      fd.append('_template', 'table');
-      fd.append('_captcha', 'false');
-      fd.append('_replyto', formData.email);
-      fd.append('_autoresponse', 'Thank you for your enquiry. The Techyora team will contact you shortly.');
-
-      // Background POST - mode 'no-cors' guarantees zero page redirect or popup
-      fetch(`https://formsubmit.co/${recipient}`, {
-        method: 'POST',
-        body: fd,
-        mode: 'no-cors'
-      }).catch(() => {});
-    } catch {}
+    // Silently dispatch enquiry to configured Email & WhatsApp channels in background
+    dispatchEnquiry({
+      name: formData.name,
+      email: formData.email,
+      service: formData.service,
+      message: formData.message,
+    });
 
     setTimeout(() => {
       setIsSubmitting(false);
