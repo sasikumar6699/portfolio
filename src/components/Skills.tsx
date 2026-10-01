@@ -22,7 +22,7 @@ import { useCyberDoor } from '../context/CyberDoorContext';
 
 export const Skills: React.FC = () => {
   const { currentTheme } = useCyberDoor();
-  const { primary, secondary, rgb } = currentTheme;
+  const { primary, rgb } = currentTheme;
 
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [activeSolutionsTab, setActiveSolutionsTab] = useState<number>(0);
