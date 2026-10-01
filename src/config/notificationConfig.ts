@@ -31,11 +31,9 @@ export const NOTIFICATION_CONFIG = {
   callMeBotApiKey: '', // e.g. '123456'
 
   /**
-   * 3. UNIFIED AUTOMATION WEBHOOK (Optional - Make.com / Pabbly / Zapier)
-   * If you prefer using Make.com or Pabbly Connect to dispatch both Email + WhatsApp:
-   * Paste your free webhook URL here.
+   * 3. DIRECT GOOGLE APPS SCRIPT WEB APP (100% Free, Direct to connect.techyora@gmail.com)
    */
-  webhookUrl: '', // e.g. 'https://hook.eu1.make.com/xxxxxxxxxxxxxxxx'
+  webhookUrl: 'https://script.google.com/macros/s/AKfycbwLEH6tQtwmpV6Dl4Q0kv_yBWnuAUi307o4npOV0a6B2jc7HJWoqE25EwdtmBwO0vMuyg/exec',
 
   /**
    * 4. TELEGRAM BOT (Optional instant backup alert)
