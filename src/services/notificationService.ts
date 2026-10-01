@@ -119,15 +119,17 @@ async function dispatchWebhook(data: EnquiryPayload): Promise<boolean> {
   if (!webhookUrl || webhookUrl.trim() === '') return false;
 
   try {
+    const payload = JSON.stringify({
+      timestamp: new Date().toISOString(),
+      ...data,
+    });
+
     await fetch(webhookUrl, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'text/plain;charset=utf-8',
       },
-      body: JSON.stringify({
-        timestamp: new Date().toISOString(),
-        ...data,
-      }),
+      body: payload,
       mode: 'no-cors',
     });
     return true;
