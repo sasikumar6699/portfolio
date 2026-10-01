@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  TECH_STACKS, 
-  TECH_CATEGORIES 
-} from '../data/techStackData';
+import { TECH_STACKS } from '../data/techStackData';
 import { SKILL_CATEGORIES } from '../data/portfolioData';
 import { 
-  Layers, 
   Cpu, 
   ShieldCheck, 
   Sparkles, 
@@ -24,12 +19,7 @@ export const Skills: React.FC = () => {
   const { currentTheme } = useCyberDoor();
   const { primary, rgb } = currentTheme;
 
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [activeSolutionsTab, setActiveSolutionsTab] = useState<number>(0);
-
-  const filteredStacks = selectedCategory === 'all'
-    ? TECH_STACKS
-    : TECH_STACKS.filter(item => item.category === selectedCategory);
 
   const getSolutionsCategoryIcon = (index: number) => {
     const iconClass = "w-4 h-4";
@@ -52,13 +42,13 @@ export const Skills: React.FC = () => {
       />
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
         
         {/* =========================================================================
-            SECTION 1: HEADER & ANIMATED CYBER MARQUEE TICKER
+            HEADER & ANIMATED CYBER LOGO AUTO-SCROLL
             ========================================================================= */}
         <div>
-          <div className="max-w-3xl mb-10">
+          <div className="max-w-3xl mb-8">
             <div
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0D0D0D] border text-xs font-mono mb-4 transition-colors"
               style={{
@@ -88,35 +78,104 @@ export const Skills: React.FC = () => {
             </p>
           </div>
 
-          {/* Infinite Horizontal Cyber Logo Marquee */}
-          <div className="relative overflow-hidden py-4 rounded-2xl bg-[#0A0A0A]/90 border border-white/10 backdrop-blur-md shadow-2xl">
-            {/* Edge Blur Gradients */}
-            <div className="absolute top-0 left-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
-            <div className="absolute top-0 right-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+          {/* =========================================================================
+              ANIME MECHA AUTO-SCROLL CYBER MARQUEE (SLOW & SMOOTH)
+              ========================================================================= */}
+          <div className="relative overflow-hidden py-6 rounded-2xl bg-[#0A0A0A]/95 border border-white/10 backdrop-blur-xl shadow-2xl group/ticker">
+            
+            {/* Top & Bottom Glowing Laser Track Lines */}
+            <div
+              className="absolute top-0 left-0 right-0 h-[1.5px] opacity-70 transition-all duration-500 group-hover/ticker:opacity-100"
+              style={{
+                background: `linear-gradient(90deg, transparent, ${primary}, transparent)`,
+                boxShadow: `0 0 10px ${primary}`,
+              }}
+            />
+            <div
+              className="absolute bottom-0 left-0 right-0 h-[1.5px] opacity-70 transition-all duration-500 group-hover/ticker:opacity-100"
+              style={{
+                background: `linear-gradient(90deg, transparent, ${primary}, transparent)`,
+                boxShadow: `0 0 10px ${primary}`,
+              }}
+            />
 
-            <div className="flex gap-4 sm:gap-6 animate-marquee whitespace-nowrap will-change-transform">
+            {/* Anime Mecha 4-Corner Target Reticles on Marquee Frame */}
+            <span
+              className="absolute top-1.5 left-1.5 w-3 h-3 border-t-2 border-l-2 opacity-50 group-hover/ticker:opacity-100 transition-all pointer-events-none"
+              style={{ borderColor: primary }}
+            />
+            <span
+              className="absolute top-1.5 right-1.5 w-3 h-3 border-t-2 border-r-2 opacity-50 group-hover/ticker:opacity-100 transition-all pointer-events-none"
+              style={{ borderColor: primary }}
+            />
+            <span
+              className="absolute bottom-1.5 left-1.5 w-3 h-3 border-b-2 border-l-2 opacity-50 group-hover/ticker:opacity-100 transition-all pointer-events-none"
+              style={{ borderColor: primary }}
+            />
+            <span
+              className="absolute bottom-1.5 right-1.5 w-3 h-3 border-b-2 border-r-2 opacity-50 group-hover/ticker:opacity-100 transition-all pointer-events-none"
+              style={{ borderColor: primary }}
+            />
+
+            {/* Edge Blur Gradients */}
+            <div className="absolute top-0 left-0 bottom-0 w-20 sm:w-32 bg-gradient-to-r from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+            <div className="absolute top-0 right-0 bottom-0 w-20 sm:w-32 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+
+            {/* Continuous Marquee Ribbon */}
+            <div className="flex gap-4 sm:gap-6 animate-marquee whitespace-nowrap will-change-transform py-1">
               {[...TECH_STACKS, ...TECH_STACKS].map((tech, idx) => (
                 <div
                   key={`${tech.id}-${idx}`}
-                  className="inline-flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#050505] border border-white/10 hover:border-white/30 transition-all group shrink-0 cursor-default"
+                  className="relative inline-flex items-center gap-3.5 px-4 sm:px-5 py-3 rounded-xl bg-[#050505] border border-white/10 hover:border-white/30 transition-all duration-300 group shrink-0 cursor-default shadow-md overflow-hidden"
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = primary;
-                    e.currentTarget.style.boxShadow = `0 0 15px rgba(${rgb}, 0.25)`;
+                    e.currentTarget.style.boxShadow = `0 0 20px rgba(${rgb}, 0.35)`;
+                    e.currentTarget.style.transform = 'translateY(-2px)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
                     e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
-                  <div className="w-6 h-6 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                    {tech.icon({ className: 'w-5 h-5' })}
+                  {/* Top projector accent */}
+                  <div
+                    className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 rounded-b group-hover:w-16 transition-all duration-300 pointer-events-none"
+                    style={{
+                      backgroundColor: primary,
+                      boxShadow: `0 0 8px ${primary}`,
+                    }}
+                  />
+
+                  {/* Logo Container Tile */}
+                  <div 
+                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#0D0D0D] border border-white/10 flex items-center justify-center p-1.5 group-hover:scale-110 group-hover:rotate-2 transition-all duration-300 shrink-0"
+                    style={{
+                      boxShadow: `0 0 12px ${tech.color}30`,
+                      borderColor: `${tech.color}45`,
+                    }}
+                  >
+                    {tech.icon({ className: 'w-full h-full' })}
                   </div>
-                  <span className="text-xs sm:text-sm font-bold text-gray-200 group-hover:text-white transition-colors">
-                    {tech.name}
-                  </span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/5 text-gray-400">
-                    {tech.categoryLabel}
-                  </span>
+
+                  {/* Tech Name & Role */}
+                  <div className="flex flex-col text-left">
+                    <span className="text-xs sm:text-sm font-bold text-gray-200 group-hover:text-white transition-colors">
+                      {tech.name}
+                    </span>
+                    <span className="text-[10px] font-mono text-gray-400 group-hover:text-gray-300">
+                      {tech.categoryLabel}
+                    </span>
+                  </div>
+
+                  {/* Status Indicator */}
+                  <span
+                    className="w-1.5 h-1.5 rounded-full ml-1"
+                    style={{
+                      backgroundColor: primary,
+                      boxShadow: `0 0 6px ${primary}`,
+                    }}
+                  />
                 </div>
               ))}
             </div>
@@ -124,168 +183,7 @@ export const Skills: React.FC = () => {
         </div>
 
         {/* =========================================================================
-            SECTION 2: INTERACTIVE TECH STACK LOGOS & ARCHITECTURE GRID
-            ========================================================================= */}
-        <div className="space-y-8">
-          
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
-            <div>
-              <div className="flex items-center gap-2">
-                <Layers className="w-5 h-5" style={{ color: primary }} />
-                <h2 className="text-xl sm:text-2xl font-bold text-white">
-                  Production Technology Matrix
-                </h2>
-              </div>
-              <p className="text-xs sm:text-sm text-gray-400 font-mono mt-1">
-                FILTER BY DOMAIN // {filteredStacks.length} ACTIVE FRAMEWORKS DEPLOYED
-              </p>
-            </div>
-
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap gap-2">
-              {TECH_CATEGORIES.map((cat) => {
-                const isActive = selectedCategory === cat.id;
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => setSelectedCategory(cat.id)}
-                    className="px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all duration-200 border cursor-pointer"
-                    style={{
-                      backgroundColor: isActive ? primary : '#0D0D0D',
-                      color: isActive ? '#000000' : '#9CA3AF',
-                      borderColor: isActive ? primary : 'rgba(255, 255, 255, 0.12)',
-                      boxShadow: isActive ? `0 0 16px rgba(${rgb}, 0.4)` : 'none',
-                    }}
-                  >
-                    {cat.label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* The Tech Stack Cards Grid with Official SVG Logos */}
-          <motion.div 
-            layout
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
-          >
-            <AnimatePresence>
-              {filteredStacks.map((tech) => (
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, scale: 0.92, y: 15 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.92, y: 15 }}
-                  transition={{ duration: 0.25 }}
-                  key={tech.id}
-                  className="relative p-5 rounded-2xl bg-[#0D0D0D] border border-white/10 transition-all duration-300 group flex flex-col justify-between overflow-hidden shadow-lg hover:shadow-2xl"
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = primary;
-                    e.currentTarget.style.transform = 'translateY(-3px)';
-                    e.currentTarget.style.boxShadow = `0 12px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(${rgb}, 0.25)`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
-                >
-                  {/* Anime Holographic Top Projector Light */}
-                  <div
-                    className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-0.5 rounded-b group-hover:w-32 transition-all duration-500"
-                    style={{
-                      backgroundColor: primary,
-                      boxShadow: `0 0 14px ${primary}`,
-                    }}
-                  />
-                  <div
-                    className="absolute top-0 left-1/2 -translate-x-1/2 w-36 h-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"
-                    style={{
-                      background: `linear-gradient(to bottom, rgba(${rgb}, 0.18), transparent)`,
-                    }}
-                  />
-
-                  {/* Anime Mecha HUD 4-Corner Target Reticles */}
-                  <span
-                    className="absolute top-1.5 left-1.5 w-3 h-3 border-t-2 border-l-2 transition-all duration-300 opacity-30 group-hover:opacity-100 group-hover:w-4 group-hover:h-4 pointer-events-none"
-                    style={{ borderColor: primary }}
-                  />
-                  <span
-                    className="absolute top-1.5 right-1.5 w-3 h-3 border-t-2 border-r-2 transition-all duration-300 opacity-30 group-hover:opacity-100 group-hover:w-4 group-hover:h-4 pointer-events-none"
-                    style={{ borderColor: primary }}
-                  />
-                  <span
-                    className="absolute bottom-1.5 left-1.5 w-3 h-3 border-b-2 border-l-2 transition-all duration-300 opacity-30 group-hover:opacity-100 group-hover:w-4 group-hover:h-4 pointer-events-none"
-                    style={{ borderColor: primary }}
-                  />
-                  <span
-                    className="absolute bottom-1.5 right-1.5 w-3 h-3 border-b-2 border-r-2 transition-all duration-300 opacity-30 group-hover:opacity-100 group-hover:w-4 group-hover:h-4 pointer-events-none"
-                    style={{ borderColor: primary }}
-                  />
-
-                  {/* Laser Scanline Anime Effect on Hover */}
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="anime-scanner" />
-                  </div>
-                  
-                  {/* Top: Logo, Name, Badge */}
-                  <div className="relative z-10">
-                    <div className="flex items-start justify-between gap-3 mb-4">
-                      {/* Logo Container Tile */}
-                      <div 
-                        className="w-12 h-12 rounded-xl bg-[#050505] border border-white/10 flex items-center justify-center p-2.5 group-hover:scale-110 group-hover:rotate-1 transition-all duration-300 shrink-0 shadow-md"
-                        style={{
-                          boxShadow: `0 0 18px ${tech.color}35`,
-                          borderColor: `${tech.color}50`,
-                        }}
-                      >
-                        {tech.icon({ className: 'w-full h-full' })}
-                      </div>
-
-                      <span
-                        className="px-2 py-0.5 rounded border text-[10px] font-mono font-bold tracking-wider uppercase shrink-0 transition-colors"
-                        style={{
-                          backgroundColor: `rgba(${rgb}, 0.08)`,
-                          borderColor: `rgba(${rgb}, 0.25)`,
-                          color: primary,
-                        }}
-                      >
-                        {tech.badge}
-                      </span>
-                    </div>
-
-                    <div className="mb-2">
-                      <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-white transition-colors flex items-center gap-1.5">
-                        <span>{tech.name}</span>
-                      </h3>
-                      <p className="text-xs font-mono font-medium text-gray-400 group-hover:text-gray-300">
-                        {tech.role}
-                      </p>
-                    </div>
-
-                    <p className="text-xs text-gray-400 group-hover:text-gray-200 leading-relaxed font-light mb-4">
-                      {tech.description}
-                    </p>
-                  </div>
-
-                  {/* Bottom: Domain Tag & Live Signal */}
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono relative z-10">
-                    <span className="text-gray-400">
-                      {tech.categoryLabel}
-                    </span>
-                    <span className="flex items-center gap-1.5 font-bold" style={{ color: primary }}>
-                      <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: primary }} />
-                      DEPLOYED
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
-        </div>
-
-        {/* =========================================================================
-            SECTION 3: ENTERPRISE BUSINESS CAPABILITIES BREAKDOWN
+            ENTERPRISE BUSINESS CAPABILITIES BREAKDOWN
             ========================================================================= */}
         <div className="space-y-6">
           <div className="flex items-center justify-between pb-4 border-b border-white/10">
@@ -326,8 +224,26 @@ export const Skills: React.FC = () => {
           </div>
 
           {/* Detailed Deliverables Matrix for Selected Solution */}
-          <div className="bg-[#0D0D0D] rounded-2xl border border-white/10 p-6 sm:p-8 shadow-xl">
-            <div className="flex items-center justify-between pb-4 mb-6 border-b border-white/10">
+          <div className="relative bg-[#0D0D0D] rounded-2xl border border-white/10 p-6 sm:p-8 shadow-xl overflow-hidden group">
+            {/* Anime Mecha Corner Brackets */}
+            <span
+              className="absolute top-2 left-2 w-3.5 h-3.5 border-t-2 border-l-2 transition-all duration-300 pointer-events-none"
+              style={{ borderColor: primary }}
+            />
+            <span
+              className="absolute top-2 right-2 w-3.5 h-3.5 border-t-2 border-r-2 transition-all duration-300 pointer-events-none"
+              style={{ borderColor: primary }}
+            />
+            <span
+              className="absolute bottom-2 left-2 w-3.5 h-3.5 border-b-2 border-l-2 transition-all duration-300 pointer-events-none"
+              style={{ borderColor: primary }}
+            />
+            <span
+              className="absolute bottom-2 right-2 w-3.5 h-3.5 border-b-2 border-r-2 transition-all duration-300 pointer-events-none"
+              style={{ borderColor: primary }}
+            />
+
+            <div className="flex items-center justify-between pb-4 mb-6 border-b border-white/10 relative z-10">
               <h3 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2.5">
                 {getSolutionsCategoryIcon(activeSolutionsTab)}
                 <span>{SKILL_CATEGORIES[activeSolutionsTab].title}</span>
@@ -337,11 +253,11 @@ export const Skills: React.FC = () => {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
               {SKILL_CATEGORIES[activeSolutionsTab].skills.map((skill, idx) => (
                 <div
                   key={idx}
-                  className="p-4 rounded-xl bg-[#050505] border border-white/10 transition-all group flex flex-col justify-between"
+                  className="p-4 rounded-xl bg-[#050505] border border-white/10 transition-all group/item flex flex-col justify-between"
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = primary;
                     e.currentTarget.style.boxShadow = `0 0 15px rgba(${rgb}, 0.2)`;
@@ -352,15 +268,15 @@ export const Skills: React.FC = () => {
                   }}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm sm:text-base font-bold text-white group-hover:text-white transition-colors">
+                    <span className="text-sm sm:text-base font-bold text-white group-hover/item:text-white transition-colors">
                       {skill.name}
                     </span>
                     <CheckCircle2
-                      className="w-4 h-4 shrink-0 transition-all group-hover:scale-110"
+                      className="w-4 h-4 shrink-0 transition-all group-hover/item:scale-110"
                       style={{ color: primary }}
                     />
                   </div>
-                  <span className="text-xs font-mono text-gray-400 group-hover:text-gray-300">
+                  <span className="text-xs font-mono text-gray-400 group-hover/item:text-gray-300">
                     {skill.tag}
                   </span>
                 </div>
