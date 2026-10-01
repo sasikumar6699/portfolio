@@ -497,10 +497,40 @@ stop[stop-color="#10b981"] {
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 40s linear infinite;
+  animation: marquee 75s linear infinite;
 }
 
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+/* Anime Mecha Holographic Scanner Light */
+@keyframes animeScanline {
+  0% {
+    top: -20%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    top: 120%;
+    opacity: 0;
+  }
+}
+
+.anime-scanner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyber-primary), transparent);
+  box-shadow: 0 0 12px var(--cyber-primary);
+  animation: animeScanline 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
 

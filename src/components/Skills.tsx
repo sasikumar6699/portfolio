@@ -190,32 +190,60 @@ export const Skills: React.FC = () => {
                     e.currentTarget.style.boxShadow = 'none';
                   }}
                 >
-                  {/* Subtle Mecha HUD Reticle Corners */}
+                  {/* Anime Holographic Top Projector Light */}
+                  <div
+                    className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-0.5 rounded-b group-hover:w-32 transition-all duration-500"
+                    style={{
+                      backgroundColor: primary,
+                      boxShadow: `0 0 14px ${primary}`,
+                    }}
+                  />
+                  <div
+                    className="absolute top-0 left-1/2 -translate-x-1/2 w-36 h-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"
+                    style={{
+                      background: `linear-gradient(to bottom, rgba(${rgb}, 0.18), transparent)`,
+                    }}
+                  />
+
+                  {/* Anime Mecha HUD 4-Corner Target Reticles */}
                   <span
-                    className="absolute top-2 left-2 w-2.5 h-2.5 border-t border-l opacity-40 group-hover:opacity-100 transition-all"
+                    className="absolute top-1.5 left-1.5 w-3 h-3 border-t-2 border-l-2 transition-all duration-300 opacity-30 group-hover:opacity-100 group-hover:w-4 group-hover:h-4 pointer-events-none"
                     style={{ borderColor: primary }}
                   />
                   <span
-                    className="absolute top-2 right-2 w-2.5 h-2.5 border-t border-r opacity-40 group-hover:opacity-100 transition-all"
+                    className="absolute top-1.5 right-1.5 w-3 h-3 border-t-2 border-r-2 transition-all duration-300 opacity-30 group-hover:opacity-100 group-hover:w-4 group-hover:h-4 pointer-events-none"
                     style={{ borderColor: primary }}
                   />
+                  <span
+                    className="absolute bottom-1.5 left-1.5 w-3 h-3 border-b-2 border-l-2 transition-all duration-300 opacity-30 group-hover:opacity-100 group-hover:w-4 group-hover:h-4 pointer-events-none"
+                    style={{ borderColor: primary }}
+                  />
+                  <span
+                    className="absolute bottom-1.5 right-1.5 w-3 h-3 border-b-2 border-r-2 transition-all duration-300 opacity-30 group-hover:opacity-100 group-hover:w-4 group-hover:h-4 pointer-events-none"
+                    style={{ borderColor: primary }}
+                  />
+
+                  {/* Laser Scanline Anime Effect on Hover */}
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="anime-scanner" />
+                  </div>
                   
                   {/* Top: Logo, Name, Badge */}
-                  <div>
+                  <div className="relative z-10">
                     <div className="flex items-start justify-between gap-3 mb-4">
                       {/* Logo Container Tile */}
                       <div 
-                        className="w-12 h-12 rounded-xl bg-[#050505] border border-white/10 flex items-center justify-center p-2.5 group-hover:scale-110 transition-transform duration-300 shrink-0 shadow-md"
+                        className="w-12 h-12 rounded-xl bg-[#050505] border border-white/10 flex items-center justify-center p-2.5 group-hover:scale-110 group-hover:rotate-1 transition-all duration-300 shrink-0 shadow-md"
                         style={{
-                          boxShadow: `0 0 15px ${tech.color}25`,
-                          borderColor: `${tech.color}40`,
+                          boxShadow: `0 0 18px ${tech.color}35`,
+                          borderColor: `${tech.color}50`,
                         }}
                       >
                         {tech.icon({ className: 'w-full h-full' })}
                       </div>
 
                       <span
-                        className="px-2 py-0.5 rounded border text-[10px] font-mono font-bold tracking-wider uppercase shrink-0"
+                        className="px-2 py-0.5 rounded border text-[10px] font-mono font-bold tracking-wider uppercase shrink-0 transition-colors"
                         style={{
                           backgroundColor: `rgba(${rgb}, 0.08)`,
                           borderColor: `rgba(${rgb}, 0.25)`,
@@ -235,13 +263,13 @@ export const Skills: React.FC = () => {
                       </p>
                     </div>
 
-                    <p className="text-xs text-gray-400 group-hover:text-gray-300 leading-relaxed font-light mb-4">
+                    <p className="text-xs text-gray-400 group-hover:text-gray-200 leading-relaxed font-light mb-4">
                       {tech.description}
                     </p>
                   </div>
 
                   {/* Bottom: Domain Tag & Live Signal */}
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono">
+                  <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono relative z-10">
                     <span className="text-gray-400">
                       {tech.categoryLabel}
                     </span>

@@ -17,8 +17,8 @@ export const TECH_CATEGORIES = [
   { id: 'erp', label: 'ERP & Business Systems' },
   { id: 'frontend', label: 'Frontend & 3D Web' },
   { id: 'backend', label: 'Backend & Databases' },
-  { id: 'ai', label: 'AI & Automation' },
-  { id: 'devops', label: 'Cloud, DevOps & AMC' },
+  { id: 'ai', label: 'AI & Machine Learning' },
+  { id: 'devops', label: 'Hosting, Cloud & AMC' },
   { id: 'design', label: 'Branding & UI/UX' },
 ] as const;
 
@@ -188,6 +188,23 @@ export const TECH_STACKS: TechStackItem[] = [
     ),
   },
   {
+    id: 'shopify',
+    name: 'Shopify / E-Commerce',
+    category: 'frontend',
+    categoryLabel: 'E-Commerce Architecture',
+    role: 'Online Storefront Systems',
+    description: 'Custom Shopify themes, headless checkout integrations, inventory synchronization & payment setups.',
+    badge: 'Commerce Engine',
+    color: '#95BF47',
+    icon: ({ className = 'w-8 h-8' }) => (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <path d="M19.5 6.5L16 4.5L14 3H10L8 4.5L4.5 6.5L3 21H21L19.5 6.5Z" fill="#95BF47" />
+        <path d="M10 3V6.5C10 7.6 10.9 8.5 12 8.5C13.1 8.5 14 7.6 14 6.5V3" stroke="white" strokeWidth="1.5" />
+        <text x="9" y="16" fill="white" fontSize="9" fontWeight="bold" fontFamily="sans-serif">S</text>
+      </svg>
+    ),
+  },
+  {
     id: 'vite',
     name: 'Vite',
     category: 'frontend',
@@ -243,6 +260,21 @@ export const TECH_STACKS: TechStackItem[] = [
     ),
   },
   {
+    id: 'supabase',
+    name: 'Supabase',
+    category: 'backend',
+    categoryLabel: 'Realtime Backend',
+    role: 'BaaS & Realtime Auth',
+    description: 'Postgres row-level security, realtime live subscriptions, vector embeddings & edge storage.',
+    badge: 'Realtime BaaS',
+    color: '#3ECF8E',
+    icon: ({ className = 'w-8 h-8' }) => (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <path d="M12.5 2L3 13.5H11.5L10 22L20.5 9.5H12L12.5 2Z" fill="#3ECF8E" />
+      </svg>
+    ),
+  },
+  {
     id: 'express',
     name: 'Express.js',
     category: 'backend',
@@ -255,6 +287,23 @@ export const TECH_STACKS: TechStackItem[] = [
       <svg viewBox="0 0 24 24" className={className} fill="none">
         <rect width="24" height="24" rx="4" fill="#111827" />
         <text x="5" y="16" fill="white" fontSize="11" fontWeight="bold" fontFamily="monospace">ex</text>
+      </svg>
+    ),
+  },
+  {
+    id: 'razorpay',
+    name: 'Razorpay / Stripe',
+    category: 'backend',
+    categoryLabel: 'Payment Gateway',
+    role: 'Secure Financial Processing',
+    description: 'GST invoice payment links, recurring customer subscriptions, POS checkout & automated webhooks.',
+    badge: 'FinTech API',
+    color: '#0C2340',
+    icon: ({ className = 'w-8 h-8' }) => (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#072654" />
+        <path d="M7 17L12 7H17L12 17H7Z" fill="#0C8CE9" />
+        <path d="M10 12L13 7H16L13 12H10Z" fill="#3395FF" />
       </svg>
     ),
   },
@@ -279,13 +328,68 @@ export const TECH_STACKS: TechStackItem[] = [
 
   // ==================== AI & AUTOMATION ====================
   {
+    id: 'openai',
+    name: 'OpenAI (GPT-4o)',
+    category: 'ai',
+    categoryLabel: 'Generative AI',
+    role: 'Reasoning & Language Models',
+    description: 'Autonomous reasoning, code generation, multimodal image comprehension & conversational AI.',
+    badge: 'Industry Standard',
+    color: '#10A37F',
+    icon: ({ className = 'w-8 h-8' }) => (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#10A37F" />
+        <circle cx="12" cy="12" r="6" stroke="white" strokeWidth="1.8" strokeDasharray="3 3" />
+        <circle cx="12" cy="12" r="2.5" fill="white" />
+      </svg>
+    ),
+  },
+  {
+    id: 'gemini',
+    name: 'Google Gemini AI',
+    category: 'ai',
+    categoryLabel: 'Multimodal AI',
+    role: 'Enterprise AI & Vertex',
+    description: 'Ultra-fast context windows, document processing, OCR bill parsing & Google Cloud AI solutions.',
+    badge: 'Google AI',
+    color: '#4285F4',
+    icon: ({ className = 'w-8 h-8' }) => (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <path d="M12 2C12 7.5 7.5 12 2 12C7.5 12 12 16.5 12 22C12 16.5 16.5 12 22 12C16.5 12 12 7.5 12 2Z" fill="url(#gemini-grad)" />
+        <defs>
+          <linearGradient id="gemini-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#1BA1E3" />
+            <stop offset="0.5" stopColor="#5E5CE6" />
+            <stop offset="1" stopColor="#BF5AF2" />
+          </linearGradient>
+        </defs>
+      </svg>
+    ),
+  },
+  {
+    id: 'claude',
+    name: 'Anthropic Claude',
+    category: 'ai',
+    categoryLabel: 'Advanced Reasoning',
+    role: 'Long-Context Analysis',
+    description: 'High-accuracy code synthesis, legal and financial contract inspection & nuanced document Q&A.',
+    badge: 'Precision AI',
+    color: '#D97706',
+    icon: ({ className = 'w-8 h-8' }) => (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#CC785C" />
+        <path d="M12 4L14 9H19L15 12.5L16.5 17.5L12 14.5L7.5 17.5L9 12.5L5 9H10L12 4Z" fill="white" />
+      </svg>
+    ),
+  },
+  {
     id: 'agentic-ai',
-    name: 'Agentic AI & LLMs',
+    name: 'Agentic AI Orchestration',
     category: 'ai',
     categoryLabel: 'Autonomous AI',
     role: 'Intelligent Decision Agents',
     description: 'Multi-agent orchestration, dynamic tool calling, autonomous business process automation & reasoning.',
-    badge: 'Next-Gen AI',
+    badge: 'Autonomous AI',
     color: '#10B981',
     icon: ({ className = 'w-8 h-8' }) => (
       <svg viewBox="0 0 24 24" className={className} fill="none" stroke="#10B981" strokeWidth="1.8">
@@ -330,7 +434,7 @@ export const TECH_STACKS: TechStackItem[] = [
     ),
   },
 
-  // ==================== CLOUD, DEVOPS & AMC ====================
+  // ==================== CLOUD, HOSTING, DEVOPS & AMC ====================
   {
     id: 'docker',
     name: 'Docker',
@@ -350,16 +454,48 @@ export const TECH_STACKS: TechStackItem[] = [
     id: 'aws',
     name: 'AWS Cloud',
     category: 'devops',
-    categoryLabel: 'Cloud Infrastructure',
-    role: 'Enterprise Cloud Hosting',
+    categoryLabel: 'Enterprise Cloud',
+    role: 'Global Cloud Infrastructure',
     description: 'EC2 instance orchestration, S3 automated backups, RDS databases, CloudFront CDN & VPC security.',
-    badge: 'Cloud Host',
+    badge: 'Tier-1 Cloud',
     color: '#FF9900',
     icon: ({ className = 'w-8 h-8' }) => (
       <svg viewBox="0 0 24 24" className={className} fill="none">
         <path d="M7.5 11.5C6.5 11.5 5.5 12 5 12.8V11.8H3V17H5V15.2C5.5 16 6.5 16.5 7.5 16.5C9.5 16.5 11 15 11 13C11 11 9.5 11.5 7.5 11.5ZM7 15C6 15 5 14.2 5 13C5 11.8 6 11 7 11C8 11 9 11.8 9 13C9 14.2 8 15 7 15Z" fill="#FF9900" />
         <path d="M3 19C8 22 16 22 21 18" stroke="#FF9900" strokeWidth="2" strokeLinecap="round" />
         <path d="M21 18L18 17M21 18L19.5 20.5" stroke="#FF9900" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    id: 'vercel',
+    name: 'Vercel Edge Platform',
+    category: 'devops',
+    categoryLabel: 'Edge Hosting',
+    role: 'Next.js & Frontend Deployment',
+    description: 'Global Edge network, automated Git deployments, serverless API execution & sub-second page loads.',
+    badge: 'Edge Hosting',
+    color: '#FFFFFF',
+    icon: ({ className = 'w-8 h-8' }) => (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <circle cx="12" cy="12" r="11" fill="#0A0A0A" stroke="#FFFFFF" strokeWidth="1.5" />
+        <path d="M12 6L18 16.5H6L12 6Z" fill="white" />
+      </svg>
+    ),
+  },
+  {
+    id: 'digitalocean',
+    name: 'DigitalOcean',
+    category: 'devops',
+    categoryLabel: 'Cloud Droplets',
+    role: 'Dedicated ERP VPS Hosting',
+    description: 'High-memory Ubuntu droplets, block storage volumes, automated snapshots & dedicated IP routing.',
+    badge: 'VPS Hosting',
+    color: '#0080FF',
+    icon: ({ className = 'w-8 h-8' }) => (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#0080FF" />
+        <path d="M12 4C7.6 4 4 7.6 4 12C4 16.4 7.6 20 12 20H15V17H12C9.2 17 7 14.8 7 12C7 9.2 9.2 7 12 7C14.8 7 17 9.2 17 12V14H14V17H17C18.7 17 20 15.7 20 14V12C20 7.6 16.4 4 12 4Z" fill="white" />
       </svg>
     ),
   },
@@ -394,6 +530,22 @@ export const TECH_STACKS: TechStackItem[] = [
     icon: ({ className = 'w-8 h-8' }) => (
       <svg viewBox="0 0 24 24" className={className} fill="#F38020">
         <path d="M18.5 10.5C18.1 7.5 15.5 5.5 12.5 5.5C10.1 5.5 8 6.9 7 9C4.5 9.3 2.5 11.4 2.5 14C2.5 16.8 4.7 19 7.5 19H18.5C20.7 19 22.5 17.2 22.5 15C22.5 12.9 20.8 11.1 18.5 10.5Z" />
+      </svg>
+    ),
+  },
+  {
+    id: 'github',
+    name: 'GitHub & CI/CD Actions',
+    category: 'devops',
+    categoryLabel: 'DevOps Automation',
+    role: 'Automated CI/CD Pipelines',
+    description: 'Continuous integration, branch testing, automated staging deploys & enterprise version control.',
+    badge: 'CI/CD Pipeline',
+    color: '#FFFFFF',
+    icon: ({ className = 'w-8 h-8' }) => (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <circle cx="12" cy="12" r="11" fill="#181717" stroke="#FFFFFF" strokeWidth="1.2" />
+        <path d="M12 4C7.58 4 4 7.58 4 12C4 15.54 6.29 18.53 9.47 19.59C9.87 19.66 10.02 19.42 10.02 19.21C10.02 19.02 10.01 18.39 10.01 17.72C8 18.09 7.46 17.18 7.3 16.73C7.21 16.5 6.82 15.79 6.48 15.6C6.2 15.45 5.8 15.08 6.47 15.07C7.1 15.06 7.55 15.65 7.7 15.89C8.42 17.11 9.58 16.77 10.04 16.56C10.11 16.04 10.32 15.68 10.55 15.48C8.77 15.28 6.91 14.59 6.91 11.53C6.91 10.66 7.22 9.95 7.73 9.39C7.65 9.19 7.37 8.37 7.81 7.27C7.81 7.27 8.48 7.06 10.02 8.1C10.66 7.92 11.34 7.83 12.02 7.83C12.7 7.83 13.38 7.92 14.02 8.1C15.56 7.05 16.23 7.27 16.23 7.27C16.67 8.37 16.39 9.19 16.31 9.39C16.82 9.95 17.13 10.65 17.13 11.53C17.13 14.6 15.26 15.28 13.48 15.48C13.77 15.73 14.02 16.21 14.02 16.96C14.02 18.03 14.01 18.89 14.01 19.21C14.01 19.42 14.16 19.67 14.56 19.59C17.71 18.53 20 15.53 20 12C20 7.58 16.42 4 12 4Z" fill="white" />
       </svg>
     ),
   },
