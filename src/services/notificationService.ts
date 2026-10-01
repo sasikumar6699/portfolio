@@ -17,38 +17,33 @@ async function dispatchEmail(data: EnquiryPayload): Promise<boolean> {
   const { targetEmail, web3FormsAccessKey } = NOTIFICATION_CONFIG;
   let success = false;
 
-  // 1. Web3Forms (if access key configured)
+  // 1. Web3Forms Dispatch (via FormData for maximal browser compatibility)
   if (web3FormsAccessKey && web3FormsAccessKey.trim() !== '') {
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-          access_key: web3FormsAccessKey,
-          from_name: 'Techyora Website Enquiry',
-          subject: `[Techyora Project Enquiry] ${data.service} - ${data.name}`,
-          name: data.name,
-          email: data.email,
-          phone: data.phone || 'Not provided',
-          company: data.company || 'Not provided',
-          service: data.service,
-          budget: data.budget || 'Not specified',
-          message: data.message,
-        }),
-      });
+      const w3fd = new FormData();
+      w3fd.append('access_key', web3FormsAccessKey);
+      w3fd.append('name', data.name);
+      w3fd.append('email', data.email);
+      w3fd.append('phone', data.phone || 'Not provided');
+      w3fd.append('company', data.company || 'Not provided');
+      w3fd.append('service', data.service);
+      w3fd.append('budget', data.budget || 'Not specified');
+      w3fd.append('message', data.message);
+      w3fd.append('from_name', 'Techyora Website Enquiry');
+      w3fd.append('subject', `[Techyora Project Enquiry] ${data.service} - ${data.name}`);
 
-      if (response.ok) {
-        success = true;
-      }
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: w3fd,
+      }).then(r => {
+        if (r.ok) success = true;
+      }).catch(() => {});
     } catch {
-      // Continue to fallback
+      // Continue to FormSubmit
     }
   }
 
-  // 2. FormSubmit AJAX fallback
+  // 2. FormSubmit Redundant Dispatch (delivers to connect.techyora@gmail.com once activated)
   try {
     const fd = new FormData();
     fd.append('name', data.name);
@@ -63,14 +58,13 @@ async function dispatchEmail(data: EnquiryPayload): Promise<boolean> {
     fd.append('_captcha', 'false');
     fd.append('_replyto', data.email);
 
-    await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
+    fetch(`https://formsubmit.co/${targetEmail}`, {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-      },
       body: fd,
-    });
-    success = true;
+      mode: 'no-cors',
+    }).then(() => {
+      success = true;
+    }).catch(() => {});
   } catch {
     // Handled silently
   }
