@@ -494,14 +494,32 @@ stop[stop-color="#10b981"] {
   }
 }
 
+@keyframes marqueeReverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 75s linear infinite;
+  animation: marquee 45s linear infinite;
+  will-change: transform;
 }
 
-.animate-marquee:hover {
-  animation-play-state: paused;
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marqueeReverse 45s linear infinite;
+  will-change: transform;
+}
+
+.group\/ticker:hover .animate-marquee,
+.group\/ticker:hover .animate-marquee-reverse {
+  animation-play-state: running;
 }
 
 /* Anime Mecha Holographic Scanner Light */

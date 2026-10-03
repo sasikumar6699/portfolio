@@ -1,5 +1,6 @@
 import React from 'react';
 import { GravityHero } from '../components/gravity/GravityHero';
+import { TechLogoMarquee } from '../components/TechLogoMarquee';
 import { GravityOrbitCarousel } from '../components/gravity/GravityOrbitCarousel';
 import { GravityManifesto } from '../components/gravity/GravityManifesto';
 import { GravityConstellation } from '../components/gravity/GravityConstellation';
@@ -27,7 +28,15 @@ export const HomePage: React.FC<HomePageProps> = ({
         onOpenResume={onOpenResume}
       />
 
-      {/* 2. 3D Cylindrical Orbit Carousel (Broader, Center-Aligned, Scroll-Driven Rotation) */}
+      {/* 2. Enterprise Auto-Scroll Tech Logo Marquee */}
+      <TechLogoMarquee
+        badge="DEPLOYED ENTERPRISE TECH STACKS"
+        title="Production Frameworks & Infrastructure"
+        subtitle="Powering mission-critical ERP implementations, reactive web apps, and autonomous AI agents."
+        showDualRow={false}
+      />
+
+      {/* 3. 3D Cylindrical Orbit Carousel (Broader, Center-Aligned, Scroll-Driven Rotation) */}
       <GravityOrbitCarousel
         onSelectService={(serviceTitle) => onOpenContact(serviceTitle)}
         onSelectProject={(projectTitle) => onOpenContact(projectTitle)}
