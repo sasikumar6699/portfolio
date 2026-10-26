@@ -1,12 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Code2, Linkedin, MessageSquare, ArrowUp, Mail } from 'lucide-react';
+import { Linkedin, MessageSquare, ArrowUp, Mail } from 'lucide-react';
+import { TechyoraLogo } from './TechyoraLogo';
 import { PERSONAL_INFO } from '../data/portfolioData';
 import { useCyberDoor } from '../context/CyberDoorContext';
 
 export const Footer: React.FC = () => {
   const { currentTheme } = useCyberDoor();
-  const { primary, rgb } = currentTheme;
+  const { primary } = currentTheme;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -20,29 +21,7 @@ export const Footer: React.FC = () => {
           
           {/* Brand Info */}
           <div className="md:col-span-5 space-y-4">
-            <NavLink
-              to="/"
-              className="flex items-center gap-2 font-mono text-xl font-bold tracking-tight text-white group"
-            >
-              <div
-                className="w-8 h-8 rounded-lg bg-[#0D0D0D] border flex items-center justify-center transition-all group-hover:scale-105"
-                style={{
-                  borderColor: `rgba(${rgb}, 0.45)`,
-                  color: primary,
-                  boxShadow: `0 0 12px rgba(${rgb}, 0.25)`,
-                }}
-              >
-                <Code2 className="w-4 h-4" />
-              </div>
-              <span>{PERSONAL_INFO.brandName}</span>
-              <span
-                className="w-2 h-2 rounded-full inline-block"
-                style={{
-                  backgroundColor: primary,
-                  boxShadow: `0 0 6px ${primary}`,
-                }}
-              />
-            </NavLink>
+            <TechyoraLogo variant="full" size="lg" linkToHome glow className="cursor-pointer" />
 
             <p className="text-sm text-gray-400 max-w-sm leading-relaxed">
               Engineering scalable software, ERPNext systems, 3D web, agentic AI & 24/7 AMC support.

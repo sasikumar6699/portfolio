@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, ArrowUpRight, Code2 } from 'lucide-react';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { TechyoraLogo } from './TechyoraLogo';
 import { useCyberDoor } from '../context/CyberDoorContext';
 
 interface NavbarProps {
@@ -59,29 +59,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         
         {/* Brand Logo */}
-        <NavLink
-          to="/"
-          className="flex items-center gap-2 group font-mono text-xl font-bold tracking-tight text-white transition-opacity hover:opacity-90"
-        >
-          <div
-            className="w-8 h-8 rounded-lg bg-[#0D0D0D] border flex items-center justify-center transition-all group-hover:scale-105"
-            style={{
-              borderColor: `rgba(${rgb}, 0.45)`,
-              color: primary,
-              boxShadow: `0 0 12px rgba(${rgb}, 0.25)`,
-            }}
-          >
-            <Code2 className="w-4 h-4" />
-          </div>
-          <span>{PERSONAL_INFO.brandName}</span>
-          <span
-            className="w-2 h-2 rounded-full inline-block"
-            style={{
-              backgroundColor: primary,
-              boxShadow: `0 0 8px ${primary}`,
-            }}
-          />
-        </NavLink>
+        <TechyoraLogo variant="full" size="md" linkToHome glow className="cursor-pointer" />
 
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center space-x-1 lg:space-x-2 bg-[#0D0D0D]/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10">

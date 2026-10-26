@@ -102,14 +102,17 @@ export const HolographicDossierCard: React.FC = () => {
                 }}
               />
               <div
-                className="w-12 h-12 rounded-xl bg-[#050505] border flex items-center justify-center font-mono text-xl font-extrabold tracking-tighter"
+                className="w-12 h-12 rounded-xl bg-[#050505] border flex items-center justify-center p-1.5 overflow-hidden"
                 style={{
                   borderColor: `rgba(${rgb}, 0.5)`,
-                  color: primary,
-                  boxShadow: `inset 0 0 12px rgba(${rgb}, 0.25)`,
+                  boxShadow: `inset 0 0 12px rgba(${rgb}, 0.25), 0 0 15px rgba(${rgb}, 0.2)`,
                 }}
               >
-                TY
+                <img
+                  src="/images/techyora-mark.png"
+                  alt="Techyora Mark"
+                  className="w-full h-full object-contain"
+                />
               </div>
             </div>
 

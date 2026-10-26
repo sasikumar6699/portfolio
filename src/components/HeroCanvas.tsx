@@ -260,7 +260,11 @@ export const HeroCanvas: React.FC<HeroPipelineProps> = ({ onSelectService }) => 
                 >
                   <Settings className="w-8 h-8" />
                 </motion.div>
-                <Cpu className="w-4 h-4 relative z-10" style={{ color: primary }} />
+                <img
+                  src="/images/techyora-mark.png"
+                  alt="Techyora Core"
+                  className="w-5 h-5 object-contain relative z-10"
+                />
               </div>
 
               {/* Hub Title */}

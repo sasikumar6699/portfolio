@@ -570,6 +570,11 @@ export const GravityHero: React.FC<GravityHeroProps> = ({ onOpenContact, onOpenR
                   style={{ backgroundColor: primary }}
                 />
               </span>
+              <img
+                src="/images/techyora-mark.png"
+                alt="Techyora"
+                className="w-4 h-4 object-contain shrink-0"
+              />
               <span className="tracking-wide uppercase font-semibold">
                 TECHYORA ENGINEERING TEAM // ENTERPRISE & GLOBAL CLIENTS
               </span>

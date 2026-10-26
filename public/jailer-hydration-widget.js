@@ -1370,6 +1370,10 @@
           <!-- Speech Bubble positioned directly above Rajinikanth's head -->
           <div class="jailer-speech-bubble" id="jailer-bubble">
             <div id="jailer-prompt-box">
+              <div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 5px; font-size: 10px; font-family: monospace; font-weight: 700; letter-spacing: 0.1em; color: #82C324; text-transform: uppercase;">
+                <img src="/images/techyora-mark.png" alt="Techyora" style="width: 14px; height: 14px; object-fit: contain;" />
+                <span>TECHYORA ASSISTANT</span>
+              </div>
               <div class="jailer-bubble-text">
                 Have you drank water in the last 30 mins???? 💧
               </div>

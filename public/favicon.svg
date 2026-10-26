@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <defs>
+    <linearGradient id="hexGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9DE628" />
+      <stop offset="50%" stop-color="#7AC71C" />
+      <stop offset="100%" stop-color="#4E930B" />
+    </linearGradient>
+    <linearGradient id="hexGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7AC71C" />
+      <stop offset="60%" stop-color="#559F0E" />
+      <stop offset="100%" stop-color="#376E08" />
+    </linearGradient>
+    <filter id="yGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- Hexagon Outer Shape with smooth rounded corners -->
+  <path d="M 80 10 
+           L 138 42 A 18 18 0 0 1 147 58
+           L 147 102 A 18 18 0 0 1 138 118
+           L 80 150 A 18 18 0 0 1 68 150
+           L 22 118 A 18 18 0 0 1 13 102
+           L 13 58 A 18 18 0 0 1 22 42
+           L 80 10 Z" 
+        fill="url(#hexGrad1)" />
+
+  <!-- Segment shading overlays -->
+  <path d="M 80 10 L 138 42 A 18 18 0 0 1 147 58 L 147 102 C 120 115 100 85 80 80 Z" 
+        fill="url(#hexGrad2)" opacity="0.3" />
+  <path d="M 147 102 A 18 18 0 0 1 138 118 L 80 150 C 70 120 90 95 80 80 Z" 
+        fill="#2E5F06" opacity="0.35" />
+
+  <!-- Center White Stylized Y Glyph with soft shadow -->
+  <g filter="url(#yGlow)">
+    <!-- Left arm -->
+    <path d="M 45 55 Q 65 72 80 82 Q 95 72 115 55" 
+          fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Vertical stem -->
+    <path d="M 80 82 L 80 114" 
+          fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" />
+  </g>
+</svg>

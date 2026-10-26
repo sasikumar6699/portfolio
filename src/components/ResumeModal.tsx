@@ -87,6 +87,11 @@ COMPANY TRACK RECORD:
           <div className="border-b border-white/10 pb-6 print:border-gray-300 print:pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-3 mb-1">
+                <img
+                  src="/images/techyora-mark.png"
+                  alt="Techyora"
+                  className="w-9 h-9 sm:w-10 sm:h-10 object-contain drop-shadow-[0_2px_8px_rgba(130,195,36,0.3)]"
+                />
                 <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight print:text-black">
                   {PERSONAL_INFO.brandName}
                 </h1>
